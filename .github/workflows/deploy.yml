@@ -53,6 +53,8 @@ jobs:
           npm_config_loglevel: verbose
         run: |
           npm install --verbose
+          npm install --verbose > npm-debug.log 
+          cat npm-debug.log 
           if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
             echo "=== npm debug log ==="
             cat /home/runner/.npm/_logs/*-debug-0.log
