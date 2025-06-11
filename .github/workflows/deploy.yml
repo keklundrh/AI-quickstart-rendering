@@ -27,7 +27,6 @@ jobs:
       - name: Clean install
         run: |
           rm -rf node_modules
-          rm -f package-lock.json
           npm cache clean --force
 
       - name: Set up Node.js
@@ -45,16 +44,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Build the React app with GH token
+      # Build the React app
       - name: Build
         env:
-          REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_ENV: production
           npm_config_loglevel: verbose
+          REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          npm install --verbose
-          npm install --verbose > npm-debug.log 
-          cat npm-debug.log 
+          npm ci --include=dev
           if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
             echo "=== npm debug log ==="
             cat /home/runner/.npm/_logs/*-debug-0.log
@@ -62,11 +59,12 @@ jobs:
           fi
           npm run build
 
-      # Deploy to GitHub Pages using GH token
+      # Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          gh_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
           commit_message: "Update site: ${{ github.event_name }}"
+          keep_files: true # Keep the functions directory

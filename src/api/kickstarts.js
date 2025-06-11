@@ -1,5 +1,5 @@
 // Configuration
-const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
+const GITHUB_API = 'https://api.github.com';
 const ORG_NAME = 'rh-ai-kickstart';
 
 // Function to extract categories from README content
@@ -33,74 +33,69 @@ function extractCategoriesFromReadme(readmeText) {
 // Function to fetch kickstarts directly from GitHub
 export const fetchKickstarts = async () => {
   try {
-    const query = `
-      query {
-        organization(login: "${ORG_NAME}") {
-          repositories(first: 100, orderBy: {field: UPDATED_AT, direction: DESC}) {
-            nodes {
-              name
-              description
-              url
-              stargazerCount
-              updatedAt
-              primaryLanguage {
-                name
-              }
-              repositoryTopics(first: 10) {
-                nodes {
-                  topic {
-                    name
-                  }
-                }
-              }
-              object(expression: "HEAD:README.md") {
-                ... on Blob {
-                  text
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
+    // Debug token status
+    const token = process.env.REACT_APP_GH_TOKEN;
+    console.log('Token status:', token ? 'Token exists' : 'No token found');
+    if (!token) {
+      throw new Error('GitHub token not found. Please check your .env file.');
+    }
 
-    const response = await fetch(GITHUB_GRAPHQL_API, {
-      method: 'POST',
+    // First, get the list of repositories
+    const reposResponse = await fetch(`${GITHUB_API}/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`, {
       headers: {
-        'Authorization': `Bearer ${process.env.REACT_APP_GH_TOKEN}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({ query })
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `Bearer ${token}`
+      }
     });
 
-    if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
+    if (!reposResponse.ok) {
+      const errorText = await reposResponse.text();
+      console.error('GitHub API error details:', {
+        status: reposResponse.status,
+        statusText: reposResponse.statusText,
+        headers: Object.fromEntries(reposResponse.headers.entries()),
+        body: errorText
+      });
+      throw new Error(`GitHub API error: ${reposResponse.status} - ${reposResponse.statusText}`);
     }
 
-    const data = await response.json();
-    if (data.errors) {
-      throw new Error('GraphQL errors: ' + data.errors[0].message);
-    }
+    const repos = await reposResponse.json();
 
-    // Transform the repository data
-    const kickstarts = data.data.organization.repositories.nodes.map(repo => {
-      const readmeCategories = repo.object?.text
-        ? extractCategoriesFromReadme(repo.object.text)
-        : [];
+    // Then, fetch README content for each repository
+    const kickstarts = await Promise.all(repos.map(async (repo) => {
+      let readmeText = '';
+      try {
+        const readmeResponse = await fetch(`${GITHUB_API}/repos/${ORG_NAME}/${repo.name}/readme`, {
+          headers: {
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (readmeResponse.ok) {
+          const readmeData = await readmeResponse.json();
+          readmeText = atob(readmeData.content);
+        }
+      } catch (error) {
+        console.warn(`Could not fetch README for ${repo.name}:`, error);
+      }
+
+      const readmeCategories = readmeText ? extractCategoriesFromReadme(readmeText) : [];
+      const topics = repo.topics || [];
+      const language = repo.language;
 
       const allCategories = new Set([
         ...readmeCategories,
-        ...(repo.repositoryTopics.nodes.map(t => t.topic.name) || []),
-        ...(repo.primaryLanguage?.name ? [repo.primaryLanguage.name] : [])
+        ...topics,
+        ...(language ? [language] : [])
       ]);
 
       if (allCategories.size === 0) {
         allCategories.add('AI');
       }
 
-      const readmePreview = repo.object?.text
-        ? repo.object.text.substring(0, 150) + (repo.object.text.length > 150 ? '...' : '')
+      const readmePreview = readmeText
+        ? readmeText.substring(0, 150) + (readmeText.length > 150 ? '...' : '')
         : 'No README available';
 
       return {
@@ -110,12 +105,12 @@ export const fetchKickstarts = async () => {
         ).join(' '),
         description: repo.description || 'No description available',
         readmePreview,
-        githubLink: `${repo.url}#readme`,
+        githubLink: repo.html_url,
         categories: Array.from(allCategories).sort(),
-        stars: repo.stargazerCount,
-        lastUpdated: new Date(repo.updatedAt).toLocaleDateString()
+        stars: repo.stargazers_count,
+        lastUpdated: new Date(repo.updated_at).toLocaleDateString()
       };
-    });
+    }));
 
     return kickstarts;
   } catch (error) {
