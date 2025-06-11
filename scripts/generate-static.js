@@ -105,13 +105,13 @@ async function generateStaticData() {
       };
     }));
 
-    // Create the data directory if it doesn't exist
+    // Create the public/data directory if it doesn't exist
     const dataDir = path.join(__dirname, '../public/data');
     if (!fs.existsSync(dataDir)) {
       fs.mkdirSync(dataDir, { recursive: true });
     }
 
-    // Write the data to a JSON file
+    // Write the data to public/data/kickstarts.json
     const data = {
       lastUpdated: new Date().toISOString(),
       kickstarts
@@ -122,7 +122,7 @@ async function generateStaticData() {
       JSON.stringify(data, null, 2)
     );
 
-    console.log('Successfully generated static data');
+    console.log('Successfully generated static data at public/data/kickstarts.json');
   } catch (error) {
     console.error('Error generating static data:', error);
     process.exit(1);

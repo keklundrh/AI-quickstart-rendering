@@ -50,6 +50,13 @@ jobs:
           npm install node-fetch@2
           node scripts/generate-static.js
 
+      - name: Ensure static data is in public directory
+        run: |
+          if [ -f data/kickstarts.json ]; then
+            mkdir -p public/data
+            cp data/kickstarts.json public/data/kickstarts.json
+          fi
+
       - name: Build
         env:
           NODE_ENV: production
