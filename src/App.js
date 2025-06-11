@@ -428,8 +428,13 @@ const KickstartCard = ({ kickstart }) => (
         href={kickstart.githubLink.replace('#readme', '')}
         target="_blank"
         rel="noopener noreferrer"
-        className="pf-v5-c-button pf-m-primary w-full"
+        className="pf-v5-c-button pf-m-primary pf-m-sm"
         role="button"
+        style={{
+          fontSize: 'var(--pf-global--FontSize--sm)',
+          padding: 'var(--pf-global--spacer--xs) var(--pf-global--spacer--sm)',
+          marginTop: 'var(--pf-global--spacer--sm)'
+        }}
       >
         View on GitHub
       </a>
