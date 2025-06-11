@@ -44,13 +44,17 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      # Generate static data before build
+      - name: Generate static kickstarts data
+        run: |
+          npm install node-fetch@2
+          GH_TOKEN=${{ secrets.GH_TOKEN }} node scripts/generate-static.js
+
       # Build the React app
       - name: Build
         env:
           NODE_ENV: production
           npm_config_loglevel: verbose
-          # Remove the token from the build environment since we're using serverless functions
-          # REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm ci --include=dev
           if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
@@ -58,7 +62,6 @@ jobs:
             cat /home/runner/.npm/_logs/*-debug-0.log
             echo "=== end npm debug log ==="
           fi
-          # Build without any token
           npm run build
 
       # Deploy to GitHub Pages

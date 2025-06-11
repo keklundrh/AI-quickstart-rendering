@@ -29,67 +29,13 @@ function extractCategoriesFromReadme(readmeText) {
   return Array.from(categories);
 }
 
-// Function to fetch kickstarts using our serverless function
+// Function to fetch kickstarts from the static JSON file
 export const fetchKickstarts = async () => {
   try {
-    // Call our serverless function instead of GitHub API directly
-    const response = await fetch('/.github/functions/github-data', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ orgName: ORG_NAME })
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('API error details:', {
-        status: response.status,
-        statusText: response.statusText,
-        headers: Object.fromEntries(response.headers.entries()),
-        body: errorText
-      });
-      throw new Error(`API error: ${response.status} - ${response.statusText}`);
-    }
-
-    const { repositories } = await response.json();
-
-    // Transform the repositories into kickstarts
-    const kickstarts = repositories.map(repo => {
-      const readmeText = repo.readmeText || '';
-      const readmeCategories = readmeText ? extractCategoriesFromReadme(readmeText) : [];
-      const topics = repo.topics || [];
-      const language = repo.language;
-
-      const allCategories = new Set([
-        ...readmeCategories,
-        ...topics,
-        ...(language ? [language] : [])
-      ]);
-
-      if (allCategories.size === 0) {
-        allCategories.add('AI');
-      }
-
-      const readmePreview = readmeText
-        ? readmeText.substring(0, 150) + (readmeText.length > 150 ? '...' : '')
-        : 'No README available';
-
-      return {
-        id: repo.name,
-        title: repo.name.split('-').map(word =>
-          word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(' '),
-        description: repo.description || 'No description available',
-        readmePreview,
-        githubLink: repo.url,
-        categories: Array.from(allCategories).sort(),
-        stars: repo.stars,
-        lastUpdated: new Date(repo.updatedAt).toLocaleDateString()
-      };
-    });
-
-    return kickstarts;
+    const response = await fetch('/data/kickstarts.json');
+    if (!response.ok) throw new Error(`Failed to fetch static data: ${response.status}`);
+    const data = await response.json();
+    return data.kickstarts;
   } catch (error) {
     console.error('Error fetching kickstarts:', error);
     throw error;
