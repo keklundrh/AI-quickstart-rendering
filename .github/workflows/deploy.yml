@@ -1,10 +1,10 @@
-# GitHub Actions workflow for deployment
-# This file will be configured latername: Deploy to GitHub Pages
+name: Deploy to GitHub Pages (Per-Branch Previews)
 
 on:
   push:
     branches:
-      - main # Trigger on pushes to the main branch
+      - main
+      - '*' # Trigger on pushes to all branches
 
 jobs:
   build-and-deploy:
@@ -19,16 +19,85 @@ jobs:
         with:
           node-version: '18' # Specify Node.js version
 
+      # Step to determine the base URL (PUBLIC_URL) for the React app
+      # and the destination directory on the gh-pages branch.
+      - name: Determine dynamic paths
+        id: dynamic_paths # Give this step an ID to reference its outputs
+        run: |
+          REPO_NAME="${{ github.event.repository.name }}"
+          # Use github.actor for the username if your GitHub Pages URL is username.github.io/repo
+          # If it's an organization page, it might be orgname.github.io/repo, adjust as needed.
+          GITHUB_USERNAME="${{ github.repository_owner }}"
+
+          # Clean up branch name for URL (replace slashes with hyphens, remove non-alphanumeric)
+          BRANCH_SLUG=$(echo "${{ github.ref_name }}" | sed 's/\//-/g' | sed 's/[^a-zA-Z0-9-]//g' | tr '[:upper:]' '[:lower:]')
+
+          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            # For the main branch, deploy to the root of the repo's GitHub Pages
+            echo "PUBLIC_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME" >> $GITHUB_ENV
+            echo "DEPLOY_DESTINATION_DIR=." >> $GITHUB_ENV
+            echo "PREVIEW_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME" >> $GITHUB_ENV
+          else
+            # For feature branches, deploy to a subdirectory under 'previews/'
+            # Example: https://username.github.io/repo-name/previews/feature-branch/
+            echo "PUBLIC_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME/previews/$BRANCH_SLUG" >> $GITHUB_ENV
+            echo "DEPLOY_DESTINATION_DIR=previews/$BRANCH_SLUG" >> $GITHUB_ENV
+            echo "PREVIEW_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME/previews/$BRANCH_SLUG" >> $GITHUB_ENV
+          fi
+
+          # Output the preview URL for potential use in subsequent steps (e.g., PR comments)
+          echo "preview_url=${PREVIEW_URL}" >> "$GITHUB_OUTPUT"
+
+      - name: Display calculated URLs and directories
+        run: |
+          echo "React App PUBLIC_URL: ${{ env.PUBLIC_URL }}"
+          echo "Deployment Destination Directory: ${{ env.DEPLOY_DESTINATION_DIR }}"
+          echo "Preview URL: ${{ steps.dynamic_paths.outputs.preview_url }}"
+
+
       - name: Install dependencies
         run: npm install # Install project dependencies defined in package.json
 
+      # Build React app. The PUBLIC_URL environment variable will be picked up by Create React App.
       - name: Build React app
-        run: npm run build # Run the build script to create optimized production build
+        run: npm run build
+        env:
+          PUBLIC_URL: ${{ env.PUBLIC_URL }} # Pass the determined PUBLIC_URL to CRA build
 
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3 # Action specifically for deploying to gh-pages
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub token for authentication
           publish_dir: ./build # Directory containing the built application (output of npm run build)
           publish_branch: gh-pages # The branch to publish to
-          force_orphan: true # Overwrites the gh-pages branch each time, useful for SPAs
+          destination_dir: ${{ env.DEPLOY_DESTINATION_DIR }} # Dynamically determined subdirectory
+          force_orphan: true # This will orphan *only* the specific destination_dir, not the entire gh-pages branch.
+          # If you want to keep other preview directories, 'force_orphan: true' with 'destination_dir' is correct.
+          # If you want to keep other files *within* the specific destination_dir, you would need 'keep_files: true'
+          # but 'force_orphan: true' overrides 'keep_files: true' for the target directory.
+          # For a clean preview, force_orphan is generally desired for the specific preview directory.
+
+      # (Optional) Add a step to comment the preview URL on Pull Requests
+      # This part would typically be part of a separate job that runs only on pull_request events
+      # but for demonstration, showing how to use the outputted URL.
+      # This would require configuring your repo to allow workflow write access to PRs.
+      - name: Comment Preview URL on Pull Request
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const previewUrl = process.env.PREVIEW_URL; // Access the URL from environment variable
+            const commentBody = `
+            🚀 **Preview Deployment Ready!** 🚀
+            You can view the changes for this branch here:
+            [${previewUrl}](${previewUrl})
+            `;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: commentBody
+            });
+        env:
+          PREVIEW_URL: ${{ steps.dynamic_paths.outputs.preview_url }} # Pass output to this step's env
