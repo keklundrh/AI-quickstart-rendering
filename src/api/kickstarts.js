@@ -1,5 +1,5 @@
 // Configuration
-const API_ENDPOINT = '/functions/github-data';  // Updated to match GitHub Pages Functions URL structure
+const GITHUB_API = 'https://api.github.com';
 const ORG_NAME = 'rh-ai-kickstart';
 
 // Function to extract categories from README content
@@ -30,44 +30,72 @@ function extractCategoriesFromReadme(readmeText) {
   return Array.from(categories);
 }
 
-// Function to fetch kickstarts through our serverless function
+// Function to fetch kickstarts directly from GitHub
 export const fetchKickstarts = async () => {
   try {
-    const response = await fetch(API_ENDPOINT, {
-      method: 'POST',
+    // Debug token status
+    const token = process.env.REACT_APP_GH_TOKEN;
+    console.log('Token status:', token ? 'Token exists' : 'No token found');
+    if (!token) {
+      throw new Error('GitHub token not found. Please check your .env file.');
+    }
+
+    // First, get the list of repositories
+    const reposResponse = await fetch(`${GITHUB_API}/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`, {
       headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ orgName: ORG_NAME })
+        'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `Bearer ${token}`
+      }
     });
 
-    if (!response.ok) {
-      throw new Error(`API error: ${response.status}`);
+    if (!reposResponse.ok) {
+      const errorText = await reposResponse.text();
+      console.error('GitHub API error details:', {
+        status: reposResponse.status,
+        statusText: reposResponse.statusText,
+        headers: Object.fromEntries(reposResponse.headers.entries()),
+        body: errorText
+      });
+      throw new Error(`GitHub API error: ${reposResponse.status} - ${reposResponse.statusText}`);
     }
 
-    const data = await response.json();
-    if (data.errors) {
-      throw new Error('API errors: ' + data.errors[0].message);
-    }
+    const repos = await reposResponse.json();
 
-    // Transform the repository data
-    const kickstarts = data.repositories.map(repo => {
-      const readmeCategories = repo.readmeText
-        ? extractCategoriesFromReadme(repo.readmeText)
-        : [];
+    // Then, fetch README content for each repository
+    const kickstarts = await Promise.all(repos.map(async (repo) => {
+      let readmeText = '';
+      try {
+        const readmeResponse = await fetch(`${GITHUB_API}/repos/${ORG_NAME}/${repo.name}/readme`, {
+          headers: {
+            'Accept': 'application/vnd.github.v3+json',
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (readmeResponse.ok) {
+          const readmeData = await readmeResponse.json();
+          readmeText = atob(readmeData.content);
+        }
+      } catch (error) {
+        console.warn(`Could not fetch README for ${repo.name}:`, error);
+      }
+
+      const readmeCategories = readmeText ? extractCategoriesFromReadme(readmeText) : [];
+      const topics = repo.topics || [];
+      const language = repo.language;
 
       const allCategories = new Set([
         ...readmeCategories,
-        ...(repo.topics || []),
-        ...(repo.language ? [repo.language] : [])
+        ...topics,
+        ...(language ? [language] : [])
       ]);
 
       if (allCategories.size === 0) {
         allCategories.add('AI');
       }
 
-      const readmePreview = repo.readmeText
-        ? repo.readmeText.substring(0, 150) + (repo.readmeText.length > 150 ? '...' : '')
+      const readmePreview = readmeText
+        ? readmeText.substring(0, 150) + (readmeText.length > 150 ? '...' : '')
         : 'No README available';
 
       return {
@@ -77,12 +105,12 @@ export const fetchKickstarts = async () => {
         ).join(' '),
         description: repo.description || 'No description available',
         readmePreview,
-        githubLink: repo.url,
+        githubLink: repo.html_url,
         categories: Array.from(allCategories).sort(),
-        stars: repo.stars,
-        lastUpdated: new Date(repo.updatedAt).toLocaleDateString()
+        stars: repo.stargazers_count,
+        lastUpdated: new Date(repo.updated_at).toLocaleDateString()
       };
-    });
+    }));
 
     return kickstarts;
   } catch (error) {
