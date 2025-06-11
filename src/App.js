@@ -19,7 +19,7 @@ const customPatternFlyStyle = `
     --pf-global--spacer--2xl: 3rem;
 
     --pf-global--BorderWidth--sm: 1px;
-    --pf-global--BorderRadius--lg: 0.25rem; /* Equivalent to --pf-global--BorderRadius--sm */
+    --pf-global--BorderRadius--lg: 0.5rem; /* Increased from 0.25rem to 0.5rem for more rounded corners */
     --pf-global--BorderColor--100: #d2d2d2;
     --pf-global--BorderColor--200: #8a8d90;
 
@@ -220,7 +220,7 @@ const customPatternFlyStyle = `
   .pf-v5-c-card {
     background-color: white;
     border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
-    border-radius: var(--pf-global--BorderRadius--lg);
+    border-radius: 0.75rem; /* Increased from var(--pf-global--BorderRadius--lg) to 0.75rem for even more rounded corners */
     box-shadow: var(--pf-global--BoxShadow--sm);
     display: flex;
     flex-direction: column;
@@ -482,11 +482,19 @@ const App = () => {
         <header className="pf-v5-c-masthead">
           <div className="pf-v5-c-masthead__main">
             <div className="pf-v5-c-masthead__brand">
-              {/* Corrected href from '#' to '/' for accessibility */}
               <a className="pf-v5-c-brand" href="/">
-                <img src="https://placehold.co/100x30/FFFFFF/EE0000?text=Red%20Hat" alt="Red Hat Logo" />
-                <span className="pf-v5-u-font-weight-bold pf-v5-u-font-size-2xl">Red Hat</span>
-                <span className="pf-v5-u-font-size-xl pf-v5-u-ml-sm">AI Kickstarts</span>
+                <img
+                  src="/assets/logo.svg"
+                  alt="Red Hat Fedora Logo"
+                  style={{
+                    height: '40px',
+                    width: 'auto',
+                    marginRight: 'var(--pf-global--spacer--md)',
+                    filter: 'brightness(0) invert(1)' // Make the logo white
+                  }}
+                />
+                <span className="pf-v5-u-font-weight-bold pf-v5-u-font-size-2xl" style={{ color: 'white' }}>Red Hat</span>
+                <span className="pf-v5-u-font-size-xl pf-v5-u-ml-sm" style={{ color: 'white' }}>AI Kickstarts</span>
               </a>
             </div>
           </div>
