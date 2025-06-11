@@ -10,7 +10,7 @@ on:
   schedule:
     - cron: '0 * * * *'  # Run every hour
 
-# Explicitly grant permissions to the GITHUB_TOKEN for GitHub Pages deployment
+# Explicitly grant permissions to the GH_TOKEN for GitHub Pages deployment
 permissions:
   contents: write # Needed to push to the gh-pages branch (for the build artifact)
   pages: write    # Needed for GitHub Pages deployment
@@ -29,15 +29,7 @@ jobs:
         with:
           node-version: '18' # Specify Node.js version
 
-      # Generate static data
-      - name: Generate Static Data
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          npm install
-          node scripts/generate-static.js
-
-      # Build the React app with GitHub token
+      # Build the React app with GH token
       - name: Build
         env:
           REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -45,11 +37,11 @@ jobs:
           npm install
           npm run build
 
-      # Deploy to GitHub Pages
+      # Deploy to GitHub Pages using GH token
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          gh_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
           commit_message: "Update site: ${{ github.event_name }}"
