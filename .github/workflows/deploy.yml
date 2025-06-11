@@ -51,7 +51,7 @@ jobs:
           NODE_ENV: production
           npm_config_loglevel: verbose
         run: |
-          npm install --verbose
+          npm ci --include=dev
           if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
             echo "=== npm debug log ==="
             cat /home/runner/.npm/_logs/*-debug-0.log
