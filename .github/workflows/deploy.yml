@@ -49,7 +49,8 @@ jobs:
         env:
           NODE_ENV: production
           npm_config_loglevel: verbose
-          REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          # Remove the token from the build environment since we're using serverless functions
+          # REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm ci --include=dev
           if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
@@ -57,6 +58,7 @@ jobs:
             cat /home/runner/.npm/_logs/*-debug-0.log
             echo "=== end npm debug log ==="
           fi
+          # Build without any token
           npm run build
 
       # Deploy to GitHub Pages
@@ -68,3 +70,31 @@ jobs:
           publish_branch: gh-pages
           commit_message: "Update site: ${{ github.event_name }}"
           keep_files: true # Keep the functions directory
+
+      # Configure GitHub Pages to use the serverless function
+      - name: Configure GitHub Pages
+        run: |
+          # Create a _routes.json file to handle API requests
+          echo '{
+            "version": 1,
+            "include": ["/*"],
+            "exclude": [],
+            "routes": [
+              {
+                "src": "/.github/functions/github-data",
+                "dest": "/.github/functions/github-data.js",
+                "methods": ["POST", "OPTIONS"],
+                "headers": {
+                  "Access-Control-Allow-Origin": "*",
+                  "Access-Control-Allow-Methods": "POST, OPTIONS",
+                  "Access-Control-Allow-Headers": "Content-Type"
+                }
+              }
+            ]
+          }' > build/_routes.json
+
+      # Add environment variable for the serverless function
+      - name: Add environment variable
+        run: |
+          echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
+          echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_OUTPUT

@@ -1,5 +1,4 @@
 // Configuration
-const GITHUB_API = 'https://api.github.com';
 const ORG_NAME = 'rh-ai-kickstart';
 
 // Function to extract categories from README content
@@ -30,56 +29,34 @@ function extractCategoriesFromReadme(readmeText) {
   return Array.from(categories);
 }
 
-// Function to fetch kickstarts directly from GitHub
+// Function to fetch kickstarts using our serverless function
 export const fetchKickstarts = async () => {
   try {
-    // Debug token status
-    const token = process.env.REACT_APP_GH_TOKEN;
-    console.log('Token status:', token ? 'Token exists' : 'No token found');
-    if (!token) {
-      throw new Error('GitHub token not found. Please check your .env file.');
-    }
-
-    // First, get the list of repositories
-    const reposResponse = await fetch(`${GITHUB_API}/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`, {
+    // Call our serverless function instead of GitHub API directly
+    const response = await fetch('/.github/functions/github-data', {
+      method: 'POST',
       headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': `Bearer ${token}`
-      }
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ orgName: ORG_NAME })
     });
 
-    if (!reposResponse.ok) {
-      const errorText = await reposResponse.text();
-      console.error('GitHub API error details:', {
-        status: reposResponse.status,
-        statusText: reposResponse.statusText,
-        headers: Object.fromEntries(reposResponse.headers.entries()),
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('API error details:', {
+        status: response.status,
+        statusText: response.statusText,
+        headers: Object.fromEntries(response.headers.entries()),
         body: errorText
       });
-      throw new Error(`GitHub API error: ${reposResponse.status} - ${reposResponse.statusText}`);
+      throw new Error(`API error: ${response.status} - ${response.statusText}`);
     }
 
-    const repos = await reposResponse.json();
+    const { repositories } = await response.json();
 
-    // Then, fetch README content for each repository
-    const kickstarts = await Promise.all(repos.map(async (repo) => {
-      let readmeText = '';
-      try {
-        const readmeResponse = await fetch(`${GITHUB_API}/repos/${ORG_NAME}/${repo.name}/readme`, {
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            'Authorization': `Bearer ${token}`
-          }
-        });
-
-        if (readmeResponse.ok) {
-          const readmeData = await readmeResponse.json();
-          readmeText = atob(readmeData.content);
-        }
-      } catch (error) {
-        console.warn(`Could not fetch README for ${repo.name}:`, error);
-      }
-
+    // Transform the repositories into kickstarts
+    const kickstarts = repositories.map(repo => {
+      const readmeText = repo.readmeText || '';
       const readmeCategories = readmeText ? extractCategoriesFromReadme(readmeText) : [];
       const topics = repo.topics || [];
       const language = repo.language;
@@ -105,12 +82,12 @@ export const fetchKickstarts = async () => {
         ).join(' '),
         description: repo.description || 'No description available',
         readmePreview,
-        githubLink: repo.html_url,
+        githubLink: repo.url,
         categories: Array.from(allCategories).sort(),
-        stars: repo.stargazers_count,
-        lastUpdated: new Date(repo.updated_at).toLocaleDateString()
+        stars: repo.stars,
+        lastUpdated: new Date(repo.updatedAt).toLocaleDateString()
       };
-    }));
+    });
 
     return kickstarts;
   } catch (error) {

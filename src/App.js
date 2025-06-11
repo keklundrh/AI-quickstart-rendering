@@ -344,6 +344,11 @@ const customPatternFlyStyle = `
   .pf-v5-c-button.pf-m-secondary:hover {
     background-color: var(--pf-global--BackgroundColor--300);
   }
+
+  .kickstart-title-link:hover {
+    color: var(--pf-global--link--Color--hover) !important;
+    text-decoration: none !important;
+  }
 `;
 
 // Replaced PatternFly React components with HTML elements and custom CSS classes
@@ -356,12 +361,15 @@ const KickstartCard = ({ kickstart }) => (
           target="_blank"
           rel="noopener noreferrer"
           style={{
-            color: 'inherit',
-            textDecoration: 'none',
+            color: 'var(--pf-global--link--Color)',
+            textDecoration: 'underline',
+            transition: 'color 0.2s ease-in-out',
             ':hover': {
-              color: 'var(--pf-global--primary-color--100)'
+              color: 'var(--pf-global--link--Color--hover)',
+              textDecoration: 'none'
             }
           }}
+          className="kickstart-title-link"
         >
           {kickstart.title}
         </a>
@@ -557,7 +565,7 @@ const App = () => {
           <section className="pf-v5-c-page__main-section pf-m-light pf-v5-u-py-xl">
             <div className="pf-v5-u-text-align-center pf-v5-u-pb-lg">
               <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v01</h1>
-              <p className="pf-v5-u-mt-md">Discover ready-to-run AI examples designed for OpenShift.</p>
+              <p className="pf-v5-u-mt-md">Discover ready-to-run AI examples designed for Red HatOpenShift AI.</p>
             </div>
 
             {/* Toolbar for Search and Filter */}
