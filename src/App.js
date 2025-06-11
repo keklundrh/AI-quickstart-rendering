@@ -481,7 +481,8 @@ const App = () => {
         <header className="pf-v5-c-masthead">
           <div className="pf-v5-c-masthead__main">
             <div className="pf-v5-c-masthead__brand">
-              <a className="pf-v5-c-brand" href="#">
+              {/* Corrected href from '#' to '/' for accessibility */}
+              <a className="pf-v5-c-brand" href="/">
                 <img src="https://placehold.co/100x30/FFFFFF/EE0000?text=Red%20Hat" alt="Red Hat Logo" />
                 <span className="pf-v5-u-font-weight-bold pf-v5-u-font-size-2xl">Red Hat</span>
                 <span className="pf-v5-u-font-size-xl pf-v5-u-ml-sm">AI Kickstarts</span>
