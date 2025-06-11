@@ -2,6 +2,34 @@
 const GITHUB_API_BASE = 'https://api.github.com';
 const ORG_NAME = 'rh-ai-kickstart';
 
+// Function to fetch README content for a repository
+const fetchReadme = async (repoName) => {
+  try {
+    const response = await fetch(`${GITHUB_API_BASE}/repos/${ORG_NAME}/${repoName}/readme`, {
+      headers: {
+        'Accept': 'application/vnd.github.html+json' // Get README as HTML
+      }
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        return 'No README available';
+      }
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+
+    const readmeHtml = await response.text();
+    // Convert HTML to plain text and get first 200 characters
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = readmeHtml;
+    const plainText = tempDiv.textContent || tempDiv.innerText || '';
+    return plainText.substring(0, 200) + (plainText.length > 200 ? '...' : '');
+  } catch (error) {
+    console.error(`Error fetching README for ${repoName}:`, error);
+    return 'Error loading README';
+  }
+};
+
 // Function to fetch repository data from GitHub
 export const fetchKickstarts = async () => {
   try {
@@ -15,16 +43,20 @@ export const fetchKickstarts = async () => {
     const repos = await response.json();
 
     // Transform the repository data into our kickstart format
-    const kickstarts = repos.map(repo => ({
-      id: repo.name,
-      title: repo.name.split('-').map(word =>
-        word.charAt(0).toUpperCase() + word.slice(1)
-      ).join(' '),
-      description: repo.description || 'No description available',
-      githubLink: repo.html_url,
-      categories: extractCategories(repo),
-      stars: repo.stargazers_count,
-      lastUpdated: new Date(repo.updated_at).toLocaleDateString()
+    const kickstarts = await Promise.all(repos.map(async repo => {
+      const readmePreview = await fetchReadme(repo.name);
+      return {
+        id: repo.name,
+        title: repo.name.split('-').map(word =>
+          word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' '),
+        description: repo.description || 'No description available',
+        readmePreview,
+        githubLink: repo.html_url,
+        categories: extractCategories(repo),
+        stars: repo.stargazers_count,
+        lastUpdated: new Date(repo.updated_at).toLocaleDateString()
+      };
     }));
 
     return kickstarts;

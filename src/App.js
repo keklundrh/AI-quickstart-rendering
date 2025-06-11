@@ -338,8 +338,45 @@ const KickstartCard = ({ kickstart }) => (
       <h3>{kickstart.title}</h3>
     </div>
     <div className="pf-v5-c-card__body">
-      <p>{kickstart.description}</p>
-      <div style={{ marginTop: 'var(--pf-global--spacer--md)' }}>
+      {/* Description section */}
+      <div className="kickstart-description">
+        <h4 style={{
+          fontSize: 'var(--pf-global--FontSize--sm)',
+          color: 'var(--pf-global--Color--200)',
+          marginBottom: 'var(--pf-global--spacer--xs)'
+        }}>
+          Description
+        </h4>
+        <p style={{ marginBottom: 'var(--pf-global--spacer--md)' }}>
+          {kickstart.description}
+        </p>
+      </div>
+
+      {/* README preview section */}
+      <div className="kickstart-readme">
+        <h4 style={{
+          fontSize: 'var(--pf-global--FontSize--sm)',
+          color: 'var(--pf-global--Color--200)',
+          marginBottom: 'var(--pf-global--spacer--xs)'
+        }}>
+          README Preview
+        </h4>
+        <p style={{
+          fontSize: 'var(--pf-global--FontSize--sm)',
+          color: 'var(--pf-global--Color--100)',
+          fontStyle: 'italic',
+          marginBottom: 'var(--pf-global--spacer--md)'
+        }}>
+          {kickstart.readmePreview}
+        </p>
+      </div>
+
+      {/* Metadata section */}
+      <div style={{
+        marginTop: 'var(--pf-global--spacer--md)',
+        fontSize: 'var(--pf-global--FontSize--sm)',
+        color: 'var(--pf-global--Color--200)'
+      }}>
         <small>Last updated: {kickstart.lastUpdated}</small>
         {kickstart.stars > 0 && (
           <span style={{ marginLeft: 'var(--pf-global--spacer--md)' }}>
