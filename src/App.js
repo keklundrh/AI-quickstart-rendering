@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { fetchKickstarts, getAllCategories } from './api/kickstarts';
 
 // NOTE: Direct imports of PatternFly React components like '@patternfly/react-core'
 // and '@patternfly/react-icons' are causing resolution errors in this self-contained
@@ -330,63 +331,6 @@ const customPatternFlyStyle = `
   }
 `;
 
-// Mock data for kickstarts
-const mockKickstarts = [
-  {
-    id: 'vllm-cpu',
-    title: 'vLLM CPU',
-    description: 'Optimize large language model inference on CPUs for efficient, cost-effective deployments, leveraging open-source frameworks like OpenVINO and ONNX Runtime.',
-    githubLink: 'https://github.com/rh-ai-kickstart/vllm-cpu',
-    categories: ['LLM', 'Inference', 'Optimization', 'CPU']
-  },
-  {
-    id: 'ai-observability-metric-summarizer',
-    title: 'AI Observability Metric Summarizer',
-    description: 'Summarize complex observability metrics using AI, providing quick insights into system health and performance anomalies.',
-    githubLink: 'https://github.com/rh-ai-kickstart/AI-Observability-Metric-Summarizer',
-    categories: ['Observability', 'AI', 'Metrics', 'Monitoring']
-  },
-  {
-    id: 'rag',
-    title: 'Retrieval Augmented Generation (RAG)',
-    description: 'Implement a RAG pipeline for enhanced LLM responses by grounding them in external knowledge bases, improving accuracy and relevance.',
-    githubLink: 'https://github.com/rh-ai-kickstart/RAG',
-    categories: ['LLM', 'RAG', 'Knowledge Base', 'Information Retrieval']
-  },
-  {
-    id: 'model-serving-fastapi',
-    title: 'Model Serving with FastAPI',
-    description: 'Deploy and serve machine learning models using FastAPI, providing high-performance APIs for inference in production environments.',
-    githubLink: 'https://github.com/rh-ai-kickstart/model-serving-fastapi',
-    categories: ['MLOps', 'Deployment', 'API', 'Python']
-  },
-  {
-    id: 'ai-assistant-chatbot',
-    title: 'AI Assistant Chatbot',
-    description: 'Build an intelligent chatbot that leverages LLMs and knowledge bases to provide conversational AI support for various use cases.',
-    githubLink: 'https://github.com/rh-ai-kickstart/ai-assistant-chatbot',
-    categories: ['Chatbot', 'LLM', 'Conversational AI', 'Assistant']
-  },
-  {
-    id: 'data-science-workbench',
-    title: 'Data Science Workbench',
-    description: 'A comprehensive environment for data scientists, featuring popular tools and libraries for data analysis, machine learning, and visualization.',
-    githubLink: 'https://github.com/rh-ai-kickstart/data-science-workbench',
-    categories: ['Data Science', 'Machine Learning', 'Analytics', 'Jupyter']
-  }
-];
-
-// Helper to get all unique categories from mock data
-const getAllCategories = () => {
-  const categories = new Set();
-  mockKickstarts.forEach(kickstart => {
-    kickstart.categories.forEach(cat => categories.add(cat));
-  });
-  return Array.from(categories).sort();
-};
-
-const allCategories = getAllCategories();
-
 // Replaced PatternFly React components with HTML elements and custom CSS classes
 const KickstartCard = ({ kickstart }) => (
   <div className="pf-v5-c-card pf-m-hoverable">
@@ -394,7 +338,15 @@ const KickstartCard = ({ kickstart }) => (
       <h3>{kickstart.title}</h3>
     </div>
     <div className="pf-v5-c-card__body">
-      {kickstart.description}
+      <p>{kickstart.description}</p>
+      <div style={{ marginTop: 'var(--pf-global--spacer--md)' }}>
+        <small>Last updated: {kickstart.lastUpdated}</small>
+        {kickstart.stars > 0 && (
+          <span style={{ marginLeft: 'var(--pf-global--spacer--md)' }}>
+            ⭐ {kickstart.stars} stars
+          </span>
+        )}
+      </div>
     </div>
     <div className="pf-v5-c-card__footer">
       {kickstart.categories.map((category, index) => (
@@ -408,9 +360,9 @@ const KickstartCard = ({ kickstart }) => (
       <a
         href={kickstart.githubLink}
         target="_blank"
-        rel="noopener noreferrer" // Security best practice for target="_blank"
+        rel="noopener noreferrer"
         className="pf-v5-c-button pf-m-primary w-full"
-        role="button" // Indicates it's a button for accessibility
+        role="button"
       >
         View on GitHub
       </a>
@@ -425,16 +377,28 @@ const App = () => {
   const [isCategorySelectOpen, setIsCategorySelectOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
 
-  // Simulate data loading
+  // Fetch kickstarts data
   useEffect(() => {
-    setIsLoading(true);
-    // In a real application, this would be a fetch call to your backend
-    setTimeout(() => {
-      setKickstarts(mockKickstarts);
-      setFilteredKickstarts(mockKickstarts);
-      setIsLoading(false);
-    }, 1000); // Simulate network delay
+    const loadKickstarts = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const data = await fetchKickstarts();
+        setKickstarts(data);
+        setFilteredKickstarts(data);
+        setCategories(getAllCategories(data));
+      } catch (err) {
+        setError(err.message);
+        console.error('Failed to load kickstarts:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadKickstarts();
   }, []);
 
   useEffect(() => {
@@ -446,7 +410,8 @@ const App = () => {
       const lowerCaseSearchTerm = searchTerm.toLowerCase();
       currentFiltered = currentFiltered.filter(kickstart =>
         kickstart.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-        kickstart.description.toLowerCase().includes(lowerCaseSearchTerm)
+        kickstart.description.toLowerCase().includes(lowerCaseSearchTerm) ||
+        kickstart.categories.some(cat => cat.toLowerCase().includes(lowerCaseSearchTerm))
       );
     }
 
@@ -464,7 +429,6 @@ const App = () => {
     setIsCategorySelectOpen(isOpen);
   };
 
-  // The 'selection' parameter directly receives the value from the clicked list item.
   const onCategorySelect = (selection) => {
     setSelectedCategory(selection === 'All Categories' ? null : selection);
     setIsCategorySelectOpen(false);
@@ -539,7 +503,7 @@ const App = () => {
                     {isCategorySelectOpen && (
                       <ul className="pf-v5-c-select__menu">
                         <li className="pf-v5-c-select__menu-item" onClick={() => onCategorySelect('All Categories')}>All Categories</li>
-                        {allCategories.map((category, index) => (
+                        {categories.map((category, index) => (
                           <li key={index} className="pf-v5-c-select__menu-item" onClick={() => onCategorySelect(category)}>{category}</li>
                         ))}
                       </ul>
@@ -559,30 +523,45 @@ const App = () => {
                 </div>
                 <h2 className="pf-v5-c-title pf-m-xl">Loading Kickstarts...</h2>
                 <div className="pf-v5-c-empty-state__body">
-                  Fetching the latest AI kickstart projects.
+                  Fetching the latest AI kickstart projects from GitHub.
                 </div>
               </div>
+            ) : error ? (
+              <div className="pf-v5-c-empty-state">
+                <div className="pf-v5-c-empty-state__icon">
+                  <svg fill="currentColor" height="3em" width="3em" viewBox="0 0 512 512" aria-hidden="true" role="img">
+                    <path d="M256 32c14.2 0 27.3 7.5 34.5 19.8l216 368c7.3 12.4 7.3 27.7 .2 40.1S486.3 480 472 480H40c-14.3 0-27.6-7.7-34.7-20.1s-7-27.8 .2-40.1l216-368C228.7 39.5 241.8 32 256 32zm0 128c-13.3 0-24 10.7-24 24V296c0 13.3 10.7 24 24 24s24-10.7 24-24V184c0-13.3-10.7-24-24-24zm32 224a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z"/>
+                  </svg>
+                </div>
+                <h2 className="pf-v5-c-title pf-m-xl">Error Loading Kickstarts</h2>
+                <div className="pf-v5-c-empty-state__body">
+                  {error}
+                </div>
+                <button
+                  className="pf-v5-c-button pf-m-primary"
+                  onClick={() => window.location.reload()}
+                >
+                  Try Again
+                </button>
+              </div>
+            ) : filteredKickstarts.length > 0 ? (
+              <div className="pf-v5-c-gallery">
+                {filteredKickstarts.map(kickstart => (
+                  <KickstartCard key={kickstart.id} kickstart={kickstart} />
+                ))}
+              </div>
             ) : (
-              filteredKickstarts.length > 0 ? (
-                <div className="pf-v5-c-gallery">
-                  {filteredKickstarts.map(kickstart => (
-                    <KickstartCard key={kickstart.id} kickstart={kickstart} />
-                  ))}
+              <div className="pf-v5-c-empty-state">
+                <div className="pf-v5-c-empty-state__icon">
+                  <svg fill="currentColor" height="3em" width="3em" viewBox="0 0 512 512" aria-hidden="true" role="img">
+                    <path d="M472 0H40C17.9 0 0 17.9 0 40v304c0 22.1 17.9 40 40 40h128l48 96 48-96h128c22.1 0 40-17.9 40-40V40c0-22.1-17.9-40-40-40zm-80 304h-96V208h96v96zM128 104c0-22.1 17.9-40 40-40h176c22.1 0 40 17.9 40 40v96H128v-96zm256 128h-96v96h96v-96zM128 304v-96h96v96h-96z"/>
+                  </svg>
                 </div>
-              ) : (
-                <div className="pf-v5-c-empty-state">
-                  <div className="pf-v5-c-empty-state__icon">
-                    {/* Cubes Icon (inline SVG or simple character) */}
-                    <svg fill="currentColor" height="3em" width="3em" viewBox="0 0 512 512" aria-hidden="true" role="img" style={{ verticalAlign: '-0.125em' }}>
-                      <path d="M472 0H40C17.9 0 0 17.9 0 40v304c0 22.1 17.9 40 40 40h128l48 96 48-96h128c22.1 0 40-17.9 40-40V40c0-22.1-17.9-40-40-40zm-80 304h-96V208h96v96zM128 104c0-22.1 17.9-40 40-40h176c22.1 0 40 17.9 40 40v96H128v-96zm256 128h-96v96h96v-96zM128 304v-96h96v96h-96z"></path>
-                    </svg>
-                  </div>
-                  <h2 className="pf-v5-c-title pf-m-xl">No Kickstarts Found</h2>
-                  <div className="pf-v5-c-empty-state__body">
-                    Adjust your search or filter criteria to find more kickstarts.
-                  </div>
+                <h2 className="pf-v5-c-title pf-m-xl">No Kickstarts Found</h2>
+                <div className="pf-v5-c-empty-state__body">
+                  Adjust your search or filter criteria to find more kickstarts.
                 </div>
-              )
+              </div>
             )}
           </section>
         </main>

@@ -38,26 +38,41 @@ The application will be available at `http://localhost:3000`
    cd red-hat-kickstarts-app
    ```
 
-2. Build the development container:
+2. Clean up any existing containers and images (optional, but recommended if you're having caching issues):
    ```bash
-   podman build -t red-hat-kickstarts-dev -f Containerfile.dev .
+   # Stop any running containers
+   podman stop $(podman ps -a -q) 2>/dev/null || true
+
+   # Remove the development container if it exists
+   podman rm -f red-hat-kickstarts-dev 2>/dev/null || true
+
+   # Remove the development image if it exists
+   podman rmi -f red-hat-kickstarts-dev 2>/dev/null || true
+
+   # Remove the development volume if it exists
+   podman volume rm red-hat-kickstarts-dev 2>/dev/null || true
    ```
 
-3. Create a named volume for development:
+3. Build the development container (with no cache):
+   ```bash
+   podman build --no-cache -t red-hat-kickstarts-dev -f Containerfile.dev .
+   ```
+
+4. Create a named volume for development:
    ```bash
    podman volume create red-hat-kickstarts-dev
    ```
 
-4. Copy your project files to the volume:
+5. Copy your project files to the volume:
    ```bash
    podman run --rm \
      -v red-hat-kickstarts-dev:/app \
      -v $(pwd):/source:ro \
      red-hat-kickstarts-dev \
-     sh -c "cp -r /source/* /app/"
+     sh -c "rm -rf /app/* && cp -r /source/* /app/"
    ```
 
-5. Run the development container:
+6. Run the development container:
    ```bash
    podman run -it --rm \
      -p 3000:3000 \
@@ -107,12 +122,24 @@ CMD ["npm", "start"]
 
 ### Containerized Build
 
-1. Build the production container:
+1. Clean up any existing production containers and images (optional, but recommended if you're having caching issues):
    ```bash
-   podman build -t red-hat-kickstarts-prod -f Containerfile .
+   # Stop any running containers
+   podman stop $(podman ps -a -q) 2>/dev/null || true
+
+   # Remove the production container if it exists
+   podman rm -f red-hat-kickstarts-prod 2>/dev/null || true
+
+   # Remove the production image if it exists
+   podman rmi -f red-hat-kickstarts-prod 2>/dev/null || true
    ```
 
-2. Run the production container:
+2. Build the production container (with no cache):
+   ```bash
+   podman build --no-cache -t red-hat-kickstarts-prod -f Containerfile .
+   ```
+
+3. Run the production container:
    ```bash
    podman run -it --rm -p 8080:80 red-hat-kickstarts-prod
    ```
