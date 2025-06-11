@@ -1,0 +1,120 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: openshift-client
+spec:
+  description: >-
+    This task runs commands using the OpenShift CLI (oc).
+  params:
+    - name: SCRIPT
+      description: The script to run
+      type: string
+  steps:
+    - name: oc
+      image: quay.io/openshift/origin-cli:latest
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        $(params.SCRIPT)
+      securityContext:
+        runAsUser: 0
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: git-clone
+spec:
+  description: >-
+    This task clones a git repository.
+  params:
+    - name: url
+      description: The git repository URL
+      type: string
+    - name: revision
+      description: The git revision to checkout
+      type: string
+    - name: submodules
+      description: Initialize and fetch git submodules
+      type: string
+      default: "true"
+    - name: depth
+      description: Perform a shallow clone, fetching only the most recent N commits
+      type: string
+      default: "1"
+  workspaces:
+    - name: output
+      description: The git repo will be cloned onto the volume backing this workspace
+  steps:
+    - name: clone
+      image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.45.0
+      script: |
+        #!/usr/bin/env sh
+        set -e
+        CHECKOUT_DIR="$(workspaces.output.path)"
+        /ko-app/git-init \
+          -url "$(params.url)" \
+          -revision "$(params.revision)" \
+          -path "$CHECKOUT_DIR" \
+          -submodules "$(params.submodules)" \
+          -depth "$(params.depth)"
+---
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: buildah
+spec:
+  description: >-
+    This task builds and pushes a container image using Buildah.
+  params:
+    - name: IMAGE
+      description: The name of the image to build
+      type: string
+    - name: DOCKERFILE
+      description: Path to the Dockerfile to build
+      type: string
+      default: Dockerfile
+    - name: CONTEXT
+      description: Path to the directory to use as context
+      type: string
+      default: .
+    - name: BUILDAH_ARGS
+      description: Additional build arguments for the buildah command
+      type: string
+      default: ""
+    - name: TLSVERIFY
+      description: Verify the TLS on the registry endpoint
+      type: string
+      default: "true"
+    - name: STORAGE_DRIVER
+      description: Override the storage driver
+      type: string
+      default: "vfs"
+  workspaces:
+    - name: source
+      description: The workspace containing the source code
+    - name: dockerconfig
+      description: The workspace containing the docker config.json
+  steps:
+    - name: build
+      image: quay.io/buildah/stable:latest
+      script: |
+        #!/usr/bin/env bash
+        set -e
+        # Set up storage
+        mkdir -p /var/lib/containers
+        # Build the image
+        buildah bud \
+          --storage-driver=$(params.STORAGE_DRIVER) \
+          --tls-verify=$(params.TLSVERIFY) \
+          $(params.BUILDAH_ARGS) \
+          -f $(params.DOCKERFILE) \
+          -t $(params.IMAGE) \
+          $(params.CONTEXT)
+        # Push the image
+        buildah push \
+          --storage-driver=$(params.STORAGE_DRIVER) \
+          --tls-verify=$(params.TLSVERIFY) \
+          $(params.IMAGE) \
+          docker://$(params.IMAGE)
+      securityContext:
+        privileged: true

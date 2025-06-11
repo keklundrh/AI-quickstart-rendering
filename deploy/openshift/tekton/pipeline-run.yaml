@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: ai-kickstarts-pipeline-run
+  annotations:
+    # Add timeout to prevent hanging pipelines
+    tekton.dev/timeout: "30m"
+spec:
+  pipelineRef:
+    name: ai-kickstarts-pipeline
+  workspaces:
+    - name: shared-workspace
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+    - name: docker-config
+      secret:
+        secretName: docker-config
+  params:
+    - name: git-url
+      value: https://github.com/erwangranger/AI-Kickstart-rendering.git
+    - name: git-revision
+      value: hostonopenshift
+    - name: image-name
+      value: ai-kickstarts-app
+    - name: image-tag
+      value: latest
+    - name: registry-url
+      value: image-registry.openshift-image-registry.svc:5000
+    - name: registry-namespace
+      value: ai-kickstarts

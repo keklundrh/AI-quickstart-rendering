@@ -20,7 +20,9 @@ RUN addgroup -g 1002000000 nginx && \
 # Create necessary directories with correct permissions
 RUN mkdir -p /tmp/nginx && \
     chown -R nginx:nginx /tmp/nginx && \
-    chmod 755 /tmp/nginx
+    chmod 755 /tmp/nginx && \
+    # Remove default nginx configuration
+    rm -rf /etc/nginx/conf.d/*
 
 # Copy custom nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -29,7 +31,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/build /usr/share/nginx/html
 
 # Set correct permissions
-RUN chown -R nginx:nginx /usr/share/nginx/html
+RUN chown -R nginx:nginx /usr/share/nginx/html && \
+    chmod -R 755 /usr/share/nginx/html
 
 EXPOSE 80
+USER nginx
 CMD ["nginx", "-g", "daemon off;"]
