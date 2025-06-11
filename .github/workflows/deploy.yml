@@ -6,6 +6,12 @@ on:
       - main
       - '*' # Trigger on pushes to all branches
 
+# Explicitly grant permissions to the GITHUB_TOKEN for GitHub Pages deployment
+permissions:
+  contents: write # Needed to push to the gh-pages branch (for the build artifact)
+  pages: write    # Needed for GitHub Pages deployment
+  id-token: write # Needed for OpenID Connect (if using, generally good practice for GH Pages)
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
