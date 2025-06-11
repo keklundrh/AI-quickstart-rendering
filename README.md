@@ -139,34 +139,61 @@ This application is automatically deployed to GitHub Pages using GitHub Actions.
 - Main branch: `https://<username>.github.io/red-hat-kickstarts-app/`
 - Preview branches: `https://<username>.github.io/red-hat-kickstarts-app/previews/<branch-name>/`
 
-## Development Workflow
+## Development Setup
 
-1. Create a new branch for your feature:
+This project uses Node.js 20.x. We recommend using [nvm](https://github.com/nvm-sh/nvm) to manage Node.js versions.
+
+### Prerequisites
+
+1. Install nvm (Node Version Manager):
    ```bash
-   git checkout -b feature/your-feature-name
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
    ```
 
-2. Make your changes and commit them:
+2. Install the correct Node.js version:
    ```bash
-   git add .
-   git commit -m "Description of your changes"
+   nvm install
+   nvm use
    ```
 
-3. Push your branch:
+### Development Workflow
+
+1. Initial setup:
    ```bash
-   git push origin feature/your-feature-name
+   npm run setup
    ```
+   This will:
+   - Clean up any empty directories
+   - Remove existing node_modules
+   - Clear npm cache
+   - Install dependencies using `npm ci` (same as CI)
 
-4. Create a Pull Request on GitHub
-   - A preview deployment will be automatically created
-   - The preview URL will be commented on your PR
+2. Start development server:
+   ```bash
+   npm run dev
+   ```
+   This runs the setup and starts the development server.
 
-## Available Scripts
+3. Build locally (same as CI):
+   ```bash
+   npm run build:local
+   ```
+   This runs the same build process as CI, including:
+   - Clean setup
+   - Generate static data
+   - Production build with verbose logging
 
-- `npm start`: Runs the app in development mode
-- `npm test`: Launches the test runner
-- `npm run build`: Builds the app for production
-- `npm run eject`: Ejects from Create React App
+### Available Scripts
+
+- `npm run setup` - Clean install of dependencies (same as CI)
+- `npm run dev` - Start development server
+- `npm run build:local` - Build locally (same as CI)
+- `npm run generate-static` - Generate static data
+- `npm run clean` - Clean up empty directories
+- `npm start` - Start development server (without setup)
+- `npm run build` - Build without setup
+- `npm test` - Run tests
+- `npm run eject` - Eject from create-react-app
 
 ## Contributing
 

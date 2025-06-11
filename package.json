@@ -21,7 +21,12 @@
         "eject": "react-scripts eject",
         "generate-static": "node scripts/generate-static.js",
         "clean": "rimraf functions api",
-        "prebuild": "npm run clean && npm run generate-static"
+        "prebuild": "npm run clean && npm run generate-static",
+        "setup": "npm run clean && rm -rf node_modules && npm cache clean --force && npm ci",
+        "build:ci": "NODE_ENV=production npm_config_loglevel=verbose npm run build",
+        "dev": "npm run setup && npm start",
+        "build:local": "npm run setup && npm run build:ci",
+        "postinstall": "node -e \"try { require('fs').statSync('.nvmrc') } catch (e) { console.log('⚠️  No .nvmrc file found. Please install Node.js 20.x') }\""
     },
     "eslintConfig": {
         "extends": [

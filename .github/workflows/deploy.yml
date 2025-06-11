@@ -19,6 +19,8 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Set token for all steps
 
     steps:
       - name: Checkout code
@@ -46,7 +48,7 @@ jobs:
       - name: Generate static kickstarts data
         run: |
           npm install node-fetch@2
-          GH_TOKEN=${{ secrets.GH_TOKEN }} node scripts/generate-static.js
+          node scripts/generate-static.js
 
       - name: Build
         env:
