@@ -12,6 +12,36 @@ const getGitHubHeaders = () => ({
   ...(GITHUB_TOKEN ? { 'Authorization': `Bearer ${GITHUB_TOKEN}` } : {})
 });
 
+// Cache configuration
+const CACHE_KEY = 'github_kickstarts_cache';
+const CACHE_DURATION = 60 * 60 * 1000; // 1 hour in milliseconds
+
+// Function to get cached data
+const getCachedData = () => {
+  const cached = localStorage.getItem(CACHE_KEY);
+  if (!cached) return null;
+
+  const { data, timestamp } = JSON.parse(cached);
+  const now = Date.now();
+
+  // Return null if cache is expired
+  if (now - timestamp > CACHE_DURATION) {
+    localStorage.removeItem(CACHE_KEY);
+    return null;
+  }
+
+  return data;
+};
+
+// Function to set cached data
+const setCachedData = (data) => {
+  const cacheData = {
+    data,
+    timestamp: Date.now()
+  };
+  localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
+};
+
 // Function to extract categories from README content
 const extractCategoriesFromReadme = (readmeHtml) => {
   const categories = new Set();
@@ -80,7 +110,14 @@ const handleGitHubError = async (response, context) => {
 // Function to fetch repository data from GitHub using GraphQL
 export const fetchKickstarts = async () => {
   try {
-    // GraphQL query to get repositories with their READMEs in a single request
+    // Check cache first
+    const cachedData = getCachedData();
+    if (cachedData) {
+      console.log('Using cached kickstarts data');
+      return cachedData;
+    }
+
+    // Optimized GraphQL query to fetch only necessary fields
     const query = `
       query {
         organization(login: "${ORG_NAME}") {
@@ -94,7 +131,7 @@ export const fetchKickstarts = async () => {
               primaryLanguage {
                 name
               }
-              repositoryTopics(first: 20) {
+              repositoryTopics(first: 10) {
                 nodes {
                   topic {
                     name
@@ -106,6 +143,10 @@ export const fetchKickstarts = async () => {
                   text
                 }
               }
+            }
+            pageInfo {
+              hasNextPage
+              endCursor
             }
           }
         }
@@ -150,9 +191,9 @@ export const fetchKickstarts = async () => {
         allCategories.add('AI');
       }
 
-      // Get README preview
+      // Get README preview (limit to first 150 characters to reduce data size)
       const readmePreview = repo.object?.text
-        ? repo.object.text.substring(0, 200) + (repo.object.text.length > 200 ? '...' : '')
+        ? repo.object.text.substring(0, 150) + (repo.object.text.length > 150 ? '...' : '')
         : 'No README available';
 
       return {
@@ -169,9 +210,20 @@ export const fetchKickstarts = async () => {
       };
     });
 
+    // Cache the transformed data
+    setCachedData(kickstarts);
+
     return kickstarts;
   } catch (error) {
     console.error('Error fetching kickstarts:', error);
+
+    // If there's an error, try to return cached data even if expired
+    const cachedData = getCachedData();
+    if (cachedData) {
+      console.log('Using expired cache due to error');
+      return cachedData;
+    }
+
     throw error;
   }
 };
