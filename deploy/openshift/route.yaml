@@ -1,0 +1,15 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: ai-kickstarts-app
+  labels:
+    app: ai-kickstarts-app
+spec:
+  to:
+    kind: Service
+    name: ai-kickstarts-app
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect

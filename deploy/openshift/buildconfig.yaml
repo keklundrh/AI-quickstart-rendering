@@ -1,0 +1,33 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: ai-kickstarts-app
+  labels:
+    app: ai-kickstarts-app
+spec:
+  source:
+    git:
+      uri: ${GIT_REPO_URL}
+      ref: ${GIT_REF}
+    contextDir: .
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Containerfile
+  output:
+    to:
+      kind: ImageStreamTag
+      name: ai-kickstarts-app:latest
+  triggers:
+  - type: ConfigChange
+  - type: ImageChange
+  - type: GitHub
+    github:
+      secret: ${GITHUB_WEBHOOK_SECRET}
+  resources:
+    requests:
+      memory: "512Mi"
+      cpu: "500m"
+    limits:
+      memory: "1Gi"
+      cpu: "1000m"
