@@ -49,6 +49,7 @@ jobs:
         env:
           NODE_ENV: production
           npm_config_loglevel: verbose
+          REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm ci --include=dev
           if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
