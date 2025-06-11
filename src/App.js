@@ -220,8 +220,8 @@ const customPatternFlyStyle = `
   .pf-v5-c-card {
     background-color: white;
     border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
-    border-radius: 0.75rem; /* Increased from var(--pf-global--BorderRadius--lg) to 0.75rem for even more rounded corners */
-    box-shadow: var(--pf-global--BoxShadow--sm);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* Enhanced shadow effect */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -229,7 +229,7 @@ const customPatternFlyStyle = `
     transition: box-shadow 0.2s ease-in-out;
   }
   .pf-v5-c-card.pf-m-hoverable:hover {
-    box-shadow: var(--pf-global--BoxShadow--md);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.08); /* Enhanced hover shadow */
   }
   .pf-v5-c-card__title {
     padding: var(--pf-global--spacer--lg);
@@ -329,6 +329,21 @@ const customPatternFlyStyle = `
   .pf-v5-c-cubes-icon { /* Custom style for CubesIcon if it doesn't resolve */
     font-size: 3rem; /* Adjust size for the icon */
   }
+
+  .pf-v5-c-select__menu-item.pf-m-selected {
+    background-color: var(--pf-global--BackgroundColor--300);
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+
+  .pf-v5-c-button.pf-m-secondary {
+    background-color: white;
+    color: var(--pf-global--primary-color--100);
+    border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--primary-color--100);
+  }
+
+  .pf-v5-c-button.pf-m-secondary:hover {
+    background-color: var(--pf-global--BackgroundColor--300);
+  }
 `;
 
 // Replaced PatternFly React components with HTML elements and custom CSS classes
@@ -412,7 +427,7 @@ const App = () => {
   const [filteredKickstarts, setFilteredKickstarts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [isCategorySelectOpen, setIsCategorySelectOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategories, setSelectedCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
@@ -439,7 +454,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // Apply filters whenever search term or category changes
+    // Apply filters whenever search term or categories change
     let currentFiltered = kickstarts;
 
     // Search term filter
@@ -452,23 +467,37 @@ const App = () => {
       );
     }
 
-    // Category filter
-    if (selectedCategory) {
+    // Category filter - now supports multiple categories
+    if (selectedCategories.length > 0) {
       currentFiltered = currentFiltered.filter(kickstart =>
-        kickstart.categories.includes(selectedCategory)
+        selectedCategories.some(selectedCat =>
+          kickstart.categories.includes(selectedCat)
+        )
       );
     }
 
     setFilteredKickstarts(currentFiltered);
-  }, [searchTerm, selectedCategory, kickstarts]);
+  }, [searchTerm, selectedCategories, kickstarts]);
 
   const onCategorySelectToggle = (isOpen) => {
     setIsCategorySelectOpen(isOpen);
   };
 
-  const onCategorySelect = (selection) => {
-    setSelectedCategory(selection === 'All Categories' ? null : selection);
-    setIsCategorySelectOpen(false);
+  const onCategorySelect = (category) => {
+    setSelectedCategories(prev => {
+      if (category === 'All Categories') {
+        return [];
+      }
+      if (prev.includes(category)) {
+        return prev.filter(cat => cat !== category);
+      }
+      return [...prev, category];
+    });
+  };
+
+  const clearFilters = () => {
+    setSearchTerm('');
+    setSelectedCategories([]);
   };
 
   return (
@@ -526,7 +555,6 @@ const App = () => {
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
                     <button className="pf-v5-c-button pf-m-control" aria-label="Search button">
-                      {/* Search Icon (inline SVG or simple character) */}
                       <svg fill="currentColor" height="1em" width="1em" viewBox="0 0 512 512" aria-hidden="true" role="img" style={{ verticalAlign: '-0.125em' }}>
                         <path d="M416 208c0 45.9-14.9 88.3-40 122.7L476 438.7c3.1 3.1 4.7 7.2 4.7 11.3 0 4.1-1.6 8.2-4.7 11.3l-22.6 22.6c-3.1 3.1-7.2 4.7-11.3 4.7-4.1 0-8.2-1.6-11.3-4.7L339.3 360c-34.4 25.1-76.8 40-122.7 40C93.1 400 0 306.9 0 208S93.1 16 208 16s208 93.1 208 192zM208 64c-77.9 0-141 63.1-141 141s63.1 141 141 141 141-63.1 141-141-63.1-141-141-141z"></path>
                       </svg>
@@ -540,22 +568,73 @@ const App = () => {
                       onClick={() => onCategorySelectToggle(!isCategorySelectOpen)}
                       aria-expanded={isCategorySelectOpen}
                     >
-                      <span>{selectedCategory || 'Filter by Category'}</span>
+                      <span>
+                        {selectedCategories.length > 0
+                          ? `${selectedCategories.length} categories selected`
+                          : 'Filter by Category'}
+                      </span>
                       <span className="pf-v5-c-select__toggle-arrow">
-                        &#9660; {/* Unicode for down arrow */}
+                        &#9660;
                       </span>
                     </button>
                     {isCategorySelectOpen && (
                       <ul className="pf-v5-c-select__menu">
-                        <li className="pf-v5-c-select__menu-item" onClick={() => onCategorySelect('All Categories')}>All Categories</li>
+                        <li
+                          className="pf-v5-c-select__menu-item"
+                          onClick={() => {
+                            setSelectedCategories([]);
+                            setIsCategorySelectOpen(false);
+                          }}
+                        >
+                          Clear Categories
+                        </li>
                         {categories.map((category, index) => (
-                          <li key={index} className="pf-v5-c-select__menu-item" onClick={() => onCategorySelect(category)}>{category}</li>
+                          <li
+                            key={index}
+                            className={`pf-v5-c-select__menu-item ${selectedCategories.includes(category) ? 'pf-m-selected' : ''}`}
+                            onClick={() => onCategorySelect(category)}
+                          >
+                            {category}
+                            {selectedCategories.includes(category) && (
+                              <span style={{ marginLeft: 'var(--pf-global--spacer--sm)' }}>✓</span>
+                            )}
+                          </li>
                         ))}
                       </ul>
                     )}
                   </div>
                 </div>
+                {(searchTerm || selectedCategories.length > 0) && (
+                  <div className="pf-v5-c-toolbar__item">
+                    <button
+                      className="pf-v5-c-button pf-m-secondary"
+                      onClick={clearFilters}
+                    >
+                      Clear Filters
+                    </button>
+                  </div>
+                )}
               </div>
+              {/* Selected Categories Display */}
+              {selectedCategories.length > 0 && (
+                <div style={{
+                  marginTop: 'var(--pf-global--spacer--md)',
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 'var(--pf-global--spacer--sm)'
+                }}>
+                  {selectedCategories.map((category, index) => (
+                    <span
+                      key={index}
+                      className="pf-v5-c-label pf-m-outline pf-m-blue"
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => onCategorySelect(category)}
+                    >
+                      {category} ×
+                    </span>
+                  ))}
+                </div>
+              )}
             </div>
           </section>
 

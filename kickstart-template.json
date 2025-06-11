@@ -1,0 +1,52 @@
+{
+  "title": "Project Title",
+  "description": "A detailed description of the project",
+  "categories": [
+    "AI",
+    "Machine Learning",
+    "Computer Vision",
+    "Natural Language Processing",
+    "Deep Learning",
+    "Data Science",
+    "OpenShift",
+    "Kubernetes",
+    "Python",
+    "TensorFlow",
+    "PyTorch",
+    "Scikit-learn",
+    "Jupyter",
+    "REST API",
+    "Web Application",
+    "CLI Tool",
+    "Data Processing",
+    "Model Training",
+    "Model Serving",
+    "Model Deployment"
+  ],
+  "tags": [
+    "example-tag-1",
+    "example-tag-2"
+  ],
+  "difficulty": "beginner|intermediate|advanced",
+  "estimatedTime": "2 hours",
+  "prerequisites": [
+    "OpenShift cluster",
+    "Python 3.8+",
+    "Basic knowledge of machine learning"
+  ],
+  "maintainers": [
+    {
+      "name": "Maintainer Name",
+      "email": "maintainer@example.com",
+      "github": "github-username"
+    }
+  ],
+  "version": "1.0.0",
+  "lastUpdated": "2024-03-20",
+  "license": "Apache-2.0",
+  "documentation": {
+    "gettingStarted": "docs/getting-started.md",
+    "api": "docs/api.md",
+    "examples": "docs/examples.md"
+  }
+}
