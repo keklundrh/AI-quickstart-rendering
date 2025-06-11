@@ -14,7 +14,7 @@ spec:
     type: Docker
     dockerStrategy:
       dockerfilePath: Containerfile
-      env:
+      buildArgs:
       - name: GH_TOKEN
         valueFrom:
           secretKeyRef:

@@ -14,6 +14,10 @@ spec:
       labels:
         app: ai-kickstarts-app
     spec:
+      securityContext:
+        fsGroup: 101
+        runAsUser: 101
+        runAsNonRoot: true
       containers:
       - name: ai-kickstarts-app
         image: image-registry.openshift-image-registry.svc:5000/ai-kickstarts/ai-kickstarts-app:latest
