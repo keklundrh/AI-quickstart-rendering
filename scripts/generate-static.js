@@ -9,9 +9,9 @@ const OUTPUT_DIR = path.join(__dirname, '../public/data');
 const OUTPUT_FILE = path.join(OUTPUT_DIR, 'kickstarts.json');
 
 // Get GitHub token from environment
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.GH_TOKEN;
 if (!GITHUB_TOKEN) {
-  console.error('Error: GITHUB_TOKEN environment variable is required');
+  console.error('Error: GH_TOKEN environment variable is required');
   process.exit(1);
 }
 
