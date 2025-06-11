@@ -6,11 +6,12 @@ A React-based web application for managing and viewing Red Hat AI Kickstarts.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) (v18 or later)
 - [Podman](https://podman.io/) (for containerized development)
 - [Git](https://git-scm.com/)
 
-### Option 1: Local Development (Direct)
+### Development with Podman (Recommended)
+
+This approach uses Podman to provide a Node.js environment without installing Node.js locally. Your local files are mounted directly into the container, with node_modules in a separate volume for better performance.
 
 1. Clone the repository:
    ```bash
@@ -18,39 +19,9 @@ A React-based web application for managing and viewing Red Hat AI Kickstarts.
    cd red-hat-kickstarts-app
    ```
 
-2. Install dependencies:
+2. Create a volume for node_modules:
    ```bash
-   npm install
-   ```
-
-3. Start the development server:
-   ```bash
-   npm start
-   ```
-
-The application will be available at `http://localhost:3000`
-
-### Option 2: Containerized Development (Podman)
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/red-hat-kickstarts-app.git
-   cd red-hat-kickstarts-app
-   ```
-
-2. Clean up any existing containers and images (optional, but recommended if you're having caching issues):
-   ```bash
-   # Stop any running containers
-   podman stop $(podman ps -a -q) 2>/dev/null || true
-
-   # Remove the development container if it exists
-   podman rm -f red-hat-kickstarts-dev 2>/dev/null || true
-
-   # Remove the development image if it exists
-   podman rmi -f red-hat-kickstarts-dev 2>/dev/null || true
-
-   # Remove the development volume if it exists
-   podman volume rm red-hat-kickstarts-dev 2>/dev/null || true
+   podman volume create red-hat-kickstarts-node-modules
    ```
 
 3. Build the development container (with no cache):
@@ -58,33 +29,42 @@ The application will be available at `http://localhost:3000`
    podman build --no-cache -t red-hat-kickstarts-dev -f Containerfile.dev .
    ```
 
-4. Create a named volume for development:
+4. Run the development container with your local directory mounted and node_modules in a volume:
    ```bash
-   podman volume create red-hat-kickstarts-dev
-   ```
-
-5. Copy your project files to the volume:
-   ```bash
+   # First, install dependencies
    podman run --rm \
-     -v red-hat-kickstarts-dev:/app \
-     -v $(pwd):/source:ro \
+     -v "$(pwd)/src:/app/src:Z" \
+     -v "$(pwd)/public:/app/public:Z" \
+     -v "$(pwd)/package.json:/app/package.json:Z" \
+     -v red-hat-kickstarts-node-modules:/app/node_modules \
+     -w /app \
      red-hat-kickstarts-dev \
-     sh -c "rm -rf /app/* && cp -r /source/* /app/"
-   ```
+     npm install
 
-6. Run the development container:
-   ```bash
+   # Then start the development server
    podman run -it --rm \
      -p 3000:3000 \
-     -v red-hat-kickstarts-dev:/app \
+     -v "$(pwd)/src:/app/src:Z" \
+     -v "$(pwd)/public:/app/public:Z" \
+     -v "$(pwd)/package.json:/app/package.json:Z" \
+     -v red-hat-kickstarts-node-modules:/app/node_modules \
      -w /app \
      red-hat-kickstarts-dev \
      npm start
    ```
 
-The application will be available at `http://localhost:3000`
+The application will be available at `http://localhost:3000`. Any changes you make to your local files will be immediately reflected in the container, and the development server will automatically reload.
 
-Note: If you make changes to your local files and want to update the container, you'll need to repeat step 4 to copy the changes to the volume.
+If you need to clean up and start fresh:
+```bash
+# Remove the node_modules volume
+podman volume rm red-hat-kickstarts-node-modules
+
+# Remove the development image
+podman rmi red-hat-kickstarts-dev
+
+# Then repeat steps 2-4 above
+```
 
 ### Containerfile.dev
 
@@ -95,12 +75,12 @@ FROM node:18
 
 WORKDIR /app
 
+# Create a volume for node_modules
+VOLUME /app/node_modules
+
 # Install dependencies
 COPY package*.json ./
 RUN npm install
-
-# Copy the rest of the application
-COPY . .
 
 # Expose the development server port
 EXPOSE 3000
@@ -111,59 +91,20 @@ CMD ["npm", "start"]
 
 ## Building for Production
 
-### Local Build
+If you need to build the application for production, you can use the same container:
 
-1. Build the application:
-   ```bash
-   npm run build
-   ```
-
-2. The production build will be available in the `build` directory.
-
-### Containerized Build
-
-1. Clean up any existing production containers and images (optional, but recommended if you're having caching issues):
-   ```bash
-   # Stop any running containers
-   podman stop $(podman ps -a -q) 2>/dev/null || true
-
-   # Remove the production container if it exists
-   podman rm -f red-hat-kickstarts-prod 2>/dev/null || true
-
-   # Remove the production image if it exists
-   podman rmi -f red-hat-kickstarts-prod 2>/dev/null || true
-   ```
-
-2. Build the production container (with no cache):
-   ```bash
-   podman build --no-cache -t red-hat-kickstarts-prod -f Containerfile .
-   ```
-
-3. Run the production container:
-   ```bash
-   podman run -it --rm -p 8080:80 red-hat-kickstarts-prod
-   ```
-
-The application will be available at `http://localhost:8080`
-
-### Containerfile
-
-Create a `Containerfile` in your project root with the following content:
-
-```dockerfile
-FROM node:18 as builder
-
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
-
-FROM nginx:alpine
-COPY --from=builder /app/build /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+```bash
+podman run --rm \
+  -v "$(pwd)/src:/app/src:Z" \
+  -v "$(pwd)/public:/app/public:Z" \
+  -v "$(pwd)/package.json:/app/package.json:Z" \
+  -v red-hat-kickstarts-node-modules:/app/node_modules \
+  -w /app \
+  red-hat-kickstarts-dev \
+  npm run build
 ```
+
+The production build will be available in the `build` directory on your local machine.
 
 ## Deployment
 
