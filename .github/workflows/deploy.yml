@@ -63,7 +63,7 @@ jobs:
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          gh_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
           commit_message: "Update site: ${{ github.event_name }}"
