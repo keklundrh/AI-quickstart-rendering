@@ -5,6 +5,8 @@ on:
     branches:
       - main
       - '*' # Trigger on pushes to all branches
+  pull_request:
+    types: [opened, synchronize, reopened] # Trigger on PR creation, updates, and reopening
 
 # Explicitly grant permissions to the GITHUB_TOKEN for GitHub Pages deployment
 permissions:
@@ -28,30 +30,30 @@ jobs:
       # Step to determine the base URL (PUBLIC_URL) for the React app
       # and the destination directory on the gh-pages branch.
       - name: Determine dynamic paths
-        id: dynamic_paths # Give this step an ID to reference its outputs
+        id: dynamic_paths
         run: |
           REPO_NAME="${{ github.event.repository.name }}"
-          # Use github.actor for the username if your GitHub Pages URL is username.github.io/repo
-          # If it's an organization page, it might be orgname.github.io/repo, adjust as needed.
           GITHUB_USERNAME="${{ github.repository_owner }}"
 
-          # Clean up branch name for URL (replace slashes with hyphens, remove non-alphanumeric)
-          BRANCH_SLUG=$(echo "${{ github.ref_name }}" | sed 's/\//-/g' | sed 's/[^a-zA-Z0-9-]//g' | tr '[:upper:]' '[:lower:]')
+          # Handle both direct branch pushes and PRs
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            # For PRs, use the PR number as part of the branch slug
+            BRANCH_SLUG="pr-${{ github.event.pull_request.number }}"
+          else
+            # For direct branch pushes, clean up the branch name
+            BRANCH_SLUG=$(echo "${{ github.ref_name }}" | sed 's/\//-/g' | sed 's/[^a-zA-Z0-9-]//g' | tr '[:upper:]' '[:lower:]')
+          fi
 
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
-            # For the main branch, deploy to the root of the repo's GitHub Pages
             echo "PUBLIC_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME" >> $GITHUB_ENV
             echo "DEPLOY_DESTINATION_DIR=." >> $GITHUB_ENV
             echo "PREVIEW_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME" >> $GITHUB_ENV
           else
-            # For feature branches, deploy to a subdirectory under 'previews/'
-            # Example: https://username.github.io/repo-name/previews/feature-branch/
             echo "PUBLIC_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME/previews/$BRANCH_SLUG" >> $GITHUB_ENV
             echo "DEPLOY_DESTINATION_DIR=previews/$BRANCH_SLUG" >> $GITHUB_ENV
             echo "PREVIEW_URL=https://$GITHUB_USERNAME.github.io/$REPO_NAME/previews/$BRANCH_SLUG" >> $GITHUB_ENV
           fi
 
-          # Output the preview URL for potential use in subsequent steps (e.g., PR comments)
           echo "preview_url=${PREVIEW_URL}" >> "$GITHUB_OUTPUT"
 
       - name: Display calculated URLs and directories
@@ -92,18 +94,44 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const previewUrl = process.env.PREVIEW_URL; // Access the URL from environment variable
+            const previewUrl = process.env.PREVIEW_URL;
             const commentBody = `
             🚀 **Preview Deployment Ready!** 🚀
-            You can view the changes for this branch here:
+
+            A preview of your changes has been deployed to:
             [${previewUrl}](${previewUrl})
+
+            This preview will be automatically updated when you push new changes to this PR.
             `;
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+
+            // Find and update existing comment if it exists
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: commentBody
+              issue_number: context.issue.number
             });
+
+            const existingComment = comments.find(comment =>
+              comment.user.login === 'github-actions[bot]' &&
+              comment.body.includes('Preview Deployment Ready!')
+            );
+
+            if (existingComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existingComment.id,
+                body: commentBody
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
         env:
-          PREVIEW_URL: ${{ steps.dynamic_paths.outputs.preview_url }} # Pass output to this step's env
+          PREVIEW_URL: ${{ steps.dynamic_paths.outputs.preview_url }}
