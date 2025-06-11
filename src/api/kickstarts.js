@@ -52,7 +52,7 @@ export const fetchKickstarts = async () => {
         ).join(' '),
         description: repo.description || 'No description available',
         readmePreview,
-        githubLink: repo.html_url,
+        githubLink: `${repo.html_url}#readme`,
         categories: extractCategories(repo),
         stars: repo.stargazers_count,
         lastUpdated: new Date(repo.updated_at).toLocaleDateString()
