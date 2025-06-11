@@ -1,5 +1,5 @@
 // Configuration
-const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
+const API_ENDPOINT = '/api/github-data';  // This will be our serverless function endpoint
 const ORG_NAME = 'rh-ai-kickstart';
 
 // Function to extract categories from README content
@@ -30,77 +30,44 @@ function extractCategoriesFromReadme(readmeText) {
   return Array.from(categories);
 }
 
-// Function to fetch kickstarts directly from GitHub
+// Function to fetch kickstarts through our serverless function
 export const fetchKickstarts = async () => {
   try {
-    const query = `
-      query {
-        organization(login: "${ORG_NAME}") {
-          repositories(first: 100, orderBy: {field: UPDATED_AT, direction: DESC}) {
-            nodes {
-              name
-              description
-              url
-              stargazerCount
-              updatedAt
-              primaryLanguage {
-                name
-              }
-              repositoryTopics(first: 10) {
-                nodes {
-                  topic {
-                    name
-                  }
-                }
-              }
-              object(expression: "HEAD:README.md") {
-                ... on Blob {
-                  text
-                }
-              }
-            }
-          }
-        }
-      }
-    `;
-
-    const response = await fetch(GITHUB_GRAPHQL_API, {
+    const response = await fetch(API_ENDPOINT, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.REACT_APP_GH_TOKEN}`,
         'Content-Type': 'application/json',
-        'Accept': 'application/json',
       },
-      body: JSON.stringify({ query })
+      body: JSON.stringify({ orgName: ORG_NAME })
     });
 
     if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status}`);
+      throw new Error(`API error: ${response.status}`);
     }
 
     const data = await response.json();
     if (data.errors) {
-      throw new Error('GraphQL errors: ' + data.errors[0].message);
+      throw new Error('API errors: ' + data.errors[0].message);
     }
 
     // Transform the repository data
-    const kickstarts = data.data.organization.repositories.nodes.map(repo => {
-      const readmeCategories = repo.object?.text
-        ? extractCategoriesFromReadme(repo.object.text)
+    const kickstarts = data.repositories.map(repo => {
+      const readmeCategories = repo.readmeText
+        ? extractCategoriesFromReadme(repo.readmeText)
         : [];
 
       const allCategories = new Set([
         ...readmeCategories,
-        ...(repo.repositoryTopics.nodes.map(t => t.topic.name) || []),
-        ...(repo.primaryLanguage?.name ? [repo.primaryLanguage.name] : [])
+        ...(repo.topics || []),
+        ...(repo.language ? [repo.language] : [])
       ]);
 
       if (allCategories.size === 0) {
         allCategories.add('AI');
       }
 
-      const readmePreview = repo.object?.text
-        ? repo.object.text.substring(0, 150) + (repo.object.text.length > 150 ? '...' : '')
+      const readmePreview = repo.readmeText
+        ? repo.readmeText.substring(0, 150) + (repo.readmeText.length > 150 ? '...' : '')
         : 'No README available';
 
       return {
@@ -110,9 +77,9 @@ export const fetchKickstarts = async () => {
         ).join(' '),
         description: repo.description || 'No description available',
         readmePreview,
-        githubLink: `${repo.url}#readme`,
+        githubLink: repo.url,
         categories: Array.from(allCategories).sort(),
-        stars: repo.stargazerCount,
+        stars: repo.stars,
         lastUpdated: new Date(repo.updatedAt).toLocaleDateString()
       };
     });

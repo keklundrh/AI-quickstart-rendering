@@ -44,10 +44,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Build the React app with GH token
+      # Build the React app
       - name: Build
         env:
-          REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NODE_ENV: production
           npm_config_loglevel: verbose
         run: |
@@ -59,11 +58,25 @@ jobs:
           fi
           npm run build
 
-      # Deploy to GitHub Pages using GH token
+      # Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GH_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
           publish_branch: gh-pages
           commit_message: "Update site: ${{ github.event_name }}"
+
+      # Deploy to Cloudflare Pages for serverless functions
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ai-kickstart-rendering
+          directory: .
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
+          environmentName: production
+          environmentVariables: |
+            GH_TOKEN=${{ secrets.GH_TOKEN }}
