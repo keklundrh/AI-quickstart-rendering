@@ -350,7 +350,22 @@ const customPatternFlyStyle = `
 const KickstartCard = ({ kickstart }) => (
   <div className="pf-v5-c-card pf-m-hoverable">
     <div className="pf-v5-c-card__title">
-      <h3>{kickstart.title}</h3>
+      <h3>
+        <a
+          href={`${kickstart.githubLink}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            color: 'inherit',
+            textDecoration: 'none',
+            ':hover': {
+              color: 'var(--pf-global--primary-color--100)'
+            }
+          }}
+        >
+          {kickstart.title}
+        </a>
+      </h3>
     </div>
     <div className="pf-v5-c-card__body">
       {/* Description section */}
@@ -410,7 +425,7 @@ const KickstartCard = ({ kickstart }) => (
         </span>
       ))}
       <a
-        href={kickstart.githubLink}
+        href={kickstart.githubLink.replace('#readme', '')}
         target="_blank"
         rel="noopener noreferrer"
         className="pf-v5-c-button pf-m-primary w-full"

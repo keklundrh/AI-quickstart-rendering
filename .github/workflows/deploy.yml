@@ -24,17 +24,40 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3 # Action to check out your repository code
 
+      - name: Clean install
+        run: |
+          rm -rf node_modules
+          rm -f package-lock.json
+          npm cache clean --force
+
       - name: Set up Node.js
-        uses: actions/setup-node@v3 # Action to set up Node.js environment
+        uses: actions/setup-node@v3
         with:
-          node-version: '18' # Specify Node.js version
+          node-version: '20' # Updated to Node.js 20 LTS
+          cache: 'npm' # Enable caching for npm dependencies
+
+      # Add cache restoration step
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
       # Build the React app with GH token
       - name: Build
         env:
           REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NODE_ENV: production
+          npm_config_loglevel: verbose
         run: |
-          npm install
+          npm install --verbose
+          if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
+            echo "=== npm debug log ==="
+            cat /home/runner/.npm/_logs/*-debug-0.log
+            echo "=== end npm debug log ==="
+          fi
           npm run build
 
       # Deploy to GitHub Pages using GH token

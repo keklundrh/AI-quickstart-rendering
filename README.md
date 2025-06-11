@@ -8,7 +8,18 @@ A React-based web application for managing and viewing Red Hat AI Kickstarts.
 
 - [Podman](https://podman.io/) (for containerized development)
 - [Git](https://git-scm.com/)
-- A GitHub Personal Access Token with `read:org` and `repo` scopes
+- A GitHub Personal Access Token (Classic) with the following permissions:
+  - `read:org` - to read organization repositories
+  - `repo` - to read repository contents
+  - `read:user` - to read user information
+
+To create a token:
+1. Go to GitHub Settings > Developer Settings > Personal Access Tokens > Tokens (classic)
+2. Click "Generate new token (classic)"
+3. Give it a descriptive name like "AI Kickstarts App"
+4. Select the permissions listed above
+5. Click "Generate token"
+6. Copy the token immediately (you won't be able to see it again)
 
 ### Development with Podman (Recommended)
 
@@ -32,8 +43,8 @@ This approach uses Podman to provide a Node.js environment without installing No
 
 4. Set up your GitHub token:
    ```bash
-   # Create a .env file in the project root
-   echo "REACT_APP_GH_TOKEN=your_github_token_here" > .env
+   # Create a .env file in the project root with your token
+   echo "REACT_APP_GH_TOKEN=ghp_your_token_here" > .env
    ```
 
 5. Run the development container with your local directory mounted and node_modules in a volume:
