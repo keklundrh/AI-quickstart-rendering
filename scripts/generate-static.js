@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+const { JSDOM } = require('jsdom');
 
 // Configuration
 const GITHUB_GRAPHQL_API = 'https://api.github.com/graphql';
@@ -15,7 +16,7 @@ if (!GITHUB_TOKEN) {
   process.exit(1);
 }
 
-// Function to fetch data from GitHub
+// Function to fetch data from GitHub using native fetch
 async function fetchKickstarts() {
   const query = `
     query {
@@ -53,6 +54,7 @@ async function fetchKickstarts() {
     headers: {
       'Authorization': `Bearer ${GITHUB_TOKEN}`,
       'Content-Type': 'application/json',
+      'Accept': 'application/json',
     },
     body: JSON.stringify({ query })
   });
@@ -69,13 +71,13 @@ async function fetchKickstarts() {
   return data.data.organization.repositories.nodes;
 }
 
-// Function to extract categories from README content
+// Function to extract categories from README content using JSDOM
 function extractCategoriesFromReadme(readmeHtml) {
+  const dom = new JSDOM(readmeHtml);
+  const document = dom.window.document;
   const categories = new Set();
-  const tempDiv = document.createElement('div');
-  tempDiv.innerHTML = readmeHtml;
 
-  const allSections = tempDiv.querySelectorAll('h2');
+  const allSections = document.querySelectorAll('h2');
   let categoriesSection = null;
 
   for (const section of allSections) {
