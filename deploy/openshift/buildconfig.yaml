@@ -7,8 +7,8 @@ metadata:
 spec:
   source:
     git:
-      uri: ${GIT_REPO_URL}
-      ref: ${GIT_REF}
+      uri: https://github.com/erwangranger/AI-Kickstart-rendering.git
+      ref: hostonopenshift
     contextDir: .
   strategy:
     type: Docker
@@ -21,9 +21,6 @@ spec:
   triggers:
   - type: ConfigChange
   - type: ImageChange
-  - type: GitHub
-    github:
-      secret: ${GITHUB_WEBHOOK_SECRET}
   resources:
     requests:
       memory: "512Mi"

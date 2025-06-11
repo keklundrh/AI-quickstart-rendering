@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: ai-kickstarts-app
-        image: ${IMAGE_REGISTRY}/${IMAGE_NAMESPACE}/ai-kickstarts-app:${IMAGE_TAG}
+        image: image-registry.openshift-image-registry.svc:5000/ai-kickstarts/ai-kickstarts-app:latest
         ports:
         - containerPort: 80
         env:
