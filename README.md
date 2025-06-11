@@ -8,6 +8,7 @@ A React-based web application for managing and viewing Red Hat AI Kickstarts.
 
 - [Podman](https://podman.io/) (for containerized development)
 - [Git](https://git-scm.com/)
+- A GitHub Personal Access Token with `read:org` and `repo` scopes
 
 ### Development with Podman (Recommended)
 
@@ -29,13 +30,20 @@ This approach uses Podman to provide a Node.js environment without installing No
    podman build --no-cache -t red-hat-kickstarts-dev -f Containerfile.dev .
    ```
 
-4. Run the development container with your local directory mounted and node_modules in a volume:
+4. Set up your GitHub token:
+   ```bash
+   # Create a .env file in the project root
+   echo "REACT_APP_GH_TOKEN=your_github_token_here" > .env
+   ```
+
+5. Run the development container with your local directory mounted and node_modules in a volume:
    ```bash
    # First, install dependencies
    podman run --rm \
      -v "$(pwd)/src:/app/src:Z" \
      -v "$(pwd)/public:/app/public:Z" \
      -v "$(pwd)/package.json:/app/package.json:Z" \
+     -v "$(pwd)/.env:/app/.env:Z" \
      -v red-hat-kickstarts-node-modules:/app/node_modules \
      -w /app \
      red-hat-kickstarts-dev \
@@ -47,6 +55,7 @@ This approach uses Podman to provide a Node.js environment without installing No
      -v "$(pwd)/src:/app/src:Z" \
      -v "$(pwd)/public:/app/public:Z" \
      -v "$(pwd)/package.json:/app/package.json:Z" \
+     -v "$(pwd)/.env:/app/.env:Z" \
      -v red-hat-kickstarts-node-modules:/app/node_modules \
      -w /app \
      red-hat-kickstarts-dev \
@@ -63,7 +72,7 @@ podman volume rm red-hat-kickstarts-node-modules
 # Remove the development image
 podman rmi red-hat-kickstarts-dev
 
-# Then repeat steps 2-4 above
+# Then repeat steps 2-5 above
 ```
 
 ### Containerfile.dev
@@ -98,6 +107,7 @@ podman run --rm \
   -v "$(pwd)/src:/app/src:Z" \
   -v "$(pwd)/public:/app/public:Z" \
   -v "$(pwd)/package.json:/app/package.json:Z" \
+  -v "$(pwd)/.env:/app/.env:Z" \
   -v red-hat-kickstarts-node-modules:/app/node_modules \
   -w /app \
   red-hat-kickstarts-dev \

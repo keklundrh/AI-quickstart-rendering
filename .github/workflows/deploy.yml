@@ -37,8 +37,10 @@ jobs:
           npm install
           node scripts/generate-static.js
 
-      # Build the React app
+      # Build the React app with GitHub token
       - name: Build
+        env:
+          REACT_APP_GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           npm install
           npm run build
