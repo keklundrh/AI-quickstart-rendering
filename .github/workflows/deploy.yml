@@ -12,17 +12,17 @@ on:
 
 # Explicitly grant permissions to the GH_TOKEN for GitHub Pages deployment
 permissions:
-  contents: write # Needed to push to the gh-pages branch (for the build artifact)
+  contents: write # Needed to push to the gh-pages branch
   pages: write    # Needed for GitHub Pages deployment
-  id-token: write # Needed for OpenID Connect (if using, generally good practice for GH Pages)
+  id-token: write # Needed for OpenID Connect
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3 # Action to check out your repository code
+        uses: actions/checkout@v3
 
       - name: Clean install
         run: |
@@ -32,10 +32,9 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20' # Updated to Node.js 20 LTS
-          cache: 'npm' # Enable caching for npm dependencies
+          node-version: '20'
+          cache: 'npm'
 
-      # Add cache restoration step
       - name: Cache npm dependencies
         uses: actions/cache@v3
         with:
@@ -44,13 +43,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Generate static data before build
       - name: Generate static kickstarts data
         run: |
           npm install node-fetch@2
           GH_TOKEN=${{ secrets.GH_TOKEN }} node scripts/generate-static.js
 
-      # Build the React app
       - name: Build
         env:
           NODE_ENV: production
@@ -64,7 +61,6 @@ jobs:
           fi
           npm run build
 
-      # Deploy to GitHub Pages
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
@@ -72,32 +68,4 @@ jobs:
           publish_dir: ./build
           publish_branch: gh-pages
           commit_message: "Update site: ${{ github.event_name }}"
-          keep_files: true # Keep the functions directory
-
-      # Configure GitHub Pages to use the serverless function
-      - name: Configure GitHub Pages
-        run: |
-          # Create a _routes.json file to handle API requests
-          echo '{
-            "version": 1,
-            "include": ["/*"],
-            "exclude": [],
-            "routes": [
-              {
-                "src": "/.github/functions/github-data",
-                "dest": "/.github/functions/github-data.js",
-                "methods": ["POST", "OPTIONS"],
-                "headers": {
-                  "Access-Control-Allow-Origin": "*",
-                  "Access-Control-Allow-Methods": "POST, OPTIONS",
-                  "Access-Control-Allow-Headers": "Content-Type"
-                }
-              }
-            ]
-          }' > build/_routes.json
-
-      # Add environment variable for the serverless function
-      - name: Add environment variable
-        run: |
-          echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
-          echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_OUTPUT
+          keep_files: true
