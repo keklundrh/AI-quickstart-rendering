@@ -1,0 +1,15 @@
+{
+  "lastUpdated": "2024-03-20T00:00:00.000Z",
+  "kickstarts": [
+    {
+      "id": "example-kickstart",
+      "title": "Example Kickstart",
+      "description": "This is a placeholder kickstart while we set up the static data generation.",
+      "readmePreview": "This is a temporary placeholder. The actual data will be generated automatically using the GitHub API.",
+      "githubLink": "https://github.com/rh-ai-kickstart/example-kickstart",
+      "categories": ["AI", "Example"],
+      "stars": 0,
+      "lastUpdated": "2024-03-20"
+    }
+  ]
+}

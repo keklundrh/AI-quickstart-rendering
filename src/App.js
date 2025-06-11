@@ -59,7 +59,7 @@ const customPatternFlyStyle = `
 
   /* Masthead Styles */
   .pf-v5-c-masthead {
-    background-color: #be0000; /* Red Hat Red */
+    background-color: #000000; /* Changed from #be0000 to black */
     color: white;
     padding: var(--pf-global--spacer--md) var(--pf-global--spacer--xl);
     display: flex;
@@ -518,8 +518,7 @@ const App = () => {
                   style={{
                     height: '40px',
                     width: 'auto',
-                    marginRight: 'var(--pf-global--spacer--md)',
-                    filter: 'brightness(0) invert(1)' // Make the logo white
+                    marginRight: 'var(--pf-global--spacer--md)'
                   }}
                 />
                 <span className="pf-v5-u-font-weight-bold pf-v5-u-font-size-2xl" style={{ color: 'white' }}>Red Hat</span>
