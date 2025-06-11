@@ -1,5 +1,5 @@
 // Configuration
-const API_ENDPOINT = '/api/github-data';  // This will be our serverless function endpoint
+const API_ENDPOINT = '/functions/github-data';  // Updated to match GitHub Pages Functions URL structure
 const ORG_NAME = 'rh-ai-kickstart';
 
 // Function to extract categories from README content
