@@ -1,0 +1,48 @@
+name: Deployment
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+
+    - name: Clean directories
+      run: |
+        rm -rf node_modules
+        rm -rf public/data/kickstarts.json
+        mkdir -p public/data
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Generate static data
+      run: node scripts/generate-static.js
+
+    - name: Build project
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: actions/gh-pages@v4
+      with:
+        src: 'build/**'
+        branch: gh-pages
+        token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
