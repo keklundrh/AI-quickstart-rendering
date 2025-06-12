@@ -35,14 +35,20 @@ jobs:
           rm -rf functions
           rm -rf api
           rm -rf build
-          rm -f package-lock.json
 
           # Create necessary directories
           mkdir -p public/data
 
       - name: Install dependencies
         run: |
-          # Install dependencies using npm ci for clean installs
+          # First ensure we have a package-lock.json
+          if [ ! -f "package-lock.json" ]; then
+            echo "No package-lock.json found, generating one..."
+            npm install
+          fi
+
+          # Now we can safely use npm ci
+          echo "Running clean install..."
           npm ci
 
           # Verify the installation
