@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchKickstarts, getAllCategories } from './api/kickstarts';
+import { fetchKickstarts, getAllCategories, forceRefreshKickstarts } from './api/kickstarts';
 
 // NOTE: Direct imports of PatternFly React components like '@patternfly/react-core'
 // and '@patternfly/react-icons' are causing resolution errors in this self-contained
@@ -459,17 +459,18 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [isRefreshing, setIsRefreshing] = useState(false);
 
-  // Fetch kickstarts data
+  // Fetch kickstarts data with caching
   useEffect(() => {
     const loadKickstarts = async () => {
       try {
         setIsLoading(true);
         setError(null);
         const data = await fetchKickstarts();
-        setKickstarts(data);
-        setFilteredKickstarts(data);
-        setCategories(getAllCategories(data));
+        setKickstarts(data.kickstarts);
+        setFilteredKickstarts(data.kickstarts);
+        setCategories(getAllCategories(data.kickstarts));
       } catch (err) {
         setError(err.message);
         console.error('Failed to load kickstarts:', err);
@@ -479,6 +480,37 @@ const App = () => {
     };
 
     loadKickstarts();
+  }, []);
+
+  // Handle background refresh
+  useEffect(() => {
+    let mounted = true;
+
+    const handleBackgroundRefresh = async () => {
+      try {
+        setIsRefreshing(true);
+        const data = await forceRefreshKickstarts();
+        if (mounted) {
+          setKickstarts(data.kickstarts);
+          setFilteredKickstarts(data.kickstarts);
+          setCategories(getAllCategories(data.kickstarts));
+        }
+      } catch (err) {
+        console.error('Background refresh failed:', err);
+      } finally {
+        if (mounted) {
+          setIsRefreshing(false);
+        }
+      }
+    };
+
+    // Set up periodic refresh (every hour)
+    const refreshInterval = setInterval(handleBackgroundRefresh, 60 * 60 * 1000);
+
+    return () => {
+      mounted = false;
+      clearInterval(refreshInterval);
+    };
   }, []);
 
   useEffect(() => {
@@ -565,7 +597,14 @@ const App = () => {
           <section className="pf-v5-c-page__main-section pf-m-light pf-v5-u-py-xl">
             <div className="pf-v5-u-text-align-center pf-v5-u-pb-lg">
               <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v01</h1>
-              <p className="pf-v5-u-mt-md">Discover ready-to-run AI examples designed for Red HatOpenShift AI.</p>
+              <p className="pf-v5-u-mt-md">
+                Discover ready-to-run AI examples designed for Red Hat OpenShift AI.
+                {isRefreshing && (
+                  <span style={{ marginLeft: 'var(--pf-global--spacer--sm)', fontSize: 'var(--pf-global--FontSize--sm)', color: 'var(--pf-global--Color--200)' }}>
+                    (Refreshing data...)
+                  </span>
+                )}
+              </p>
             </div>
 
             {/* Toolbar for Search and Filter */}
