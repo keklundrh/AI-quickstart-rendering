@@ -7,8 +7,6 @@ on:
       - '*' # Trigger on pushes to all branches
   pull_request:
     types: [opened, synchronize, reopened] # Trigger on PR creation, updates, and reopening
-  schedule:
-    - cron: '0 * * * *'  # Run every hour
 
 # Explicitly grant permissions to the GH_TOKEN for GitHub Pages deployment
 permissions:
