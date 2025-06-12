@@ -55,10 +55,10 @@ jobs:
 
       - name: Ensure static data is in public directory
         run: |
-          if [ -f data/kickstarts.json ]; then
-            cp data/kickstarts.json public/data/kickstarts.json
+          if [ -f public/data/kickstarts.json ]; then
+            echo "Static data (kickstarts.json) is present in public/data."
           else
-            echo "Error: kickstarts.json was not generated"
+            echo "Error: kickstarts.json was not generated (or not found in public/data)."
             exit 1
           fi
 
