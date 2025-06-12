@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "description": "A showcase of AI kickstart examples for Red Hat OpenShift AI",
-    "homepage": ".",
+    "homepage": "https://erwangranger.github.io/AI-Kickstart-rendering",
     "repository": {
         "type": "git",
         "url": "https://github.com/erwangranger/AI-Kickstart-rendering"

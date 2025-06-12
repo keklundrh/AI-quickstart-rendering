@@ -42,8 +42,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # Install dependencies and generate new package-lock.json
-          npm install
+          # Install dependencies using npm ci for clean installs
+          npm ci
 
           # Verify the installation
           npm ls
@@ -65,6 +65,18 @@ jobs:
           NODE_ENV: production
           npm_config_loglevel: verbose
         run: npm run build
+
+      - name: Verify build directory
+        run: |
+          if [ ! -d "build" ]; then
+            echo "Error: build directory was not created"
+            exit 1
+          fi
+          if [ ! -f "build/index.html" ]; then
+            echo "Error: build/index.html was not created"
+            exit 1
+          fi
+          echo "Build directory verified successfully"
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
