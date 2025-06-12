@@ -19,17 +19,10 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    env:
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Set token for all steps
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Clean install
-        run: |
-          rm -rf node_modules
-          npm cache clean --force
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -37,44 +30,48 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
-      - name: Cache npm dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+      - name: Clean and prepare directories
+        run: |
+          # Remove existing directories and files
+          rm -rf node_modules
+          rm -rf functions
+          rm -rf api
+          rm -rf build
+          rm -f package-lock.json
+
+          # Create necessary directories
+          mkdir -p public/data
+
+      - name: Install dependencies
+        run: |
+          # Install dependencies and generate new package-lock.json
+          npm install
+
+          # Verify the installation
+          npm ls
 
       - name: Generate static kickstarts data
-        run: |
-          npm install node-fetch@2
-          node scripts/generate-static.js
+        run: node scripts/generate-static.js
 
       - name: Ensure static data is in public directory
         run: |
           if [ -f data/kickstarts.json ]; then
-            mkdir -p public/data
             cp data/kickstarts.json public/data/kickstarts.json
+          else
+            echo "Error: kickstarts.json was not generated"
+            exit 1
           fi
 
       - name: Build
         env:
           NODE_ENV: production
           npm_config_loglevel: verbose
-        run: |
-          npm ci --include=dev
-          if [ -f /home/runner/.npm/_logs/*-debug-0.log ]; then
-            echo "=== npm debug log ==="
-            cat /home/runner/.npm/_logs/*-debug-0.log
-            echo "=== end npm debug log ==="
-          fi
-          npm run build
+        run: npm run build
 
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
-          publish_branch: gh-pages
-          commit_message: "Update site: ${{ github.event_name }}"
-          keep_files: true
+          folder: build
+          branch: gh-pages
+          clean: true
+

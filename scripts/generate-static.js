@@ -35,21 +35,15 @@ function extractCategoriesFromReadme(readmeText) {
 
 async function generateStaticData() {
   try {
-    const token = process.env.GH_TOKEN;
-    if (!token) {
-      throw new Error('GitHub token not found. Please check your environment variables.');
-    }
-
-    // Fetch repositories
+    // Fetch repositories with anonymous access
     const reposResponse = await fetch(`${GITHUB_API}/orgs/${ORG_NAME}/repos?sort=updated&per_page=100`, {
       headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': `Bearer ${token}`
+        'Accept': 'application/vnd.github.v3+json'
       }
     });
 
     if (!reposResponse.ok) {
-      throw new Error(`GitHub API error: ${reposResponse.status}`);
+      throw new Error(`GitHub API error: ${reposResponse.status} - ${await reposResponse.text()}`);
     }
 
     const repos = await reposResponse.json();
@@ -60,8 +54,7 @@ async function generateStaticData() {
       try {
         const readmeResponse = await fetch(`${GITHUB_API}/repos/${ORG_NAME}/${repo.name}/readme`, {
           headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            'Authorization': `Bearer ${token}`
+            'Accept': 'application/vnd.github.v3+json'
           }
         });
 
@@ -70,7 +63,7 @@ async function generateStaticData() {
           readmeText = Buffer.from(readmeData.content, 'base64').toString();
         }
       } catch (error) {
-        console.warn(`Could not fetch README for ${repo.name}:`, error);
+        console.warn(`Could not fetch README for ${repo.name}:`, error.message);
       }
 
       const readmeCategories = readmeText ? extractCategoriesFromReadme(readmeText) : [];

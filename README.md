@@ -8,18 +8,6 @@ A React-based web application for managing and viewing Red Hat AI Kickstarts.
 
 - [Podman](https://podman.io/) (for containerized development)
 - [Git](https://git-scm.com/)
-- A GitHub Personal Access Token (Classic) with the following permissions:
-  - `read:org` - to read organization repositories
-  - `repo` - to read repository contents
-  - `read:user` - to read user information
-
-To create a token:
-1. Go to GitHub Settings > Developer Settings > Personal Access Tokens > Tokens (classic)
-2. Click "Generate new token (classic)"
-3. Give it a descriptive name like "AI Kickstarts App"
-4. Select the permissions listed above
-5. Click "Generate token"
-6. Copy the token immediately (you won't be able to see it again)
 
 ### Development with Podman (Recommended)
 
@@ -41,20 +29,13 @@ This approach uses Podman to provide a Node.js environment without installing No
    podman build --no-cache -t red-hat-kickstarts-dev -f Containerfile.dev .
    ```
 
-4. Set up your GitHub token:
-   ```bash
-   # Create a .env file in the project root with your token
-   echo "REACT_APP_GH_TOKEN=ghp_your_token_here" > .env
-   ```
-
-5. Run the development container with your local directory mounted and node_modules in a volume:
+4. Run the development container with your local directory mounted and node_modules in a volume:
    ```bash
    # First, install dependencies
    podman run --rm \
      -v "$(pwd)/src:/app/src:Z" \
      -v "$(pwd)/public:/app/public:Z" \
      -v "$(pwd)/package.json:/app/package.json:Z" \
-     -v "$(pwd)/.env:/app/.env:Z" \
      -v red-hat-kickstarts-node-modules:/app/node_modules \
      -w /app \
      red-hat-kickstarts-dev \
@@ -66,7 +47,6 @@ This approach uses Podman to provide a Node.js environment without installing No
      -v "$(pwd)/src:/app/src:Z" \
      -v "$(pwd)/public:/app/public:Z" \
      -v "$(pwd)/package.json:/app/package.json:Z" \
-     -v "$(pwd)/.env:/app/.env:Z" \
      -v red-hat-kickstarts-node-modules:/app/node_modules \
      -w /app \
      red-hat-kickstarts-dev \
@@ -83,7 +63,7 @@ podman volume rm red-hat-kickstarts-node-modules
 # Remove the development image
 podman rmi red-hat-kickstarts-dev
 
-# Then repeat steps 2-5 above
+# Then repeat steps 2-4 above
 ```
 
 ### Containerfile.dev

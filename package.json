@@ -9,10 +9,16 @@
         "url": "https://github.com/erwangranger/AI-Kickstart-rendering"
     },
     "dependencies": {
-        "jsdom": "^24.0.0",
-        "node-fetch": "^2.7.0",
+        "@testing-library/jest-dom": "^5.17.0",
+        "@testing-library/react": "^13.4.0",
+        "@testing-library/user-event": "^13.5.0",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "react-scripts": "5.0.1",
+        "web-vitals": "^2.1.4"
+    },
+    "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
     },
     "scripts": {
         "start": "react-scripts start",
@@ -20,13 +26,11 @@
         "test": "react-scripts test",
         "eject": "react-scripts eject",
         "generate-static": "node scripts/generate-static.js",
-        "clean": "rimraf functions api",
+        "clean": "rm -rf functions api",
         "prebuild": "npm run clean && npm run generate-static",
         "setup": "npm run clean && rm -rf node_modules && npm cache clean --force && npm ci",
-        "build:ci": "NODE_ENV=production npm_config_loglevel=verbose npm run build",
         "dev": "npm run setup && npm start",
-        "build:local": "npm run setup && npm run build:ci",
-        "postinstall": "node -e \"try { require('fs').statSync('.nvmrc') } catch (e) { console.log('⚠️  No .nvmrc file found. Please install Node.js 20.x') }\""
+        "build:local": "npm run setup && npm run build"
     },
     "eslintConfig": {
         "extends": [
@@ -46,17 +50,9 @@
             "last 1 safari version"
         ]
     },
-    "devDependencies": {
-        "@babel/plugin-transform-class-properties": "^7.23.4",
-        "@babel/plugin-transform-nullish-coalescing-operator": "^7.23.4",
-        "@babel/plugin-transform-numeric-separator": "^7.23.4",
-        "@babel/plugin-transform-optional-chaining": "^7.23.4",
-        "@babel/plugin-transform-private-methods": "^7.23.4",
-        "@babel/plugin-transform-private-property-in-object": "^7.23.4",
-        "glob": "^10.3.10",
-        "react-scripts": "5.0.1",
-        "rimraf": "^5.0.5",
-        "svgo": "^3.2.0",
-        "typescript": "4.9.5"
+    "overrides": {
+        "postcss": "^8.4.35",
+        "nth-check": "^2.1.1",
+        "semver": "^7.5.4"
     }
 }
