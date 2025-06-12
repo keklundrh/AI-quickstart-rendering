@@ -4,6 +4,9 @@ const CACHE_DURATION = 60 * 60 * 1000;
 // Cache key for localStorage
 const CACHE_KEY = 'kickstarts_cache';
 
+// Base path for GitHub Pages
+const BASE_PATH = '/AI-Kickstart-rendering';
+
 // Function to get cached data
 function getCachedData() {
   try {
@@ -58,7 +61,7 @@ export async function fetchKickstarts() {
 // Function to fetch fresh data
 async function refreshKickstartsData() {
   try {
-    const response = await fetch('/data/kickstarts.json');
+    const response = await fetch(`${BASE_PATH}/data/kickstarts.json`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }

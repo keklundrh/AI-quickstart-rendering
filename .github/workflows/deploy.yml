@@ -68,11 +68,15 @@ jobs:
           echo "Current working directory: $(pwd)"
           echo "Directory contents before build:"
           ls -la
+          echo "Checking public/data contents:"
+          ls -la public/data || echo "public/data not found"
           npm run build
           echo "Directory contents after build:"
           ls -la
           echo "Build directory contents:"
           ls -la build || echo "Build directory not found"
+          echo "Checking if data file is in build:"
+          ls -la build/data || echo "build/data not found"
 
       - name: Verify build directory
         run: |
@@ -91,9 +95,17 @@ jobs:
             ls -la build
             exit 1
           fi
+          if [ ! -f "build/data/kickstarts.json" ]; then
+            echo "Error: build/data/kickstarts.json was not created"
+            echo "Build/data directory contents:"
+            ls -la build/data || echo "build/data not found"
+            exit 1
+          fi
           echo "Build directory verified successfully"
           echo "Build directory contents:"
           ls -la build
+          echo "Build/data directory contents:"
+          ls -la build/data
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
