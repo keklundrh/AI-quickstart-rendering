@@ -116,5 +116,3 @@ spec:
           --tls-verify=$(params.TLSVERIFY) \
           $(params.IMAGE) \
           docker://$(params.IMAGE)
-      securityContext:
-        privileged: true
