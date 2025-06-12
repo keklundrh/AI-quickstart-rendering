@@ -41,18 +41,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          # First ensure we have a package-lock.json
-          if [ ! -f "package-lock.json" ]; then
-            echo "No package-lock.json found, generating one..."
-            npm install
-          fi
-
-          # Now we can safely use npm ci
-          echo "Running clean install..."
-          npm ci
+          # Install dependencies and update package-lock.json
+          echo "Installing dependencies..."
+          npm install --verbose
 
           # Verify the installation
-          npm ls
+          npm ls --verbose
 
       - name: Generate static kickstarts data
         run: node scripts/generate-static.js
