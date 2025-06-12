@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const fetch = require('node-fetch');
 
 const GITHUB_API = 'https://api.github.com';
 const ORG_NAME = 'rh-ai-kickstart';
