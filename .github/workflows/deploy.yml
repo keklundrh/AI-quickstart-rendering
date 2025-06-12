@@ -64,39 +64,74 @@ jobs:
         env:
           NODE_ENV: production
           npm_config_loglevel: verbose
-        run: npm run build
+        run: |
+          echo "Current working directory: $(pwd)"
+          echo "Directory contents before build:"
+          ls -la
+          npm run build
+          echo "Directory contents after build:"
+          ls -la
+          echo "Build directory contents:"
+          ls -la build || echo "Build directory not found"
 
       - name: Verify build directory
         run: |
+          echo "Current working directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
           if [ ! -d "build" ]; then
             echo "Error: build directory was not created"
+            echo "Current directory contents:"
+            ls -la
             exit 1
           fi
           if [ ! -f "build/index.html" ]; then
             echo "Error: build/index.html was not created"
+            echo "Build directory contents:"
+            ls -la build
             exit 1
           fi
           echo "Build directory verified successfully"
+          echo "Build directory contents:"
+          ls -la build
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: build
           path: build
+          if-no-files-found: error
 
   pages:
     runs-on: ubuntu-latest
     needs: build-and-deploy
     steps:
+      - name: Debug working directory
+        run: |
+          echo "Current working directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
+
       - name: Download artifact (build folder) from build-and-deploy
         uses: actions/download-artifact@v4
         with:
           name: build
+          path: build
+          if-no-files-found: error
 
-      - name: Deploy (push) artifact to gh-pages branch (using JamesIves/github-pages-deploy-action)
+      - name: Verify downloaded artifact
+        run: |
+          echo "Current working directory: $(pwd)"
+          echo "Directory contents:"
+          ls -la
+          echo "Build directory contents:"
+          ls -la build || echo "Build directory not found"
+
+      - name: Deploy (push) artifact to gh-pages branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build
           branch: gh-pages
           clean: true
+          if-no-files-found: error
 
