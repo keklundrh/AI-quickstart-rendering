@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/AI-Kickstart-rendering/static/js/main.f7304f53.js",
+    "main.js": "/AI-Kickstart-rendering/static/js/main.3bb4b562.js",
     "index.html": "/AI-Kickstart-rendering/index.html",
-    "main.f7304f53.js.map": "/AI-Kickstart-rendering/static/js/main.f7304f53.js.map"
+    "main.3bb4b562.js.map": "/AI-Kickstart-rendering/static/js/main.3bb4b562.js.map"
   },
   "entrypoints": [
-    "static/js/main.f7304f53.js"
+    "static/js/main.3bb4b562.js"
   ]
 }
