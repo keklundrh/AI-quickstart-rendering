@@ -5,7 +5,11 @@ const CACHE_DURATION = 60 * 60 * 1000;
 const CACHE_KEY = 'kickstarts_cache';
 
 // Base path for GitHub Pages
-const BASE_PATH = '/AI-Kickstart-rendering';
+export const BASE_PATH = '/AI-Kickstart-rendering';
+
+// GitHub repository information
+export const REPO_OWNER = 'erwangranger';
+export const REPO_NAME = 'AI-Kickstart-rendering';
 
 // Function to get cached data
 function getCachedData() {
@@ -93,5 +97,28 @@ export async function forceRefreshKickstarts() {
   } catch (error) {
     console.error('Error forcing refresh of kickstarts:', error);
     throw error;
+  }
+}
+
+// Function to fetch repository statistics
+export async function fetchRepoStats() {
+  try {
+    const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return {
+      stars: data.stargazers_count,
+      forks: data.forks_count,
+      url: data.html_url
+    };
+  } catch (error) {
+    console.error('Error fetching repository stats:', error);
+    return {
+      stars: 0,
+      forks: 0,
+      url: `https://github.com/${REPO_OWNER}/${REPO_NAME}`
+    };
   }
 }

@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { fetchKickstarts, getAllCategories, forceRefreshKickstarts } from './api/kickstarts';
+import { fetchKickstarts, getAllCategories, forceRefreshKickstarts, fetchRepoStats } from './api/kickstarts';
+import { BASE_PATH } from './api/kickstarts';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // NOTE: Direct imports of PatternFly React components like '@patternfly/react-core'
 // and '@patternfly/react-icons' are causing resolution errors in this self-contained
@@ -35,9 +38,9 @@ const customPatternFlyStyle = `
     --pf-global--BackgroundColor--200: #fafafa;
     --pf-global--BackgroundColor--300: #e0e0e0; /* Hover state for select items */
 
-    --pf-global--primary-color--100: #0066cc; /* PatternFly primary blue */
-    --pf-global--primary-color--200: #004080; /* Darker blue for hover */
-    --pf-global--active-color--100: #0066cc; /* Blue for labels */
+    --pf-global--primary-color--100: #cc0000; /* Changed to red */
+    --pf-global--primary-color--200: #990000; /* Darker red for hover */
+    --pf-global--active-color--100: #cc0000; /* Changed to red */
 
     --pf-global--BoxShadow--sm: 0 0.0625rem 0.125rem rgba(3,3,3,0.1), 0 0.125rem 0.25rem rgba(3,3,3,0.1);
     --pf-global--BoxShadow--md: 0 0.125rem 0.25rem rgba(3,3,3,0.1), 0 0.25rem 0.5rem rgba(3,3,3,0.1);
@@ -349,6 +352,139 @@ const customPatternFlyStyle = `
     color: var(--pf-global--link--Color--hover) !important;
     text-decoration: none !important;
   }
+
+  /* Footer Styles */
+  .pf-v5-c-footer {
+    background-color: var(--pf-global--BackgroundColor--200);
+    border-top: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+    padding: var(--pf-global--spacer--lg) var(--pf-global--spacer--xl);
+    margin-top: auto;
+  }
+  .pf-v5-c-footer__content {
+    display: flex;
+    justify-content: flex-start; /* Align content to the left */
+    align-items: center;
+    max-width: 1200px;
+    /* margin: 0 auto; Removed to allow left alignment within footer padding */
+    font-size: var(--pf-global--FontSize--sm);
+    color: var(--pf-global--Color--200);
+  }
+  .pf-v5-c-footer__link {
+    color: var(--pf-global--primary-color--100);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--pf-global--spacer--xs);
+  }
+  .pf-v5-c-footer__link:hover {
+    text-decoration: underline;
+  }
+  .pf-v5-c-footer__stats {
+    display: flex;
+    gap: var(--pf-global--spacer--md);
+  }
+  .pf-v5-c-footer__stat {
+    display: flex;
+    align-items: center;
+    gap: var(--pf-global--spacer--xs);
+  }
+  .pf-v5-c-footer__stat-icon {
+    color: var(--pf-global--Color--200);
+  }
+
+  /* Markdown Styles */
+  .markdown-preview {
+    font-size: var(--pf-global--FontSize--sm);
+    color: var(--pf-global--Color--100);
+    line-height: 1.5;
+    border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+    border-radius: var(--pf-global--BorderRadius--lg);
+    padding: var(--pf-global--spacer--md);
+    background-color: var(--pf-global--BackgroundColor--200);
+    margin-bottom: var(--pf-global--spacer--md);
+  }
+  .markdown-preview h1,
+  .markdown-preview h2,
+  .markdown-preview h3,
+  .markdown-preview h4,
+  .markdown-preview h5,
+  .markdown-preview h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+  .markdown-preview h1 { font-size: 1.5em; }
+  .markdown-preview h2 { font-size: 1.3em; }
+  .markdown-preview h3 { font-size: 1.1em; }
+  .markdown-preview h4 { font-size: 1em; }
+  .markdown-preview h5 { font-size: 0.9em; }
+  .markdown-preview h6 { font-size: 0.8em; }
+  .markdown-preview p {
+    margin: 0.5em 0;
+  }
+  .markdown-preview ul,
+  .markdown-preview ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+  }
+  .markdown-preview li {
+    margin: 0.25em 0;
+  }
+  .markdown-preview code {
+    background-color: var(--pf-global--BackgroundColor--200);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+  .markdown-preview pre {
+    background-color: var(--pf-global--BackgroundColor--200);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 0.5em 0;
+  }
+  .markdown-preview pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  .markdown-preview blockquote {
+    border-left: 3px solid var(--pf-global--BorderColor--200);
+    margin: 0.5em 0;
+    padding-left: 1em;
+    color: var(--pf-global--Color--200);
+  }
+  .markdown-preview a {
+    color: var(--pf-global--primary-color--100);
+    text-decoration: none;
+  }
+  .markdown-preview a:hover {
+    text-decoration: underline;
+  }
+  .markdown-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+  .markdown-preview table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5em 0;
+  }
+  .markdown-preview th,
+  .markdown-preview td {
+    border: 1px solid var(--pf-global--BorderColor--200);
+    padding: 0.5em;
+    text-align: left;
+  }
+  .markdown-preview th {
+    background-color: var(--pf-global--BackgroundColor--200);
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+  .markdown-preview hr {
+    border: none;
+    border-top: 1px solid var(--pf-global--BorderColor--200);
+    margin: 1em 0;
+  }
 `;
 
 // Replaced PatternFly React components with HTML elements and custom CSS classes
@@ -399,14 +535,27 @@ const KickstartCard = ({ kickstart }) => (
         }}>
           README Preview
         </h4>
-        <p style={{
-          fontSize: 'var(--pf-global--FontSize--sm)',
-          color: 'var(--pf-global--Color--100)',
-          fontStyle: 'italic',
-          marginBottom: 'var(--pf-global--spacer--md)'
-        }}>
-          {kickstart.readmePreview}
-        </p>
+        <div className="markdown-preview">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              // Ensure headings have content and are accessible
+              h1: ({node, children, ...props}) => <h3 {...props}>{children || 'Heading 1'}</h3>,
+              h2: ({node, children, ...props}) => <h4 {...props}>{children || 'Heading 2'}</h4>,
+              h3: ({node, children, ...props}) => <h5 {...props}>{children || 'Heading 3'}</h5>,
+              // Disable images in preview
+              img: () => null,
+              // Ensure anchors have content and are accessible
+              a: ({node, children, ...props}) => (
+                <a {...props} target="_blank" rel="noopener noreferrer">
+                  {children || props.href || 'Link'}
+                </a>
+              ),
+            }}
+          >
+            {kickstart.readmePreview}
+          </ReactMarkdown>
+        </div>
       </div>
 
       {/* Metadata section */}
@@ -460,6 +609,7 @@ const App = () => {
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [repoStats, setRepoStats] = useState({ stars: 0, forks: 0, url: '' });
 
   // Fetch kickstarts data with caching
   useEffect(() => {
@@ -560,6 +710,15 @@ const App = () => {
     setSelectedCategories([]);
   };
 
+  // Add effect to fetch repo stats
+  useEffect(() => {
+    const loadRepoStats = async () => {
+      const stats = await fetchRepoStats();
+      setRepoStats(stats);
+    };
+    loadRepoStats();
+  }, []);
+
   return (
     <>
       {/* Inject custom CSS for PatternFly look-alike */}
@@ -573,7 +732,7 @@ const App = () => {
             <div className="pf-v5-c-masthead__brand">
               <a className="pf-v5-c-brand" href="/">
                 <img
-                  src="/assets/logo.svg"
+                  src={`${BASE_PATH}/assets/logo.svg`}
                   alt="Red Hat Fedora Logo"
                   style={{
                     height: '40px',
@@ -596,7 +755,7 @@ const App = () => {
           {/* Hero Section / Introduction */}
           <section className="pf-v5-c-page__main-section pf-m-light pf-v5-u-py-xl">
             <div className="pf-v5-u-text-align-center pf-v5-u-pb-lg">
-              <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v01</h1>
+              <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v02</h1>
               <p className="pf-v5-u-mt-md">
                 Discover ready-to-run AI examples designed for Red Hat OpenShift AI.
                 {isRefreshing && (
@@ -755,6 +914,31 @@ const App = () => {
             )}
           </section>
         </main>
+
+        {/* Add Footer */}
+        <footer className="pf-v5-c-footer">
+          <div className="pf-v5-c-footer__content">
+            <div className="pf-v5-c-footer__text">
+              PoC App by <a href="https://red.ht/cai-team" className="pf-v5-c-footer__link" target="_blank" rel="noopener noreferrer">red.ht/cai-team</a>
+            </div>
+            <div className="pf-v5-c-footer__stats">
+              <a href={repoStats.url} className="pf-v5-c-footer__link" target="_blank" rel="noopener noreferrer">
+                <span className="pf-v5-c-footer__stat">
+                  <svg className="pf-v5-c-footer__stat-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 .25a.75.75 0 0 1 .673.418l3.058 6.197 6.839.994a.75.75 0 0 1 .415 1.279l-4.948 4.823 1.168 6.811a.75.75 0 0 1-1.088.791L8 13.347l-6.116 3.216a.75.75 0 0 1-1.088-.79l1.168-6.812-4.948-4.823a.75.75 0 0 1 .416-1.28l6.838-.993L7.327.668A.75.75 0 0 1 8 .25z"/>
+                  </svg>
+                  {repoStats.stars}
+                </span>
+                <span className="pf-v5-c-footer__stat">
+                  <svg className="pf-v5-c-footer__stat-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm3-8.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z"/>
+                  </svg>
+                  {repoStats.forks}
+                </span>
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );

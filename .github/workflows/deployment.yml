@@ -1,10 +1,20 @@
 name: Deployment
 
 on:
+  # Run on push to sometesting branch
   push:
-    branches: [ main ]
-  pull_request:
-    types: [opened, synchronize, reopened]
+    branches: [ sometesting ]
+  # Run on manual trigger
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Branch to build from'
+        required: true
+        default: 'sometesting'
+        type: string
+  # Run on schedule (every hour)
+  schedule:
+    - cron: '0 * * * *'  # Runs at minute 0 of every hour
 
 permissions:
   contents: write
@@ -18,6 +28,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.inputs.branch || 'sometesting' }}
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
@@ -40,9 +52,8 @@ jobs:
       run: npm run build
 
     - name: Deploy to GitHub Pages
-      uses: actions/gh-pages@v4
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        src: 'build/**'
+        folder: build
         branch: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+        clean: true
