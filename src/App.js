@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { fetchKickstarts, getAllCategories, forceRefreshKickstarts, fetchRepoStats } from './api/kickstarts';
 import { BASE_PATH } from './api/kickstarts';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // NOTE: Direct imports of PatternFly React components like '@patternfly/react-core'
 // and '@patternfly/react-icons' are causing resolution errors in this self-contained
@@ -389,6 +391,100 @@ const customPatternFlyStyle = `
   .pf-v5-c-footer__stat-icon {
     color: var(--pf-global--Color--200);
   }
+
+  /* Markdown Styles */
+  .markdown-preview {
+    font-size: var(--pf-global--FontSize--sm);
+    color: var(--pf-global--Color--100);
+    line-height: 1.5;
+    border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+    border-radius: var(--pf-global--BorderRadius--lg);
+    padding: var(--pf-global--spacer--md);
+    background-color: var(--pf-global--BackgroundColor--200);
+    margin-bottom: var(--pf-global--spacer--md);
+  }
+  .markdown-preview h1,
+  .markdown-preview h2,
+  .markdown-preview h3,
+  .markdown-preview h4,
+  .markdown-preview h5,
+  .markdown-preview h6 {
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+  .markdown-preview h1 { font-size: 1.5em; }
+  .markdown-preview h2 { font-size: 1.3em; }
+  .markdown-preview h3 { font-size: 1.1em; }
+  .markdown-preview h4 { font-size: 1em; }
+  .markdown-preview h5 { font-size: 0.9em; }
+  .markdown-preview h6 { font-size: 0.8em; }
+  .markdown-preview p {
+    margin: 0.5em 0;
+  }
+  .markdown-preview ul,
+  .markdown-preview ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+  }
+  .markdown-preview li {
+    margin: 0.25em 0;
+  }
+  .markdown-preview code {
+    background-color: var(--pf-global--BackgroundColor--200);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+  .markdown-preview pre {
+    background-color: var(--pf-global--BackgroundColor--200);
+    padding: 1em;
+    border-radius: 4px;
+    overflow-x: auto;
+    margin: 0.5em 0;
+  }
+  .markdown-preview pre code {
+    background-color: transparent;
+    padding: 0;
+  }
+  .markdown-preview blockquote {
+    border-left: 3px solid var(--pf-global--BorderColor--200);
+    margin: 0.5em 0;
+    padding-left: 1em;
+    color: var(--pf-global--Color--200);
+  }
+  .markdown-preview a {
+    color: var(--pf-global--primary-color--100);
+    text-decoration: none;
+  }
+  .markdown-preview a:hover {
+    text-decoration: underline;
+  }
+  .markdown-preview img {
+    max-width: 100%;
+    height: auto;
+  }
+  .markdown-preview table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0.5em 0;
+  }
+  .markdown-preview th,
+  .markdown-preview td {
+    border: 1px solid var(--pf-global--BorderColor--200);
+    padding: 0.5em;
+    text-align: left;
+  }
+  .markdown-preview th {
+    background-color: var(--pf-global--BackgroundColor--200);
+    font-weight: var(--pf-global--FontWeight--bold);
+  }
+  .markdown-preview hr {
+    border: none;
+    border-top: 1px solid var(--pf-global--BorderColor--200);
+    margin: 1em 0;
+  }
 `;
 
 // Replaced PatternFly React components with HTML elements and custom CSS classes
@@ -439,14 +535,23 @@ const KickstartCard = ({ kickstart }) => (
         }}>
           README Preview
         </h4>
-        <p style={{
-          fontSize: 'var(--pf-global--FontSize--sm)',
-          color: 'var(--pf-global--Color--100)',
-          fontStyle: 'italic',
-          marginBottom: 'var(--pf-global--spacer--md)'
-        }}>
-          {kickstart.readmePreview}
-        </p>
+        <div className="markdown-preview">
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              // Limit heading levels to h1-h3 for preview
+              h1: ({node, ...props}) => <h3 {...props} />,
+              h2: ({node, ...props}) => <h4 {...props} />,
+              h3: ({node, ...props}) => <h5 {...props} />,
+              // Disable images in preview
+              img: () => null,
+              // Make links open in new tab
+              a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" />,
+            }}
+          >
+            {kickstart.readmePreview}
+          </ReactMarkdown>
+        </div>
       </div>
 
       {/* Metadata section */}
@@ -646,7 +751,7 @@ const App = () => {
           {/* Hero Section / Introduction */}
           <section className="pf-v5-c-page__main-section pf-m-light pf-v5-u-py-xl">
             <div className="pf-v5-u-text-align-center pf-v5-u-pb-lg">
-              <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v01</h1>
+              <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v02</h1>
               <p className="pf-v5-u-mt-md">
                 Discover ready-to-run AI examples designed for Red Hat OpenShift AI.
                 {isRefreshing && (
