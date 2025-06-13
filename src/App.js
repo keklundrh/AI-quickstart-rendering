@@ -360,10 +360,10 @@ const customPatternFlyStyle = `
   }
   .pf-v5-c-footer__content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; /* Align content to the left */
     align-items: center;
     max-width: 1200px;
-    margin: 0 auto;
+    /* margin: 0 auto; Removed to allow left alignment within footer padding */
     font-size: var(--pf-global--FontSize--sm);
     color: var(--pf-global--Color--200);
   }
