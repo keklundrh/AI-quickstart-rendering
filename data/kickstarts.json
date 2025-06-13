@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-13T18:13:45.938Z",
+  "lastUpdated": "2025-06-13T19:08:13.695Z",
   "kickstarts": [
+    {
+      "id": "llama-stack-observability",
+      "title": "Llama Stack Observability",
+      "description": "Llama Stack Observability Kickstart",
+      "readmePreview": "# Llama Stack Observability\n\nA comprehensive repository providing complete observability and deployment solutions for Llama Stack infrastructure on Op...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/13/2025"
+    },
     {
       "id": "ai-virtual-agent",
       "title": "Ai Virtual Agent",
@@ -23,18 +35,6 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "6/13/2025"
-    },
-    {
-      "id": "llama-stack-observability",
-      "title": "Llama Stack Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Observability\n\nA comprehensive repository providing complete observability and deployment solutions for Llama Stack infrastructure on Op...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
-      "categories": [
-        "Shell"
-      ],
-      "stars": 0,
       "lastUpdated": "6/13/2025"
     },
     {
