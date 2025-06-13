@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchKickstarts, getAllCategories, forceRefreshKickstarts } from './api/kickstarts';
+import { fetchKickstarts, getAllCategories, forceRefreshKickstarts, fetchRepoStats } from './api/kickstarts';
+import { BASE_PATH } from './api/kickstarts';
 
 // NOTE: Direct imports of PatternFly React components like '@patternfly/react-core'
 // and '@patternfly/react-icons' are causing resolution errors in this self-contained
@@ -35,9 +36,9 @@ const customPatternFlyStyle = `
     --pf-global--BackgroundColor--200: #fafafa;
     --pf-global--BackgroundColor--300: #e0e0e0; /* Hover state for select items */
 
-    --pf-global--primary-color--100: #0066cc; /* PatternFly primary blue */
-    --pf-global--primary-color--200: #004080; /* Darker blue for hover */
-    --pf-global--active-color--100: #0066cc; /* Blue for labels */
+    --pf-global--primary-color--100: #cc0000; /* Changed to red */
+    --pf-global--primary-color--200: #990000; /* Darker red for hover */
+    --pf-global--active-color--100: #cc0000; /* Changed to red */
 
     --pf-global--BoxShadow--sm: 0 0.0625rem 0.125rem rgba(3,3,3,0.1), 0 0.125rem 0.25rem rgba(3,3,3,0.1);
     --pf-global--BoxShadow--md: 0 0.125rem 0.25rem rgba(3,3,3,0.1), 0 0.25rem 0.5rem rgba(3,3,3,0.1);
@@ -349,6 +350,45 @@ const customPatternFlyStyle = `
     color: var(--pf-global--link--Color--hover) !important;
     text-decoration: none !important;
   }
+
+  /* Footer Styles */
+  .pf-v5-c-footer {
+    background-color: var(--pf-global--BackgroundColor--200);
+    border-top: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
+    padding: var(--pf-global--spacer--lg) var(--pf-global--spacer--xl);
+    margin-top: auto;
+  }
+  .pf-v5-c-footer__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    font-size: var(--pf-global--FontSize--sm);
+    color: var(--pf-global--Color--200);
+  }
+  .pf-v5-c-footer__link {
+    color: var(--pf-global--primary-color--100);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--pf-global--spacer--xs);
+  }
+  .pf-v5-c-footer__link:hover {
+    text-decoration: underline;
+  }
+  .pf-v5-c-footer__stats {
+    display: flex;
+    gap: var(--pf-global--spacer--md);
+  }
+  .pf-v5-c-footer__stat {
+    display: flex;
+    align-items: center;
+    gap: var(--pf-global--spacer--xs);
+  }
+  .pf-v5-c-footer__stat-icon {
+    color: var(--pf-global--Color--200);
+  }
 `;
 
 // Replaced PatternFly React components with HTML elements and custom CSS classes
@@ -460,6 +500,7 @@ const App = () => {
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [repoStats, setRepoStats] = useState({ stars: 0, forks: 0, url: '' });
 
   // Fetch kickstarts data with caching
   useEffect(() => {
@@ -560,6 +601,15 @@ const App = () => {
     setSelectedCategories([]);
   };
 
+  // Add effect to fetch repo stats
+  useEffect(() => {
+    const loadRepoStats = async () => {
+      const stats = await fetchRepoStats();
+      setRepoStats(stats);
+    };
+    loadRepoStats();
+  }, []);
+
   return (
     <>
       {/* Inject custom CSS for PatternFly look-alike */}
@@ -573,7 +623,7 @@ const App = () => {
             <div className="pf-v5-c-masthead__brand">
               <a className="pf-v5-c-brand" href="/">
                 <img
-                  src="/assets/logo.svg"
+                  src={`${BASE_PATH}/assets/logo.svg`}
                   alt="Red Hat Fedora Logo"
                   style={{
                     height: '40px',
@@ -755,6 +805,31 @@ const App = () => {
             )}
           </section>
         </main>
+
+        {/* Add Footer */}
+        <footer className="pf-v5-c-footer">
+          <div className="pf-v5-c-footer__content">
+            <div className="pf-v5-c-footer__text">
+              PoC App by <a href="https://red.ht/cai-team" className="pf-v5-c-footer__link" target="_blank" rel="noopener noreferrer">red.ht/cai-team</a>
+            </div>
+            <div className="pf-v5-c-footer__stats">
+              <a href={repoStats.url} className="pf-v5-c-footer__link" target="_blank" rel="noopener noreferrer">
+                <span className="pf-v5-c-footer__stat">
+                  <svg className="pf-v5-c-footer__stat-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 .25a.75.75 0 0 1 .673.418l3.058 6.197 6.839.994a.75.75 0 0 1 .415 1.279l-4.948 4.823 1.168 6.811a.75.75 0 0 1-1.088.791L8 13.347l-6.116 3.216a.75.75 0 0 1-1.088-.79l1.168-6.812-4.948-4.823a.75.75 0 0 1 .416-1.28l6.838-.993L7.327.668A.75.75 0 0 1 8 .25z"/>
+                  </svg>
+                  {repoStats.stars}
+                </span>
+                <span className="pf-v5-c-footer__stat">
+                  <svg className="pf-v5-c-footer__stat-icon" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M5 3.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm0 2.122a2.25 2.25 0 1 0-1.5 0v.878A2.25 2.25 0 0 0 5.75 8.5h1.5v2.128a2.251 2.251 0 1 0 1.5 0V8.5h1.5a2.25 2.25 0 0 0 2.25-2.25v-.878a2.25 2.25 0 1 0-1.5 0v.878a.75.75 0 0 1-.75.75h-4.5A.75.75 0 0 1 5 6.25v-.878zm3.75 7.378a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0zm3-8.75a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5z"/>
+                  </svg>
+                  {repoStats.forks}
+                </span>
+              </a>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
