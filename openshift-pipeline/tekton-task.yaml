@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: nodejs-deploy
+spec:
+  params:
+    - name: source-repo
+      type: string
+      description: Git repository URL
+    - name: source-branch
+      type: string
+      description: Git branch to deploy
+  steps:
+    - name: build
+      image: node:14
+      command: ['npm', 'install']
+      workingDir: $(params.source-repo)
+    - name: test
+      image: node:14
+      command: ['npm', 'test']
+      workingDir: $(params.source-repo)
+    - name: deploy
+      image: openshift/cli:latest
+      command: ['oc', 'apply', '-f', '-']
+      workingDir: $(params.source-repo)
+      command: ['npm', 'install']
+      workingDir: $(params.source-repo)
+    - name: test
+      image: node:14
+      command: ['npm', 'test']
+      workingDir: $(params.source-repo)
+    - name: deploy
+      image: openshift/cli:latest
+      command: ['oc', 'apply', '-f', '-']
+      workingDir: $(params.source-repo)

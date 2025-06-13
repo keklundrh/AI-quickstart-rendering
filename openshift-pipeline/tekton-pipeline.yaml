@@ -1,0 +1,21 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: deploy-to-openshift
+spec:
+  params:
+    - name: source-repo
+      type: string
+      description: Git repository URL
+    - name: source-branch
+      type: string
+      description: Git branch to deploy
+  tasks:
+    - name: build-and-deploy
+      taskRef:
+        name: nodejs-deploy
+      params:
+        - name: source-repo
+          value: $(params.source-repo)
+        - name: source-branch
+          value: $(params.source-branch)

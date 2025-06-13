@@ -1,0 +1,12 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: deploy-run
+spec:
+  pipelineRef:
+    name: deploy-to-openshift
+  params:
+    - name: source-repo
+      value: 'https://github.com/yourusername/yourrepo.git'
+    - name: source-branch
+      value: 'main'
