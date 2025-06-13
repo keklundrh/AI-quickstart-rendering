@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-06-13T15:35:28.090Z",
+  "lastUpdated": "2025-06-13T16:12:04.680Z",
   "kickstarts": [
     {
       "id": "ai-architecture-charts",
@@ -122,18 +122,6 @@
         "Python"
       ],
       "stars": 3,
-      "lastUpdated": "6/9/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# Virtual Assistant/Agent\n\nWelcome to the Virtual Assistant/Agent Kickstart!  \n\nUse this to quickly create AI Virtual Assistant for different user per...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
       "lastUpdated": "6/9/2025"
     },
     {
