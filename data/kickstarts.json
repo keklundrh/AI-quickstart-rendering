@@ -1,18 +1,6 @@
 {
-  "lastUpdated": "2025-06-12T17:32:09.965Z",
+  "lastUpdated": "2025-06-13T14:31:21.284Z",
   "kickstarts": [
-    {
-      "id": "llama-stack-mcp-server",
-      "title": "Llama Stack Mcp Server",
-      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
-      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
-      "categories": [
-        "JavaScript"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/12/2025"
-    },
     {
       "id": "llama-stack-observability",
       "title": "Llama Stack Observability",
@@ -20,7 +8,55 @@
       "readmePreview": "# Llama Stack Observability\n\nA comprehensive repository providing complete observability and deployment solutions for Llama Stack infrastructure on Op...",
       "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
       "categories": [
-        "Smarty"
+        "Shell"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/13/2025"
+    },
+    {
+      "id": "ai-virtual-assistant",
+      "title": "Ai Virtual Assistant",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Assistant\n\nA comprehensive platform for creating and managing AI-powered virtual assistants with knowledge base integration, built on top...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-assistant",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/12/2025"
+    },
+    {
+      "id": "ai-kickstart-template",
+      "title": "Ai Kickstart Template",
+      "description": "Template repository to pre-populate kickstart repos",
+      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-template",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/12/2025"
+    },
+    {
+      "id": ".github",
+      "title": ".github",
+      "description": "Org-level helper repository, this is not a kickstart",
+      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
+      "githubLink": "https://github.com/rh-ai-kickstart/.github",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/12/2025"
+    },
+    {
+      "id": "ai-kickstart-contrib",
+      "title": "Ai Kickstart Contrib",
+      "description": "A repo for AI kickstart documentation, collaboration and support",
+      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
+      "categories": [
+        "AI"
       ],
       "stars": 0,
       "lastUpdated": "6/12/2025"
@@ -33,6 +69,18 @@
       "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
       "categories": [
         "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "6/12/2025"
+    },
+    {
+      "id": "llama-stack-mcp-server",
+      "title": "Llama Stack Mcp Server",
+      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
+      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
+      "categories": [
+        "JavaScript"
       ],
       "stars": 0,
       "lastUpdated": "6/12/2025"
@@ -113,18 +161,6 @@
       "lastUpdated": "5/30/2025"
     },
     {
-      "id": "ai-kickstart-contrib",
-      "title": "Ai Kickstart Contrib",
-      "description": "No description available",
-      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "5/28/2025"
-    },
-    {
       "id": "dynamic-model-router",
       "title": "Dynamic Model Router",
       "description": "No description available",
@@ -149,18 +185,6 @@
       "lastUpdated": "5/16/2025"
     },
     {
-      "id": ".github",
-      "title": ".github",
-      "description": "No description available",
-      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
-      "githubLink": "https://github.com/rh-ai-kickstart/.github",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "5/12/2025"
-    },
-    {
       "id": "vllm-cpu",
       "title": "Vllm Cpu",
       "description": "No description available",
@@ -171,18 +195,6 @@
       ],
       "stars": 3,
       "lastUpdated": "5/12/2025"
-    },
-    {
-      "id": "ai-kickstart-template",
-      "title": "Ai Kickstart Template",
-      "description": "No description available",
-      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-template",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "5/2/2025"
     }
   ]
 }
