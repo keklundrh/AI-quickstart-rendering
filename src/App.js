@@ -539,14 +539,18 @@ const KickstartCard = ({ kickstart }) => (
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              // Limit heading levels to h1-h3 for preview
-              h1: ({node, ...props}) => <h3 {...props} />,
-              h2: ({node, ...props}) => <h4 {...props} />,
-              h3: ({node, ...props}) => <h5 {...props} />,
+              // Ensure headings have content and are accessible
+              h1: ({node, children, ...props}) => <h3 {...props}>{children || 'Heading 1'}</h3>,
+              h2: ({node, children, ...props}) => <h4 {...props}>{children || 'Heading 2'}</h4>,
+              h3: ({node, children, ...props}) => <h5 {...props}>{children || 'Heading 3'}</h5>,
               // Disable images in preview
               img: () => null,
-              // Make links open in new tab
-              a: ({node, ...props}) => <a {...props} target="_blank" rel="noopener noreferrer" />,
+              // Ensure anchors have content and are accessible
+              a: ({node, children, ...props}) => (
+                <a {...props} target="_blank" rel="noopener noreferrer">
+                  {children || props.href || 'Link'}
+                </a>
+              ),
             }}
           >
             {kickstart.readmePreview}
