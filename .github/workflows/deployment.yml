@@ -52,9 +52,8 @@ jobs:
       run: npm run build
 
     - name: Deploy to GitHub Pages
-      uses: actions/gh-pages@v4
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-        src: 'build/**'
+        folder: build
         branch: gh-pages
-        token: ${{ secrets.GITHUB_TOKEN }}
-        force: true
+        clean: true
