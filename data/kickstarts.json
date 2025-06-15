@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-06-15T20:10:01.170Z",
+  "lastUpdated": "2025-06-15T21:08:39.316Z",
   "kickstarts": [
     {
       "id": "product-recommender-system",
@@ -101,13 +101,10 @@
       "id": "custom-workbench-images-examples",
       "title": "Custom Workbench Images Examples",
       "description": "An easy way to quickly add a lot of useful, community-provided, custom Workbench Images",
-      "readmePreview": "# Custom Workbench Images for Red Hat OpenShift AI\n\nThis repository provides a fast way to add a collection of community-contributed Custom Workbench ...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/custom-workbench-images-examples",
       "categories": [
-        "AI",
-        "OpenShift",
-        "RHOAI",
-        "Workbench Images"
+        "AI"
       ],
       "stars": 0,
       "lastUpdated": "6/11/2025"
@@ -116,7 +113,7 @@
       "id": "RAG",
       "title": "RAG",
       "description": "No description available",
-      "readmePreview": "# RAG Reference Architecture using LLaMA Stack, OpenShift AI, and PGVector\n\n## Description\n\nRetrieval-Augmented Generation (RAG) enhances Large Langua...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/RAG",
       "categories": [
         "Python"
@@ -128,7 +125,7 @@
       "id": "AI-Observability-Metric-Summarizer",
       "title": "AI Observability Metric Summarizer",
       "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=shar...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/AI-Observability-Metric-Summarizer",
       "categories": [
         "Python"
@@ -140,7 +137,7 @@
       "id": "vllm-tool-calling",
       "title": "Vllm Tool Calling",
       "description": "AI Kickstart for deploying an LLM with Tool Calling enabled on top of OpenShift AI",
-      "readmePreview": "# vLLM Tool Calling \n\nWelcome to the vLLM [Function Calling](https://ai-on-openshift.io/odh-rhoai/enable-function-calling/) Kickstart!  \n\nUse this to ...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/vllm-tool-calling",
       "categories": [
         "AI"
@@ -152,7 +149,7 @@
       "id": "dynamic-model-router",
       "title": "Dynamic Model Router",
       "description": "No description available",
-      "readmePreview": "\n# Dynamic Model Routing with Semantic Evaluation and LoRA Adapters\nWelcome to the LLM Dynamic Model Routing kickstart! Use this to quickly deploy a s...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
       "categories": [
         "Python"
@@ -164,7 +161,7 @@
       "id": "rhoai-metrics-dashboard",
       "title": "Rhoai Metrics Dashboard",
       "description": "RHOAI Metrics Dashboard for Single Serving Models",
-      "readmePreview": "# RHOAI Metrics Dashboard for Single Serving Models\n\nEnable RHOAI User Workload Metrics for Single Serving Models\n\n## Prerequisites\n\n- OpenShift 4.10 ...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/rhoai-metrics-dashboard",
       "categories": [
         "AI"
@@ -176,7 +173,7 @@
       "id": "vllm-cpu",
       "title": "Vllm Cpu",
       "description": "No description available",
-      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
+      "readmePreview": "No README available",
       "githubLink": "https://github.com/rh-ai-kickstart/vllm-cpu",
       "categories": [
         "Smarty"
