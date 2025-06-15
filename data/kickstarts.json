@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-15T09:09:31.229Z",
+  "lastUpdated": "2025-06-15T10:10:28.011Z",
   "kickstarts": [
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# product-recommender-system\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with user-item rela...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "6/15/2025"
+    },
     {
       "id": "llama-stack-observability",
       "title": "Llama Stack Observability",
@@ -83,18 +95,6 @@
         "JavaScript"
       ],
       "stars": 0,
-      "lastUpdated": "6/12/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "No description available",
-      "readmePreview": "# product-recommender-system\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with user-item rela...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
       "lastUpdated": "6/12/2025"
     },
     {
