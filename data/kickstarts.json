@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-16T15:11:01.472Z",
+  "lastUpdated": "2025-06-16T16:12:42.470Z",
   "kickstarts": [
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# product-recommender-system\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with user-item rela...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "6/16/2025"
+    },
     {
       "id": "vllm-cpu",
       "title": "Vllm Cpu",
@@ -12,18 +24,6 @@
       ],
       "stars": 3,
       "lastUpdated": "6/16/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# product-recommender-system\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with user-item rela...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
-      "lastUpdated": "6/15/2025"
     },
     {
       "id": "llama-stack-observability",
