@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-16T22:09:52.319Z",
+  "lastUpdated": "2025-06-16T23:09:35.647Z",
   "kickstarts": [
+    {
+      "id": "llama-stack-observability",
+      "title": "Llama Stack Observability",
+      "description": "Llama Stack Observability Kickstart",
+      "readmePreview": "# Llama Stack Observability\n\nA comprehensive repository providing complete observability and deployment solutions for Llama Stack infrastructure on Op...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/16/2025"
+    },
     {
       "id": "llm-cpu-serving",
       "title": "Llm Cpu Serving",
@@ -24,18 +36,6 @@
       ],
       "stars": 1,
       "lastUpdated": "6/16/2025"
-    },
-    {
-      "id": "llama-stack-observability",
-      "title": "Llama Stack Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Observability\n\nA comprehensive repository providing complete observability and deployment solutions for Llama Stack infrastructure on Op...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/13/2025"
     },
     {
       "id": "ai-virtual-agent",
