@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-16T06:16:14.012Z",
+  "lastUpdated": "2025-06-16T07:12:49.739Z",
   "kickstarts": [
+    {
+      "id": "vllm-cpu",
+      "title": "Vllm Cpu",
+      "description": "No description available",
+      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
+      "githubLink": "https://github.com/rh-ai-kickstart/vllm-cpu",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 3,
+      "lastUpdated": "6/16/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -171,18 +183,6 @@
       ],
       "stars": 0,
       "lastUpdated": "5/16/2025"
-    },
-    {
-      "id": "vllm-cpu",
-      "title": "Vllm Cpu",
-      "description": "No description available",
-      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
-      "githubLink": "https://github.com/rh-ai-kickstart/vllm-cpu",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 3,
-      "lastUpdated": "5/12/2025"
     }
   ]
 }
