@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-16T23:09:35.647Z",
+  "lastUpdated": "2025-06-17T00:50:00.843Z",
   "kickstarts": [
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Assistant\n\nA comprehensive platform for creating and managing AI-powered virtual assistants with knowledge base integration, built on top...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/17/2025"
+    },
     {
       "id": "llama-stack-observability",
       "title": "Llama Stack Observability",
@@ -11,7 +23,7 @@
         "Smarty"
       ],
       "stars": 0,
-      "lastUpdated": "6/16/2025"
+      "lastUpdated": "6/17/2025"
     },
     {
       "id": "llm-cpu-serving",
@@ -36,18 +48,6 @@
       ],
       "stars": 1,
       "lastUpdated": "6/16/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Assistant\n\nA comprehensive platform for creating and managing AI-powered virtual assistants with knowledge base integration, built on top...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/13/2025"
     },
     {
       "id": "ai-architecture-charts",
