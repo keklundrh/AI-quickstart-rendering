@@ -1,18 +1,6 @@
 {
-  "lastUpdated": "2025-06-17T17:10:20.499Z",
+  "lastUpdated": "2025-06-17T18:14:19.947Z",
   "kickstarts": [
-    {
-      "id": "AI-Observability-Metric-Summarizer",
-      "title": "AI Observability Metric Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=shar...",
-      "githubLink": "https://github.com/rh-ai-kickstart/AI-Observability-Metric-Summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 3,
-      "lastUpdated": "6/17/2025"
-    },
     {
       "id": "ai-virtual-agent",
       "title": "Ai Virtual Agent",
@@ -23,6 +11,18 @@
         "Python"
       ],
       "stars": 0,
+      "lastUpdated": "6/17/2025"
+    },
+    {
+      "id": "AI-Observability-Metric-Summarizer",
+      "title": "AI Observability Metric Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=shar...",
+      "githubLink": "https://github.com/rh-ai-kickstart/AI-Observability-Metric-Summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 3,
       "lastUpdated": "6/17/2025"
     },
     {
