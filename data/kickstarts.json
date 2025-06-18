@@ -1,18 +1,6 @@
 {
-  "lastUpdated": "2025-06-18T12:19:36.646Z",
+  "lastUpdated": "2025-06-18T13:27:03.455Z",
   "kickstarts": [
-    {
-      "id": "llama-stack-observability",
-      "title": "Llama Stack Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Telemtry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provi...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/18/2025"
-    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -23,6 +11,18 @@
         "Python"
       ],
       "stars": 1,
+      "lastUpdated": "6/18/2025"
+    },
+    {
+      "id": "llama-stack-observability",
+      "title": "Llama Stack Observability",
+      "description": "Llama Stack Observability Kickstart",
+      "readmePreview": "# Llama Stack Telemtry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provi...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 0,
       "lastUpdated": "6/18/2025"
     },
     {
