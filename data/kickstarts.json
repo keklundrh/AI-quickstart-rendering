@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-18T17:11:34.937Z",
+  "lastUpdated": "2025-06-18T18:14:18.212Z",
   "kickstarts": [
+    {
+      "id": "ai-kickstart-contrib",
+      "title": "Ai Kickstart Contrib",
+      "description": "A repo for AI kickstart documentation, collaboration and support",
+      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/18/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -91,18 +103,6 @@
       "description": "Org-level helper repository, this is not a kickstart",
       "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
       "githubLink": "https://github.com/rh-ai-kickstart/.github",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/12/2025"
-    },
-    {
-      "id": "ai-kickstart-contrib",
-      "title": "Ai Kickstart Contrib",
-      "description": "A repo for AI kickstart documentation, collaboration and support",
-      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
       "categories": [
         "AI"
       ],
