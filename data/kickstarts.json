@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-18T09:11:49.220Z",
+  "lastUpdated": "2025-06-18T11:09:08.313Z",
   "kickstarts": [
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# product-recommender-system\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with user-item rela...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "6/18/2025"
+    },
     {
       "id": "AI-Observability-Metric-Summarizer",
       "title": "AI Observability Metric Summarizer",
@@ -35,18 +47,6 @@
         "Python"
       ],
       "stars": 0,
-      "lastUpdated": "6/17/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# product-recommender-system\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with user-item rela...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
       "lastUpdated": "6/17/2025"
     },
     {
