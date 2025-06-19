@@ -1,11 +1,35 @@
 {
-  "lastUpdated": "2025-06-19T16:12:02.875Z",
+  "lastUpdated": "2025-06-19T17:09:08.964Z",
   "kickstarts": [
+    {
+      "id": "llm-cpu-serving",
+      "title": "Llm Cpu Serving",
+      "description": "No description available",
+      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 3,
+      "lastUpdated": "6/19/2025"
+    },
+    {
+      "id": "ai-kickstart-template",
+      "title": "Ai Kickstart Template",
+      "description": "Template repository to pre-populate kickstart repos",
+      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-template",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/19/2025"
+    },
     {
       "id": "llama-stack-observability",
       "title": "Llama Stack Observability",
       "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Telemtry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provi...",
+      "readmePreview": "# Llama Stack Telemetry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository prov...",
       "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
       "categories": [
         "Smarty"
@@ -72,30 +96,6 @@
       ],
       "stars": 3,
       "lastUpdated": "6/18/2025"
-    },
-    {
-      "id": "llm-cpu-serving",
-      "title": "Llm Cpu Serving",
-      "description": "No description available",
-      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 3,
-      "lastUpdated": "6/16/2025"
-    },
-    {
-      "id": "ai-kickstart-template",
-      "title": "Ai Kickstart Template",
-      "description": "Template repository to pre-populate kickstart repos",
-      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-template",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/12/2025"
     },
     {
       "id": ".github",
