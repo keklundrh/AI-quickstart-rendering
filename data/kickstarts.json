@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-19T15:10:02.971Z",
+  "lastUpdated": "2025-06-19T16:12:02.875Z",
   "kickstarts": [
+    {
+      "id": "llama-stack-observability",
+      "title": "Llama Stack Observability",
+      "description": "Llama Stack Observability Kickstart",
+      "readmePreview": "# Llama Stack Telemtry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provi...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/19/2025"
+    },
     {
       "id": "ai-architecture-charts",
       "title": "Ai Architecture Charts",
@@ -47,18 +59,6 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "6/18/2025"
-    },
-    {
-      "id": "llama-stack-observability",
-      "title": "Llama Stack Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Telemtry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provi...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 0,
       "lastUpdated": "6/18/2025"
     },
     {
