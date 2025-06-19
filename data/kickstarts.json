@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-18T23:09:48.273Z",
+  "lastUpdated": "2025-06-19T00:50:02.835Z",
   "kickstarts": [
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/19/2025"
+    },
     {
       "id": "ai-kickstart-contrib",
       "title": "Ai Kickstart Contrib",
@@ -48,18 +60,6 @@
       ],
       "stars": 3,
       "lastUpdated": "6/18/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Assistant\n\nA comprehensive platform for creating and managing AI-powered virtual assistants with knowledge base integration, built on top...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/17/2025"
     },
     {
       "id": "llm-cpu-serving",
