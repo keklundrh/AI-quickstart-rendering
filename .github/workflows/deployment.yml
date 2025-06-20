@@ -12,9 +12,9 @@ on:
         required: true
         default: 'sometesting'
         type: string
-  # Run on schedule (every hour)
+  # Run on schedule (daily at 12:30 AM)
   schedule:
-    - cron: '0 * * * *'  # Runs at minute 0 of every hour
+    - cron: '30 0 * * *'  # Runs at 12:30 AM every day
 
 permissions:
   contents: write
