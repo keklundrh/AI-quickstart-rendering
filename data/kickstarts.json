@@ -1,6 +1,30 @@
 {
-  "lastUpdated": "2025-06-20T15:10:04.530Z",
+  "lastUpdated": "2025-06-20T16:12:27.702Z",
   "kickstarts": [
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/20/2025"
+    },
+    {
+      "id": "ai-architecture-charts",
+      "title": "Ai Architecture Charts",
+      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
+      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "6/20/2025"
+    },
     {
       "id": "dynamic-model-router",
       "title": "Dynamic Model Router",
@@ -60,30 +84,6 @@
       "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
       "categories": [
         "Smarty"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/19/2025"
-    },
-    {
-      "id": "ai-architecture-charts",
-      "title": "Ai Architecture Charts",
-      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
-      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
-      "lastUpdated": "6/19/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
       ],
       "stars": 0,
       "lastUpdated": "6/19/2025"
