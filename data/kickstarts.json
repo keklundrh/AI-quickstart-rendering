@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-06-20T07:10:28.515Z",
+  "lastUpdated": "2025-06-20T08:14:19.605Z",
   "kickstarts": [
+    {
+      "id": "dynamic-model-router",
+      "title": "Dynamic Model Router",
+      "description": "Dynamically route user prompts to LoRA adapters or a base LLM using semantic evaluation on Red Hat OpenShift AI with LiteLLM and vLLM.",
+      "readmePreview": "\n# Dynamic Model Routing with Semantic Evaluation and LoRA Adapters\nWelcome to the LLM Dynamic Model Routing kickstart! Use this to quickly deploy a s...",
+      "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/20/2025"
+    },
     {
       "id": "custom-workbench-images-examples",
       "title": "Custom Workbench Images Examples",
@@ -159,18 +171,6 @@
       ],
       "stars": 1,
       "lastUpdated": "5/30/2025"
-    },
-    {
-      "id": "dynamic-model-router",
-      "title": "Dynamic Model Router",
-      "description": "No description available",
-      "readmePreview": "\n# Dynamic Model Routing with Semantic Evaluation and LoRA Adapters\nWelcome to the LLM Dynamic Model Routing kickstart! Use this to quickly deploy a s...",
-      "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "5/26/2025"
     },
     {
       "id": "rhoai-metrics-dashboard",
