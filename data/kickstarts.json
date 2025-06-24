@@ -1,6 +1,78 @@
 {
-  "lastUpdated": "2025-06-23T02:33:56.680Z",
+  "lastUpdated": "2025-06-24T02:26:43.381Z",
   "kickstarts": [
+    {
+      "id": "RAG",
+      "title": "RAG",
+      "description": "No description available",
+      "readmePreview": "# RAG Reference Architecture using LLaMA Stack, OpenShift AI, and PGVector\n\n## Description\n\nRetrieval-Augmented Generation (RAG) enhances Large Langua...",
+      "githubLink": "https://github.com/rh-ai-kickstart/RAG",
+      "categories": [
+        "Python"
+      ],
+      "stars": 3,
+      "lastUpdated": "6/23/2025"
+    },
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/23/2025"
+    },
+    {
+      "id": "ai-observability-metric-summarizer",
+      "title": "Ai Observability Metric Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=shar...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-observability-metric-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 3,
+      "lastUpdated": "6/23/2025"
+    },
+    {
+      "id": "openshift-metrics-summarizer",
+      "title": "Openshift Metrics Summarizer",
+      "description": "No description available",
+      "readmePreview": "# Openshift Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=sharing)\n\nT...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-metrics-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/23/2025"
+    },
+    {
+      "id": "dynamic-model-router",
+      "title": "Dynamic Model Router",
+      "description": "Dynamically route user prompts to LoRA adapters or a base LLM using semantic evaluation on Red Hat OpenShift AI with LiteLLM and vLLM.",
+      "readmePreview": "\n# Dynamic Model Routing with Semantic Evaluation and LoRA Adapters\nWelcome to the LLM Dynamic Model Routing kickstart! Use this to quickly deploy a s...",
+      "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/23/2025"
+    },
+    {
+      "id": "lls-observability",
+      "title": "Lls Observability",
+      "description": "Llama Stack Observability Kickstart",
+      "readmePreview": "# Llama Stack Telemetry & Observability\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provides helm cha...",
+      "githubLink": "https://github.com/rh-ai-kickstart/lls-observability",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/23/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -23,30 +95,6 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "6/20/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/20/2025"
-    },
-    {
-      "id": "dynamic-model-router",
-      "title": "Dynamic Model Router",
-      "description": "Dynamically route user prompts to LoRA adapters or a base LLM using semantic evaluation on Red Hat OpenShift AI with LiteLLM and vLLM.",
-      "readmePreview": "\n# Dynamic Model Routing with Semantic Evaluation and LoRA Adapters\nWelcome to the LLM Dynamic Model Routing kickstart! Use this to quickly deploy a s...",
-      "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
       "lastUpdated": "6/20/2025"
     },
     {
@@ -89,18 +137,6 @@
       "lastUpdated": "6/19/2025"
     },
     {
-      "id": "llama-stack-observability",
-      "title": "Llama Stack Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Telemetry & Observability\n\n## Overview\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository prov...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-observability",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/19/2025"
-    },
-    {
       "id": "ai-kickstart-contrib",
       "title": "Ai Kickstart Contrib",
       "description": "A repo for AI kickstart documentation, collaboration and support",
@@ -110,18 +146,6 @@
         "AI"
       ],
       "stars": 0,
-      "lastUpdated": "6/18/2025"
-    },
-    {
-      "id": "AI-Observability-Metric-Summarizer",
-      "title": "AI Observability Metric Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=shar...",
-      "githubLink": "https://github.com/rh-ai-kickstart/AI-Observability-Metric-Summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 3,
       "lastUpdated": "6/18/2025"
     },
     {
@@ -147,18 +171,6 @@
       ],
       "stars": 0,
       "lastUpdated": "6/12/2025"
-    },
-    {
-      "id": "RAG",
-      "title": "RAG",
-      "description": "No description available",
-      "readmePreview": "# RAG Reference Architecture using LLaMA Stack, OpenShift AI, and PGVector\n\n## Description\n\nRetrieval-Augmented Generation (RAG) enhances Large Langua...",
-      "githubLink": "https://github.com/rh-ai-kickstart/RAG",
-      "categories": [
-        "Python"
-      ],
-      "stars": 3,
-      "lastUpdated": "6/9/2025"
     },
     {
       "id": "vllm-tool-calling",
