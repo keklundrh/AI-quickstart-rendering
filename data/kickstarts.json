@@ -1,6 +1,30 @@
 {
-  "lastUpdated": "2025-06-24T02:26:43.381Z",
+  "lastUpdated": "2025-06-25T02:27:18.109Z",
   "kickstarts": [
+    {
+      "id": "llama-stack-mcp-server",
+      "title": "Llama Stack Mcp Server",
+      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
+      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
+      "categories": [
+        "JavaScript"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/24/2025"
+    },
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "6/24/2025"
+    },
     {
       "id": "RAG",
       "title": "RAG",
@@ -74,18 +98,6 @@
       "lastUpdated": "6/23/2025"
     },
     {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
-      "lastUpdated": "6/22/2025"
-    },
-    {
       "id": "ai-architecture-charts",
       "title": "Ai Architecture Charts",
       "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
@@ -156,18 +168,6 @@
       "githubLink": "https://github.com/rh-ai-kickstart/.github",
       "categories": [
         "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/12/2025"
-    },
-    {
-      "id": "llama-stack-mcp-server",
-      "title": "Llama Stack Mcp Server",
-      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
-      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
-      "categories": [
-        "JavaScript"
       ],
       "stars": 0,
       "lastUpdated": "6/12/2025"
