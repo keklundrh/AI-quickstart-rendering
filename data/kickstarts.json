@@ -1,18 +1,6 @@
 {
-  "lastUpdated": "2025-06-25T02:27:18.109Z",
+  "lastUpdated": "2025-06-26T02:26:25.848Z",
   "kickstarts": [
-    {
-      "id": "llama-stack-mcp-server",
-      "title": "Llama Stack Mcp Server",
-      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
-      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
-      "categories": [
-        "JavaScript"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/24/2025"
-    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -23,6 +11,18 @@
         "Python"
       ],
       "stars": 1,
+      "lastUpdated": "6/25/2025"
+    },
+    {
+      "id": "llama-stack-mcp-server",
+      "title": "Llama Stack Mcp Server",
+      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
+      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
+      "categories": [
+        "JavaScript"
+      ],
+      "stars": 0,
       "lastUpdated": "6/24/2025"
     },
     {
