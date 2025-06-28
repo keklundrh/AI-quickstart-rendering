@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-06-27T02:27:04.937Z",
+  "lastUpdated": "2025-06-28T02:22:28.565Z",
   "kickstarts": [
     {
       "id": "ai-observability-metric-summarizer",
@@ -11,25 +11,37 @@
         "Python"
       ],
       "stars": 3,
-      "lastUpdated": "6/26/2025"
+      "lastUpdated": "6/27/2025"
+    },
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 0,
+      "lastUpdated": "6/27/2025"
     },
     {
       "id": "ai-architecture-charts",
       "title": "Ai Architecture Charts",
       "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
-      "readmePreview": "No README available",
+      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
       "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
       "categories": [
         "Python"
       ],
       "stars": 2,
-      "lastUpdated": "6/26/2025"
+      "lastUpdated": "6/27/2025"
     },
     {
       "id": "llm-cpu-serving",
       "title": "Llm Cpu Serving",
       "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
-      "readmePreview": "No README available",
+      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
       "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
       "categories": [
         "Smarty"
@@ -53,7 +65,7 @@
       "id": "llama-stack-mcp-server",
       "title": "Llama Stack Mcp Server",
       "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
-      "readmePreview": "No README available",
+      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
       "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
       "categories": [
         "JavaScript"
@@ -65,7 +77,7 @@
       "id": "RAG",
       "title": "RAG",
       "description": "No description available",
-      "readmePreview": "No README available",
+      "readmePreview": "# RAG Reference Architecture using LLaMA Stack, OpenShift AI, and PGVector\n\n## Description\n\nRetrieval-Augmented Generation (RAG) enhances Large Langua...",
       "githubLink": "https://github.com/rh-ai-kickstart/RAG",
       "categories": [
         "Python"
@@ -74,22 +86,10 @@
       "lastUpdated": "6/23/2025"
     },
     {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "No README available",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/23/2025"
-    },
-    {
       "id": "openshift-metrics-summarizer",
       "title": "Openshift Metrics Summarizer",
       "description": "No description available",
-      "readmePreview": "No README available",
+      "readmePreview": "# Openshift Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=sharing)\n\nT...",
       "githubLink": "https://github.com/rh-ai-kickstart/openshift-metrics-summarizer",
       "categories": [
         "Python"
@@ -101,7 +101,7 @@
       "id": "dynamic-model-router",
       "title": "Dynamic Model Router",
       "description": "Dynamically route user prompts to LoRA adapters or a base LLM using semantic evaluation on Red Hat OpenShift AI with LiteLLM and vLLM.",
-      "readmePreview": "No README available",
+      "readmePreview": "\n# Dynamic Model Routing with Semantic Evaluation and LoRA Adapters\nWelcome to the LLM Dynamic Model Routing kickstart! Use this to quickly deploy a s...",
       "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
       "categories": [
         "Python"
@@ -113,7 +113,7 @@
       "id": "lls-observability",
       "title": "Lls Observability",
       "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "No README available",
+      "readmePreview": "# Llama Stack Telemetry & Observability\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provides helm cha...",
       "githubLink": "https://github.com/rh-ai-kickstart/lls-observability",
       "categories": [
         "Smarty"
@@ -125,10 +125,13 @@
       "id": "custom-workbench-images-examples",
       "title": "Custom Workbench Images Examples",
       "description": "An easy way to quickly add a lot of useful, community-provided, custom Workbench Images",
-      "readmePreview": "No README available",
+      "readmePreview": "# Custom Workbench Images for Red Hat OpenShift AI\n\nThis repository provides a fast way to add a collection of community-contributed Custom Workbench ...",
       "githubLink": "https://github.com/rh-ai-kickstart/custom-workbench-images-examples",
       "categories": [
-        "AI"
+        "AI",
+        "OpenShift",
+        "RHOAI",
+        "Workbench Images"
       ],
       "stars": 0,
       "lastUpdated": "6/19/2025"
@@ -137,7 +140,7 @@
       "id": "ai-kickstart-template",
       "title": "Ai Kickstart Template",
       "description": "Template repository to pre-populate kickstart repos",
-      "readmePreview": "No README available",
+      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
       "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-template",
       "categories": [
         "AI"
@@ -149,7 +152,7 @@
       "id": "ai-kickstart-contrib",
       "title": "Ai Kickstart Contrib",
       "description": "A repo for AI kickstart documentation, collaboration and support",
-      "readmePreview": "No README available",
+      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
       "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
       "categories": [
         "AI"
@@ -161,7 +164,7 @@
       "id": ".github",
       "title": ".github",
       "description": "Org-level helper repository, this is not a kickstart",
-      "readmePreview": "No README available",
+      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
       "githubLink": "https://github.com/rh-ai-kickstart/.github",
       "categories": [
         "AI"
@@ -173,7 +176,7 @@
       "id": "vllm-tool-calling",
       "title": "Vllm Tool Calling",
       "description": "AI Kickstart for deploying an LLM with Tool Calling enabled on top of OpenShift AI",
-      "readmePreview": "No README available",
+      "readmePreview": "# vLLM Tool Calling \n\nWelcome to the vLLM [Function Calling](https://ai-on-openshift.io/odh-rhoai/enable-function-calling/) Kickstart!  \n\nUse this to ...",
       "githubLink": "https://github.com/rh-ai-kickstart/vllm-tool-calling",
       "categories": [
         "AI"
@@ -185,7 +188,7 @@
       "id": "rhoai-metrics-dashboard",
       "title": "Rhoai Metrics Dashboard",
       "description": "RHOAI Metrics Dashboard for Single Serving Models",
-      "readmePreview": "No README available",
+      "readmePreview": "# RHOAI Metrics Dashboard for Single Serving Models\n\nEnable RHOAI User Workload Metrics for Single Serving Models\n\n## Prerequisites\n\n- OpenShift 4.10 ...",
       "githubLink": "https://github.com/rh-ai-kickstart/rhoai-metrics-dashboard",
       "categories": [
         "AI"
