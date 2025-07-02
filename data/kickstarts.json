@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-07-01T02:39:10.005Z",
+  "lastUpdated": "2025-07-02T02:26:29.093Z",
   "kickstarts": [
     {
       "id": "ai-observability-metric-summarizer",
@@ -11,7 +11,7 @@
         "Python"
       ],
       "stars": 3,
-      "lastUpdated": "6/30/2025"
+      "lastUpdated": "7/1/2025"
     },
     {
       "id": "product-recommender-system",
