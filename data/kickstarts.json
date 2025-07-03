@@ -1,17 +1,29 @@
 {
-  "lastUpdated": "2025-07-02T02:26:29.093Z",
+  "lastUpdated": "2025-07-03T02:27:16.645Z",
   "kickstarts": [
     {
-      "id": "ai-observability-metric-summarizer",
-      "title": "Ai Observability Metric Summarizer",
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
       "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=shar...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-observability-metric-summarizer",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:500px; height:500px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
       "categories": [
         "Python"
       ],
-      "stars": 3,
-      "lastUpdated": "7/1/2025"
+      "stars": 4,
+      "lastUpdated": "7/3/2025"
+    },
+    {
+      "id": "ai-architecture-charts",
+      "title": "Ai Architecture Charts",
+      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
+      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
+      "categories": [
+        "Python"
+      ],
+      "stars": 2,
+      "lastUpdated": "7/2/2025"
     },
     {
       "id": "product-recommender-system",
@@ -23,7 +35,7 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "6/30/2025"
+      "lastUpdated": "7/2/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -36,18 +48,6 @@
       ],
       "stars": 0,
       "lastUpdated": "6/30/2025"
-    },
-    {
-      "id": "ai-architecture-charts",
-      "title": "Ai Architecture Charts",
-      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
-      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
-      "categories": [
-        "Python"
-      ],
-      "stars": 2,
-      "lastUpdated": "6/27/2025"
     },
     {
       "id": "llm-cpu-serving",
@@ -83,18 +83,6 @@
         "Python"
       ],
       "stars": 3,
-      "lastUpdated": "6/23/2025"
-    },
-    {
-      "id": "openshift-metrics-summarizer",
-      "title": "Openshift Metrics Summarizer",
-      "description": "No description available",
-      "readmePreview": "# Openshift Metrics Summarizer\n\n[Design Document](https://docs.google.com/document/d/1bXBCL4fbPlRqQxwhGX1p12CS_E6-9oOyFnYSpbQskyI/edit?usp=sharing)\n\nT...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-metrics-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
       "lastUpdated": "6/23/2025"
     },
     {
