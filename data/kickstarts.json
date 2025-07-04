@@ -1,16 +1,40 @@
 {
-  "lastUpdated": "2025-07-03T02:27:16.645Z",
+  "lastUpdated": "2025-07-04T02:26:06.656Z",
   "kickstarts": [
     {
       "id": "openshift-ai-observability-summarizer",
       "title": "Openshift Ai Observability Summarizer",
       "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:500px; height:500px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
       "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
       "categories": [
         "Python"
       ],
+      "stars": 5,
+      "lastUpdated": "7/3/2025"
+    },
+    {
+      "id": "RAG",
+      "title": "RAG",
+      "description": "No description available",
+      "readmePreview": "# RAG Reference Architecture using LLaMA Stack, OpenShift AI, and PGVector\n\n## Description\n\nRetrieval-Augmented Generation (RAG) enhances Large Langua...",
+      "githubLink": "https://github.com/rh-ai-kickstart/RAG",
+      "categories": [
+        "Python"
+      ],
       "stars": 4,
+      "lastUpdated": "7/3/2025"
+    },
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
       "lastUpdated": "7/3/2025"
     },
     {
@@ -23,18 +47,6 @@
         "Python"
       ],
       "stars": 2,
-      "lastUpdated": "7/2/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
       "lastUpdated": "7/2/2025"
     },
     {
@@ -72,18 +84,6 @@
       ],
       "stars": 0,
       "lastUpdated": "6/24/2025"
-    },
-    {
-      "id": "RAG",
-      "title": "RAG",
-      "description": "No description available",
-      "readmePreview": "# RAG Reference Architecture using LLaMA Stack, OpenShift AI, and PGVector\n\n## Description\n\nRetrieval-Augmented Generation (RAG) enhances Large Langua...",
-      "githubLink": "https://github.com/rh-ai-kickstart/RAG",
-      "categories": [
-        "Python"
-      ],
-      "stars": 3,
-      "lastUpdated": "6/23/2025"
     },
     {
       "id": "dynamic-model-router",
