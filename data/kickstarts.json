@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-07-04T02:26:06.656Z",
+  "lastUpdated": "2025-07-05T02:21:43.869Z",
   "kickstarts": [
+    {
+      "id": "lls-observability",
+      "title": "Lls Observability",
+      "description": "Llama Stack Observability Kickstart",
+      "readmePreview": "# Llama Stack Telemetry & Observability\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provides helm cha...",
+      "githubLink": "https://github.com/rh-ai-kickstart/lls-observability",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 0,
+      "lastUpdated": "7/4/2025"
+    },
     {
       "id": "openshift-ai-observability-summarizer",
       "title": "Openshift Ai Observability Summarizer",
@@ -93,18 +105,6 @@
       "githubLink": "https://github.com/rh-ai-kickstart/dynamic-model-router",
       "categories": [
         "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/23/2025"
-    },
-    {
-      "id": "lls-observability",
-      "title": "Lls Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Telemetry & Observability\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provides helm cha...",
-      "githubLink": "https://github.com/rh-ai-kickstart/lls-observability",
-      "categories": [
-        "Smarty"
       ],
       "stars": 0,
       "lastUpdated": "6/23/2025"
