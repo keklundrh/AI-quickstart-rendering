@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-07-07T02:32:51.714Z",
+  "lastUpdated": "2025-07-08T02:27:58.035Z",
   "kickstarts": [
     {
       "id": "ai-virtual-agent",
@@ -11,7 +11,19 @@
         "Python"
       ],
       "stars": 0,
-      "lastUpdated": "7/6/2025"
+      "lastUpdated": "7/7/2025"
+    },
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "7/7/2025"
     },
     {
       "id": "lls-observability",
@@ -47,18 +59,6 @@
         "Python"
       ],
       "stars": 4,
-      "lastUpdated": "7/3/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
       "lastUpdated": "7/3/2025"
     },
     {
