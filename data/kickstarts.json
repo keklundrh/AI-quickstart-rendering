@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-07-09T02:29:22.258Z",
+  "lastUpdated": "2025-07-10T02:29:31.407Z",
   "kickstarts": [
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 6,
+      "lastUpdated": "7/9/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -11,7 +23,19 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "7/8/2025"
+      "lastUpdated": "7/9/2025"
+    },
+    {
+      "id": "llm-cpu-serving",
+      "title": "Llm Cpu Serving",
+      "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
+      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
+      "categories": [
+        "Smarty"
+      ],
+      "stars": 4,
+      "lastUpdated": "7/9/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -38,18 +62,6 @@
       "lastUpdated": "7/4/2025"
     },
     {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 5,
-      "lastUpdated": "7/3/2025"
-    },
-    {
       "id": "RAG",
       "title": "RAG",
       "description": "No description available",
@@ -72,18 +84,6 @@
       ],
       "stars": 2,
       "lastUpdated": "7/2/2025"
-    },
-    {
-      "id": "llm-cpu-serving",
-      "title": "Llm Cpu Serving",
-      "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
-      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 3,
-      "lastUpdated": "6/26/2025"
     },
     {
       "id": "llama-stack-mcp-server",
