@@ -1,6 +1,30 @@
 {
-  "lastUpdated": "2025-07-14T02:37:17.470Z",
+  "lastUpdated": "2025-07-15T02:36:17.907Z",
   "kickstarts": [
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "7/14/2025"
+    },
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "Python"
+      ],
+      "stars": 1,
+      "lastUpdated": "7/14/2025"
+    },
     {
       "id": "openshift-ai-observability-summarizer",
       "title": "Openshift Ai Observability Summarizer",
@@ -14,18 +38,6 @@
       "lastUpdated": "7/10/2025"
     },
     {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
-      "lastUpdated": "7/10/2025"
-    },
-    {
       "id": "llm-cpu-serving",
       "title": "Llm Cpu Serving",
       "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
@@ -36,18 +48,6 @@
       ],
       "stars": 4,
       "lastUpdated": "7/9/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 0,
-      "lastUpdated": "7/7/2025"
     },
     {
       "id": "lls-observability",
