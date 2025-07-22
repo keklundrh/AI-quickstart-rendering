@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-07-21T02:41:01.382Z",
+  "lastUpdated": "2025-07-22T02:34:48.483Z",
   "kickstarts": [
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 9,
+      "lastUpdated": "7/21/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -11,7 +23,7 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "7/20/2025"
+      "lastUpdated": "7/21/2025"
     },
     {
       "id": "ai-architecture-charts",
@@ -24,18 +36,6 @@
       ],
       "stars": 2,
       "lastUpdated": "7/18/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 6,
-      "lastUpdated": "7/17/2025"
     },
     {
       "id": "RAG",
