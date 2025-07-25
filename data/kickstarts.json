@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-07-24T02:35:17.170Z",
+  "lastUpdated": "2025-07-25T02:34:56.527Z",
   "kickstarts": [
+    {
+      "id": "ai-architecture-charts",
+      "title": "Ai Architecture Charts",
+      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
+      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
+      "categories": [
+        "Python"
+      ],
+      "stars": 2,
+      "lastUpdated": "7/24/2025"
+    },
     {
       "id": "ai-virtual-agent",
       "title": "Ai Virtual Agent",
@@ -11,7 +23,7 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "7/23/2025"
+      "lastUpdated": "7/24/2025"
     },
     {
       "id": "product-recommender-system",
@@ -23,19 +35,19 @@
         "TypeScript"
       ],
       "stars": 1,
-      "lastUpdated": "7/23/2025"
+      "lastUpdated": "7/24/2025"
     },
     {
-      "id": "ai-architecture-charts",
-      "title": "Ai Architecture Charts",
-      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
-      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
       "categories": [
         "Python"
       ],
-      "stars": 2,
-      "lastUpdated": "7/23/2025"
+      "stars": 10,
+      "lastUpdated": "7/24/2025"
     },
     {
       "id": "RAG",
@@ -47,18 +59,6 @@
         "Python"
       ],
       "stars": 4,
-      "lastUpdated": "7/23/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 9,
       "lastUpdated": "7/23/2025"
     },
     {
