@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-07-27T02:55:02.353Z",
+  "lastUpdated": "2025-07-28T02:41:45.167Z",
   "kickstarts": [
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "TypeScript"
+      ],
+      "stars": 1,
+      "lastUpdated": "7/27/2025"
+    },
     {
       "id": "ai-architecture-charts",
       "title": "Ai Architecture Charts",
@@ -33,18 +45,6 @@
       "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
       "categories": [
         "Python"
-      ],
-      "stars": 1,
-      "lastUpdated": "7/24/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System \n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine wit...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "TypeScript"
       ],
       "stars": 1,
       "lastUpdated": "7/24/2025"
