@@ -1,6 +1,30 @@
 {
-  "lastUpdated": "2025-07-28T02:41:45.167Z",
+  "lastUpdated": "2025-07-29T02:56:31.306Z",
   "kickstarts": [
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 12,
+      "lastUpdated": "7/28/2025"
+    },
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "TypeScript"
+      ],
+      "stars": 1,
+      "lastUpdated": "7/28/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -24,30 +48,6 @@
       ],
       "stars": 2,
       "lastUpdated": "7/25/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 11,
-      "lastUpdated": "7/25/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent\n\nA comprehensive platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of Llam...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 1,
-      "lastUpdated": "7/24/2025"
     },
     {
       "id": "RAG",
