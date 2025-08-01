@@ -1,29 +1,29 @@
 {
-  "lastUpdated": "2025-07-31T02:37:33.679Z",
+  "lastUpdated": "2025-08-01T02:59:53.919Z",
   "kickstarts": [
     {
-      "id": "vllm-tool-calling",
-      "title": "Vllm Tool Calling",
-      "description": "AI Kickstart for deploying an LLM with Tool Calling enabled on top of OpenShift AI",
-      "readmePreview": "# vLLM Tool Calling \n\n![Ready for publish](https://img.shields.io/badge/ready_for-publish-red)\n![Ready for publish](https://img.shields.io/badge/Sourc...",
-      "githubLink": "https://github.com/rh-ai-kickstart/vllm-tool-calling",
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
       "categories": [
-        "AI"
+        "TypeScript"
       ],
       "stars": 1,
-      "lastUpdated": "7/30/2025"
+      "lastUpdated": "7/31/2025"
     },
     {
       "id": "openshift-ai-observability-summarizer",
       "title": "Openshift Ai Observability Summarizer",
       "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# AI Observability Metrics Summarizer\n\n<img src=\"docs/img/logo.png\" alt=\"UI\" style=\"width:200px; height:200px;\"/>\n\n\n[Design Document](https://docs.goo...",
+      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
       "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
       "categories": [
         "Python"
       ],
       "stars": 13,
-      "lastUpdated": "7/30/2025"
+      "lastUpdated": "7/31/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -35,6 +35,18 @@
         "Python"
       ],
       "stars": 2,
+      "lastUpdated": "7/31/2025"
+    },
+    {
+      "id": "vllm-tool-calling",
+      "title": "Vllm Tool Calling",
+      "description": "AI Kickstart for deploying an LLM with Tool Calling enabled on top of OpenShift AI",
+      "readmePreview": "# vLLM Tool Calling \n\n![Ready for publish](https://img.shields.io/badge/ready_for-publish-red)\n![Ready for publish](https://img.shields.io/badge/Sourc...",
+      "githubLink": "https://github.com/rh-ai-kickstart/vllm-tool-calling",
+      "categories": [
+        "AI"
+      ],
+      "stars": 1,
       "lastUpdated": "7/30/2025"
     },
     {
@@ -63,18 +75,6 @@
         "JavaScript"
       ],
       "stars": 0,
-      "lastUpdated": "7/30/2025"
-    },
-    {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "TypeScript"
-      ],
-      "stars": 1,
       "lastUpdated": "7/30/2025"
     },
     {
