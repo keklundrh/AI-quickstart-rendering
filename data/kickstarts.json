@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-08-01T02:59:53.919Z",
+  "lastUpdated": "2025-08-02T02:31:31.622Z",
   "kickstarts": [
+    {
+      "id": "ai-architecture-charts",
+      "title": "Ai Architecture Charts",
+      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
+      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
+      "categories": [
+        "Python"
+      ],
+      "stars": 2,
+      "lastUpdated": "8/1/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -11,19 +23,7 @@
         "TypeScript"
       ],
       "stars": 1,
-      "lastUpdated": "7/31/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 13,
-      "lastUpdated": "7/31/2025"
+      "lastUpdated": "8/1/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -35,7 +35,19 @@
         "Python"
       ],
       "stars": 2,
-      "lastUpdated": "7/31/2025"
+      "lastUpdated": "8/1/2025"
+    },
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 15,
+      "lastUpdated": "8/1/2025"
     },
     {
       "id": "vllm-tool-calling",
@@ -76,18 +88,6 @@
       ],
       "stars": 0,
       "lastUpdated": "7/30/2025"
-    },
-    {
-      "id": "ai-architecture-charts",
-      "title": "Ai Architecture Charts",
-      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
-      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
-      "categories": [
-        "Python"
-      ],
-      "stars": 2,
-      "lastUpdated": "7/29/2025"
     },
     {
       "id": "RAG",
