@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-08-04T19:20:35.523Z",
+  "lastUpdated": "2025-08-04T19:49:04.175Z",
   "kickstarts": [
     {
       "id": "ai-kickstart-contrib",
@@ -8,9 +8,22 @@
       "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
       "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
       "categories": [
-        "AI"
+        "ai-bu-cai"
       ],
       "stars": 0,
+      "lastUpdated": "8/4/2025"
+    },
+    {
+      "id": "llm-cpu-serving",
+      "title": "Llm Cpu Serving",
+      "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
+      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
+      "categories": [
+        "Smarty",
+        "ai-bu-cai"
+      ],
+      "stars": 4,
       "lastUpdated": "8/4/2025"
     },
     {
@@ -112,18 +125,6 @@
       ],
       "stars": 4,
       "lastUpdated": "7/29/2025"
-    },
-    {
-      "id": "llm-cpu-serving",
-      "title": "Llm Cpu Serving",
-      "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
-      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
-      "categories": [
-        "Smarty"
-      ],
-      "stars": 4,
-      "lastUpdated": "7/9/2025"
     },
     {
       "id": "lls-observability",
