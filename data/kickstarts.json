@@ -1,6 +1,20 @@
 {
-  "lastUpdated": "2025-08-04T19:49:04.175Z",
+  "lastUpdated": "2025-08-04T19:51:10.004Z",
   "kickstarts": [
+    {
+      "id": "llama-stack-ReAct",
+      "title": "Llama Stack ReAct",
+      "description": "No description available",
+      "readmePreview": "# Llama Stack with ReACT Agent\n\nWelcome to the Llama Stack with ReACT Agent Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Sta...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-ReAct",
+      "categories": [
+        "JavaScript",
+        "ai-bu",
+        "ai-bu-cai"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/4/2025"
+    },
     {
       "id": "ai-kickstart-contrib",
       "title": "Ai Kickstart Contrib",
@@ -8,6 +22,7 @@
       "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
       "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
       "categories": [
+        "ai-bu",
         "ai-bu-cai"
       ],
       "stars": 0,
@@ -98,18 +113,6 @@
         "RHOAI",
         "Workbench Images",
         "ai-bu-cai"
-      ],
-      "stars": 0,
-      "lastUpdated": "7/30/2025"
-    },
-    {
-      "id": "llama-stack-ReAct",
-      "title": "Llama Stack ReAct",
-      "description": "No description available",
-      "readmePreview": "# Llama Stack with ReACT Agent\n\nWelcome to the Llama Stack with ReACT Agent Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Sta...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-ReAct",
-      "categories": [
-        "JavaScript"
       ],
       "stars": 0,
       "lastUpdated": "7/30/2025"
