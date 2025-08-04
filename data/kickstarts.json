@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-08-04T16:51:41.044Z",
+  "lastUpdated": "2025-08-04T19:20:35.523Z",
   "kickstarts": [
+    {
+      "id": "ai-kickstart-contrib",
+      "title": "Ai Kickstart Contrib",
+      "description": "A repo for AI kickstart documentation, collaboration and support",
+      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/4/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -160,18 +172,6 @@
       ],
       "stars": 0,
       "lastUpdated": "6/19/2025"
-    },
-    {
-      "id": "ai-kickstart-contrib",
-      "title": "Ai Kickstart Contrib",
-      "description": "A repo for AI kickstart documentation, collaboration and support",
-      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/18/2025"
     },
     {
       "id": ".github",
