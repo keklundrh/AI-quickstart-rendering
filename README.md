@@ -2,6 +2,14 @@
 
 A React-based web application for managing and viewing Red Hat AI Kickstarts.
 
+## Features
+
+- **Search**: Search kickstarts by title, description, categories, or topics
+- **Category Filtering**: Filter kickstarts by multiple categories
+- **Topic Filtering**: Filter kickstarts by GitHub repository topics
+- **Real-time Updates**: Automatic background refresh of data
+- **Responsive Design**: Works on desktop and mobile devices
+
 ## Local Development
 
 ### Prerequisites

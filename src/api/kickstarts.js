@@ -89,6 +89,59 @@ export function getAllCategories(kickstarts) {
   return Array.from(categories).sort();
 }
 
+// Function to get all unique topics from the kickstarts
+export function getAllTopics(kickstarts) {
+  const topics = new Set();
+  kickstarts.forEach(kickstart => {
+    if (kickstart.topics) {
+      kickstart.topics.forEach(topic => topics.add(topic));
+    }
+  });
+  return Array.from(topics).sort();
+}
+
+// Function to fetch topics for a specific repository
+export async function fetchRepoTopics(repoUrl) {
+  try {
+    // Extract owner and repo name from GitHub URL
+    const match = repoUrl.match(/github\.com\/([^/]+)\/([^/]+)/);
+    if (!match) {
+      return [];
+    }
+
+    const [, owner, repo] = match;
+    const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/topics`, {
+      headers: {
+        'Accept': 'application/vnd.github.mercy-preview+json'
+      }
+    });
+
+    if (!response.ok) {
+      console.warn(`Failed to fetch topics for ${owner}/${repo}: ${response.status}`);
+      return [];
+    }
+
+    const data = await response.json();
+    return data.names || [];
+  } catch (error) {
+    console.warn(`Error fetching topics for ${repoUrl}:`, error);
+    return [];
+  }
+}
+
+// Function to fetch topics for all kickstarts
+export async function fetchAllTopics(kickstarts) {
+  const topicsPromises = kickstarts.map(async (kickstart) => {
+    const topics = await fetchRepoTopics(kickstart.githubLink);
+    return {
+      ...kickstart,
+      topics
+    };
+  });
+
+  return Promise.all(topicsPromises);
+}
+
 // Function to force a refresh of the data
 export async function forceRefreshKickstarts() {
   try {
