@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchKickstarts, getAllCategories, forceRefreshKickstarts, fetchRepoStats } from './api/kickstarts';
+import { fetchKickstarts, getAllCategories, getAllTopics, fetchAllTopics, forceRefreshKickstarts, fetchRepoStats } from './api/kickstarts';
 import { BASE_PATH } from './api/kickstarts';
 import KickstartCard from './components/KickstartCard';
 import SearchToolbar from './components/SearchToolbar';
@@ -11,9 +11,12 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isCategorySelectOpen, setIsCategorySelectOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [isTopicSelectOpen, setIsTopicSelectOpen] = useState(false);
+  const [selectedTopics, setSelectedTopics] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [topics, setTopics] = useState([]);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [repoStats, setRepoStats] = useState({ stars: 0, forks: 0, url: '' });
 
@@ -24,9 +27,14 @@ const App = () => {
         setIsLoading(true);
         setError(null);
         const data = await fetchKickstarts();
-        setKickstarts(data.kickstarts);
-        setFilteredKickstarts(data.kickstarts);
-        setCategories(getAllCategories(data.kickstarts));
+
+        // Fetch topics for all kickstarts
+        const kickstartsWithTopics = await fetchAllTopics(data.kickstarts);
+
+        setKickstarts(kickstartsWithTopics);
+        setFilteredKickstarts(kickstartsWithTopics);
+        setCategories(getAllCategories(kickstartsWithTopics));
+        setTopics(getAllTopics(kickstartsWithTopics));
       } catch (err) {
         setError(err.message);
         console.error('Failed to load kickstarts:', err);
@@ -47,9 +55,13 @@ const App = () => {
         setIsRefreshing(true);
         const data = await forceRefreshKickstarts();
         if (mounted) {
-          setKickstarts(data.kickstarts);
-          setFilteredKickstarts(data.kickstarts);
-          setCategories(getAllCategories(data.kickstarts));
+          // Fetch topics for all kickstarts
+          const kickstartsWithTopics = await fetchAllTopics(data.kickstarts);
+
+          setKickstarts(kickstartsWithTopics);
+          setFilteredKickstarts(kickstartsWithTopics);
+          setCategories(getAllCategories(kickstartsWithTopics));
+          setTopics(getAllTopics(kickstartsWithTopics));
         }
       } catch (err) {
         console.error('Background refresh failed:', err);
@@ -70,7 +82,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    // Apply filters whenever search term or categories change
+    // Apply filters whenever search term, categories, or topics change
     let currentFiltered = kickstarts;
 
     // Search term filter
@@ -79,7 +91,8 @@ const App = () => {
       currentFiltered = currentFiltered.filter(kickstart =>
         kickstart.title.toLowerCase().includes(lowerCaseSearchTerm) ||
         kickstart.description.toLowerCase().includes(lowerCaseSearchTerm) ||
-        kickstart.categories.some(cat => cat.toLowerCase().includes(lowerCaseSearchTerm))
+        kickstart.categories.some(cat => cat.toLowerCase().includes(lowerCaseSearchTerm)) ||
+        (kickstart.topics && kickstart.topics.some(topic => topic.toLowerCase().includes(lowerCaseSearchTerm)))
       );
     }
 
@@ -92,12 +105,22 @@ const App = () => {
       );
     }
 
+    // Topic filter - supports multiple topics
+    if (selectedTopics.length > 0) {
+      currentFiltered = currentFiltered.filter(kickstart =>
+        selectedTopics.some(selectedTopic =>
+          kickstart.topics && kickstart.topics.includes(selectedTopic)
+        )
+      );
+    }
+
     setFilteredKickstarts(currentFiltered);
-  }, [searchTerm, selectedCategories, kickstarts]);
+  }, [searchTerm, selectedCategories, selectedTopics, kickstarts]);
 
   const clearFilters = () => {
     setSearchTerm('');
     setSelectedCategories([]);
+    setSelectedTopics([]);
   };
 
   // Add effect to fetch repo stats
@@ -160,6 +183,11 @@ const App = () => {
               selectedCategories={selectedCategories}
               setSelectedCategories={setSelectedCategories}
               categories={categories}
+              isTopicSelectOpen={isTopicSelectOpen}
+              setIsTopicSelectOpen={setIsTopicSelectOpen}
+              selectedTopics={selectedTopics}
+              setSelectedTopics={setSelectedTopics}
+              topics={topics}
               clearFilters={clearFilters}
             />
           </section>

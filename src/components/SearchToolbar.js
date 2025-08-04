@@ -8,6 +8,11 @@ const SearchToolbar = ({
   selectedCategories,
   setSelectedCategories,
   categories,
+  isTopicSelectOpen,
+  setIsTopicSelectOpen,
+  selectedTopics,
+  setSelectedTopics,
+  topics,
   clearFilters
 }) => {
   const onCategorySelectToggle = (isOpen) => {
@@ -26,6 +31,22 @@ const SearchToolbar = ({
     });
   };
 
+  const onTopicSelectToggle = (isOpen) => {
+    setIsTopicSelectOpen(isOpen);
+  };
+
+  const onTopicSelect = (topic) => {
+    setSelectedTopics(prev => {
+      if (topic === 'All Topics') {
+        return [];
+      }
+      if (prev.includes(topic)) {
+        return prev.filter(t => t !== topic);
+      }
+      return [...prev, topic];
+    });
+  };
+
   return (
     <div className="pf-v5-c-toolbar pf-v5-u-mb-lg">
       <div className="pf-v5-c-toolbar__content">
@@ -35,7 +56,7 @@ const SearchToolbar = ({
               className="pf-v5-c-text-input-group__text-input"
               type="search"
               aria-label="Search kickstarts"
-              placeholder="Search by title or description..."
+              placeholder="Search by title, description, categories, or topics..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -89,7 +110,50 @@ const SearchToolbar = ({
             )}
           </div>
         </div>
-        {(searchTerm || selectedCategories.length > 0) && (
+        <div className="pf-v5-c-toolbar__item">
+          <div className="pf-v5-c-select">
+            <button
+              className="pf-v5-c-select__toggle"
+              onClick={() => onTopicSelectToggle(!isTopicSelectOpen)}
+              aria-expanded={isTopicSelectOpen}
+            >
+              <span>
+                {selectedTopics.length > 0
+                  ? `${selectedTopics.length} topics selected`
+                  : 'Filter by Topic'}
+              </span>
+              <span className="pf-v5-c-select__toggle-arrow">
+                &#9660;
+              </span>
+            </button>
+            {isTopicSelectOpen && (
+              <ul className="pf-v5-c-select__menu">
+                <li
+                  className="pf-v5-c-select__menu-item"
+                  onClick={() => {
+                    setSelectedTopics([]);
+                    setIsTopicSelectOpen(false);
+                  }}
+                >
+                  Clear Topics
+                </li>
+                {topics.map((topic, index) => (
+                  <li
+                    key={index}
+                    className={`pf-v5-c-select__menu-item ${selectedTopics.includes(topic) ? 'pf-m-selected' : ''}`}
+                    onClick={() => onTopicSelect(topic)}
+                  >
+                    {topic}
+                    {selectedTopics.includes(topic) && (
+                      <span style={{ marginLeft: 'var(--pf-global--spacer--sm)' }}>✓</span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+        {(searchTerm || selectedCategories.length > 0 || selectedTopics.length > 0) && (
           <div className="pf-v5-c-toolbar__item">
             <button
               className="pf-v5-c-button pf-m-secondary"
@@ -100,8 +164,8 @@ const SearchToolbar = ({
           </div>
         )}
       </div>
-      {/* Selected Categories Display */}
-      {selectedCategories.length > 0 && (
+      {/* Selected Categories and Topics Display */}
+      {(selectedCategories.length > 0 || selectedTopics.length > 0) && (
         <div style={{
           marginTop: 'var(--pf-global--spacer--md)',
           display: 'flex',
@@ -110,12 +174,22 @@ const SearchToolbar = ({
         }}>
           {selectedCategories.map((category, index) => (
             <span
-              key={index}
+              key={`cat-${index}`}
               className="pf-v5-c-label pf-m-outline pf-m-blue"
               style={{ cursor: 'pointer' }}
               onClick={() => onCategorySelect(category)}
             >
-              {category} ×
+              Category: {category} ×
+            </span>
+          ))}
+          {selectedTopics.map((topic, index) => (
+            <span
+              key={`topic-${index}`}
+              className="pf-v5-c-label pf-m-outline pf-m-green"
+              style={{ cursor: 'pointer' }}
+              onClick={() => onTopicSelect(topic)}
+            >
+              Topic: {topic} ×
             </span>
           ))}
         </div>

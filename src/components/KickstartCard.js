@@ -89,10 +89,18 @@ const KickstartCard = ({ kickstart }) => (
     <div className="pf-v5-c-card__footer">
       {kickstart.categories.map((category, index) => (
         <span
-          key={index}
+          key={`cat-${index}`}
           className="pf-v5-c-label pf-m-outline pf-m-blue"
         >
           {category}
+        </span>
+      ))}
+      {kickstart.topics && kickstart.topics.map((topic, index) => (
+        <span
+          key={`topic-${index}`}
+          className="pf-v5-c-label pf-m-outline pf-m-green"
+        >
+          {topic}
         </span>
       ))}
       <a

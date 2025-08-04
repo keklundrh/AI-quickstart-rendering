@@ -257,6 +257,12 @@ body {
   color: var(--pf-global--active-color--100);
   background-color: transparent;
 }
+
+.pf-v5-c-label.pf-m-outline.pf-m-green {
+  border: var(--pf-global--BorderWidth--sm) solid #3e8635;
+  color: #3e8635;
+  background-color: transparent;
+}
 .pf-v5-c-button {
   display: inline-flex;
   justify-content: center;
