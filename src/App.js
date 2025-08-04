@@ -163,9 +163,9 @@ const App = () => {
           {/* Hero Section / Introduction */}
           <section className="pf-v5-c-page__main-section pf-m-light pf-v5-u-py-xl">
             <div className="pf-v5-u-text-align-center pf-v5-u-pb-lg">
-              <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v02</h1>
+              <h1 className="pf-v5-c-title">Explore Red Hat AI Kickstarts - v03</h1>
               <p className="pf-v5-u-mt-md">
-                Discover ready-to-run AI examples designed for Red Hat OpenShift AI.
+                Discover ready-to-run AI examples designed for Red Hat AI.
                 {isRefreshing && (
                   <span style={{ marginLeft: 'var(--pf-global--spacer--sm)', fontSize: 'var(--pf-global--FontSize--sm)', color: 'var(--pf-global--Color--200)' }}>
                     (Refreshing data...)
