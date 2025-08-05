@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-08-04T20:04:05.655Z",
+  "lastUpdated": "2025-08-05T02:41:02.264Z",
   "kickstarts": [
+    {
+      "id": ".github",
+      "title": ".github",
+      "description": "Org-level helper repository, this is not a kickstart",
+      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
+      "githubLink": "https://github.com/rh-ai-kickstart/.github",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/4/2025"
+    },
     {
       "id": "rhoai-metrics-dashboard",
       "title": "Rhoai Metrics Dashboard",
@@ -198,18 +210,6 @@
       ],
       "stars": 0,
       "lastUpdated": "6/19/2025"
-    },
-    {
-      "id": ".github",
-      "title": ".github",
-      "description": "Org-level helper repository, this is not a kickstart",
-      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
-      "githubLink": "https://github.com/rh-ai-kickstart/.github",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/12/2025"
     }
   ]
 }
