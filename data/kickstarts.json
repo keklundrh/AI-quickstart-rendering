@@ -1,6 +1,44 @@
 {
-  "lastUpdated": "2025-08-06T02:39:22.253Z",
+  "lastUpdated": "2025-08-07T02:39:22.559Z",
   "kickstarts": [
+    {
+      "id": "product-recommender-system",
+      "title": "Product Recommender System",
+      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
+      "readmePreview": "# AI Kickstart - Product Recommender System\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with...",
+      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
+      "categories": [
+        "TypeScript",
+        "product-recommender-system",
+        "rh-ecosystem-engineering"
+      ],
+      "stars": 1,
+      "lastUpdated": "8/6/2025"
+    },
+    {
+      "id": ".github",
+      "title": ".github",
+      "description": "Org-level helper repository, this is not a kickstart",
+      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
+      "githubLink": "https://github.com/rh-ai-kickstart/.github",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/6/2025"
+    },
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python"
+      ],
+      "stars": 15,
+      "lastUpdated": "8/6/2025"
+    },
     {
       "id": "ai-virtual-agent",
       "title": "Ai Virtual Agent",
@@ -122,18 +160,6 @@
       "lastUpdated": "8/5/2025"
     },
     {
-      "id": "product-recommender-system",
-      "title": "Product Recommender System",
-      "description": "Red Hat AI Kickstart Recommendation System algorithm, for  interactions between users and products in an online store.",
-      "readmePreview": "# AI Kickstart - Product Recommender System\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with...",
-      "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
-      "categories": [
-        "TypeScript"
-      ],
-      "stars": 1,
-      "lastUpdated": "8/5/2025"
-    },
-    {
       "id": "custom-workbench-images-examples",
       "title": "Custom Workbench Images Examples",
       "description": "An easy way to quickly add a lot of useful, community-provided, custom Workbench Images",
@@ -149,30 +175,6 @@
       ],
       "stars": 0,
       "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": ".github",
-      "title": ".github",
-      "description": "Org-level helper repository, this is not a kickstart",
-      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
-      "githubLink": "https://github.com/rh-ai-kickstart/.github",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/4/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 15,
-      "lastUpdated": "8/4/2025"
     },
     {
       "id": "ai-architecture-charts",
