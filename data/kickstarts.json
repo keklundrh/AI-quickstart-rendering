@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-08-08T02:38:52.683Z",
+  "lastUpdated": "2025-08-09T02:26:22.065Z",
   "kickstarts": [
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent Kickstart\n\nA platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of LlamaSta...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 2,
+      "lastUpdated": "8/8/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -13,7 +25,34 @@
         "rh-ecosystem-engineering"
       ],
       "stars": 1,
-      "lastUpdated": "8/7/2025"
+      "lastUpdated": "8/8/2025"
+    },
+    {
+      "id": "llama-stack-ReAct",
+      "title": "Llama Stack ReAct",
+      "description": "No description available",
+      "readmePreview": "# Llama Stack with ReACT Agent\n\nWelcome to the Llama Stack with ReACT Agent Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B or Llama 4 Scout on vL...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-ReAct",
+      "categories": [
+        "JavaScript",
+        "rh-ai-bu",
+        "rh-ai-bu-cai"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/8/2025"
+    },
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python",
+        "openshift-ai-observability-summarizer"
+      ],
+      "stars": 15,
+      "lastUpdated": "8/8/2025"
     },
     {
       "id": ".github",
@@ -26,30 +65,6 @@
       ],
       "stars": 0,
       "lastUpdated": "8/6/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python"
-      ],
-      "stars": 15,
-      "lastUpdated": "8/6/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent Kickstart\n\nA platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of LlamaSta...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 2,
-      "lastUpdated": "8/5/2025"
     },
     {
       "id": "rhoai-metrics-dashboard",
@@ -141,20 +156,6 @@
       "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
       "categories": [
         "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "llama-stack-ReAct",
-      "title": "Llama Stack ReAct",
-      "description": "No description available",
-      "readmePreview": "# Llama Stack with ReACT Agent\n\nWelcome to the Llama Stack with ReACT Agent Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Sta...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-ReAct",
-      "categories": [
-        "JavaScript",
-        "rh-ai-bu",
-        "rh-ai-bu-cai"
       ],
       "stars": 0,
       "lastUpdated": "8/5/2025"
