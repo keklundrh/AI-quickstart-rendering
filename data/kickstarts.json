@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-08-11T02:38:40.335Z",
+  "lastUpdated": "2025-08-12T02:25:09.231Z",
   "kickstarts": [
     {
       "id": "product-recommender-system",
@@ -8,12 +8,12 @@
       "readmePreview": "# AI Kickstart - Product Recommender System\n\nWelcome to the Product Recommender System Kickstart!\nUse this to quickly get a recommendation engine with...",
       "githubLink": "https://github.com/rh-ai-kickstart/product-recommender-system",
       "categories": [
-        "TypeScript",
+        "Python",
         "product-recommender-system",
         "rh-ecosystem-engineering"
       ],
       "stars": 1,
-      "lastUpdated": "8/10/2025"
+      "lastUpdated": "8/11/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -25,7 +25,7 @@
         "Python"
       ],
       "stars": 2,
-      "lastUpdated": "8/8/2025"
+      "lastUpdated": "8/11/2025"
     },
     {
       "id": "llama-stack-ReAct",
