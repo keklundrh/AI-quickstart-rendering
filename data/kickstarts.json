@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-08-12T02:25:09.231Z",
+  "lastUpdated": "2025-08-13T02:27:11.395Z",
   "kickstarts": [
     {
       "id": "product-recommender-system",
@@ -13,7 +13,7 @@
         "rh-ecosystem-engineering"
       ],
       "stars": 1,
-      "lastUpdated": "8/11/2025"
+      "lastUpdated": "8/12/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -25,7 +25,20 @@
         "Python"
       ],
       "stars": 2,
-      "lastUpdated": "8/11/2025"
+      "lastUpdated": "8/12/2025"
+    },
+    {
+      "id": "openshift-ai-observability-summarizer",
+      "title": "Openshift Ai Observability Summarizer",
+      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
+      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
+      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
+      "categories": [
+        "Python",
+        "openshift-ai-observability-summarizer"
+      ],
+      "stars": 15,
+      "lastUpdated": "8/12/2025"
     },
     {
       "id": "llama-stack-ReAct",
@@ -39,19 +52,6 @@
         "rh-ai-bu-cai"
       ],
       "stars": 0,
-      "lastUpdated": "8/8/2025"
-    },
-    {
-      "id": "openshift-ai-observability-summarizer",
-      "title": "Openshift Ai Observability Summarizer",
-      "description": "AI Kickstart that provides interactive dashboard to analyze AI Model Performance as well as Openshift metrics collected from Prometheus",
-      "readmePreview": "# OpenShift AI Observability Summarizer\n\n[![CNCF Compatible](https://img.shields.io/badge/CNCF%20Compatible-Yes-blue.svg)](https://www.cncf.io/)\n[![Li...",
-      "githubLink": "https://github.com/rh-ai-kickstart/openshift-ai-observability-summarizer",
-      "categories": [
-        "Python",
-        "openshift-ai-observability-summarizer"
-      ],
-      "stars": 15,
       "lastUpdated": "8/8/2025"
     },
     {
