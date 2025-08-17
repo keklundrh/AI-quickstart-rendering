@@ -1,6 +1,18 @@
 {
-  "lastUpdated": "2025-08-15T02:28:52.867Z",
+  "lastUpdated": "2025-08-17T02:34:03.728Z",
   "kickstarts": [
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent Kickstart\n\nA platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of LlamaSta...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 3,
+      "lastUpdated": "8/15/2025"
+    },
     {
       "id": "custom-workbench-images-examples",
       "title": "Custom Workbench Images Examples",
@@ -54,18 +66,6 @@
         "rh-ecosystem-engineering"
       ],
       "stars": 1,
-      "lastUpdated": "8/12/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent Kickstart\n\nA platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of LlamaSta...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 2,
       "lastUpdated": "8/12/2025"
     },
     {
