@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2025-08-18T02:35:12.083Z",
+  "lastUpdated": "2025-08-19T02:19:35.287Z",
   "kickstarts": [
     {
       "id": "product-recommender-system",
@@ -13,7 +13,7 @@
         "rh-ecosystem-engineering"
       ],
       "stars": 1,
-      "lastUpdated": "8/17/2025"
+      "lastUpdated": "8/18/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -25,7 +25,19 @@
         "Python"
       ],
       "stars": 3,
-      "lastUpdated": "8/15/2025"
+      "lastUpdated": "8/18/2025"
+    },
+    {
+      "id": "ai-architecture-charts",
+      "title": "Ai Architecture Charts",
+      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
+      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
+      "categories": [
+        "Python"
+      ],
+      "stars": 2,
+      "lastUpdated": "8/18/2025"
     },
     {
       "id": "custom-workbench-images-examples",
@@ -42,18 +54,6 @@
         "rh-ai-bu-cai"
       ],
       "stars": 0,
-      "lastUpdated": "8/13/2025"
-    },
-    {
-      "id": "ai-architecture-charts",
-      "title": "Ai Architecture Charts",
-      "description": "This repository contains all the helm charts to deploy LLM service, Llama Stack server, configuring pipeline server, minio, pgvector",
-      "readmePreview": "# ai-architecture-charts\nCharts for AI components using Llama Stack\n",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-architecture-charts",
-      "categories": [
-        "Python"
-      ],
-      "stars": 2,
       "lastUpdated": "8/13/2025"
     },
     {
