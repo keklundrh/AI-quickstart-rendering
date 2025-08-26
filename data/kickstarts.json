@@ -1,6 +1,121 @@
 {
-  "lastUpdated": "2025-08-25T02:22:26.069Z",
+  "lastUpdated": "2025-08-26T02:18:28.027Z",
   "kickstarts": [
+    {
+      "id": "llama-stack-mcp-server",
+      "title": "Llama Stack Mcp Server",
+      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
+      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Quickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stac...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
+      "categories": [
+        "JavaScript",
+        "rh-ai-bu",
+        "rh-ai-bu-cai"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "lls-observability",
+      "title": "Lls Observability",
+      "description": "Llama Stack Observability quickstart",
+      "readmePreview": "# Llama Stack Telemetry & Observability\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provides helm cha...",
+      "githubLink": "https://github.com/rh-ai-kickstart/lls-observability",
+      "categories": [
+        "Smarty",
+        "rh-ai-bu",
+        "rh-ai-bu-cai"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "byo-agentic-framework",
+      "title": "Byo Agentic Framework",
+      "description": "Quickstart for BringYourOwn / MultiAgent Agent into Red Hat AI with Llama Stack",
+      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
+      "githubLink": "https://github.com/rh-ai-kickstart/byo-agentic-framework",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "vllm-tool-calling",
+      "title": "Vllm Tool Calling",
+      "description": "AI quickstart for deploying an LLM with Tool Calling enabled on top of OpenShift AI",
+      "readmePreview": "# vLLM Tool Calling \n\n![Ready for publish](https://img.shields.io/badge/ready_for-publish-red)\n![Ready for publish](https://img.shields.io/badge/Sourc...",
+      "githubLink": "https://github.com/rh-ai-kickstart/vllm-tool-calling",
+      "categories": [
+        "rh-ai-bu",
+        "rh-ai-bu-cai"
+      ],
+      "stars": 1,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "llm-cpu-serving",
+      "title": "Llm Cpu Serving",
+      "description": "This quickstart will serve a small language model on CPUs, using vLLM inference runtime",
+      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU quickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straig...",
+      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
+      "categories": [
+        "Smarty",
+        "rh-ai-bu",
+        "rh-ai-bu-cai"
+      ],
+      "stars": 4,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": ".github",
+      "title": ".github",
+      "description": "Org-level helper repository, this is not a quickstart",
+      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
+      "githubLink": "https://github.com/rh-ai-kickstart/.github",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "ai-quickstart-contrib",
+      "title": "Ai Quickstart Contrib",
+      "description": "A repo for AI quickstart documentation, collaboration and support",
+      "readmePreview": "# ai-quickstart-contrib\n\n:loudspeaker: This repository *is not* a quickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, t...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-quickstart-contrib",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "ai-quickstart-template",
+      "title": "Ai Quickstart Template",
+      "description": "Template repository to pre-populate quickstart repos",
+      "readmePreview": "# [INSERT quickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-quickstart-template",
+      "categories": [
+        "AI"
+      ],
+      "stars": 0,
+      "lastUpdated": "8/25/2025"
+    },
+    {
+      "id": "ai-virtual-agent",
+      "title": "Ai Virtual Agent",
+      "description": "No description available",
+      "readmePreview": "# AI Virtual Agent Kickstart\n\nA platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of LlamaSta...",
+      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
+      "categories": [
+        "Python"
+      ],
+      "stars": 3,
+      "lastUpdated": "8/25/2025"
+    },
     {
       "id": "product-recommender-system",
       "title": "Product Recommender System",
@@ -13,7 +128,7 @@
         "rh-ecosystem-engineering"
       ],
       "stars": 1,
-      "lastUpdated": "8/21/2025"
+      "lastUpdated": "8/25/2025"
     },
     {
       "id": "dynamic-model-router",
@@ -28,18 +143,6 @@
       ],
       "stars": 1,
       "lastUpdated": "8/21/2025"
-    },
-    {
-      "id": "ai-virtual-agent",
-      "title": "Ai Virtual Agent",
-      "description": "No description available",
-      "readmePreview": "# AI Virtual Agent Kickstart\n\nA platform for creating and managing AI-powered virtual agents with knowledge base integration, built on top of LlamaSta...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-virtual-agent",
-      "categories": [
-        "Python"
-      ],
-      "stars": 3,
-      "lastUpdated": "8/20/2025"
     },
     {
       "id": "openshift-ai-observability-summarizer",
@@ -96,18 +199,6 @@
       "lastUpdated": "8/13/2025"
     },
     {
-      "id": "byo-agentic-framework",
-      "title": "Byo Agentic Framework",
-      "description": "Kickstart for BringYourOwn / MultiAgent Agent into Red Hat AI with Llama Stack",
-      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
-      "githubLink": "https://github.com/rh-ai-kickstart/byo-agentic-framework",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/13/2025"
-    },
-    {
       "id": "llama-stack-ReAct",
       "title": "Llama Stack ReAct",
       "description": "No description available",
@@ -122,18 +213,6 @@
       "lastUpdated": "8/8/2025"
     },
     {
-      "id": ".github",
-      "title": ".github",
-      "description": "Org-level helper repository, this is not a kickstart",
-      "readmePreview": "📢 this repository *is not* a kickstart! \n\nThis repository is community oriented and helps us stay organized.\n\nFYI - the repositories: \n* [.github](ht...",
-      "githubLink": "https://github.com/rh-ai-kickstart/.github",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/6/2025"
-    },
-    {
       "id": "rhoai-metrics-dashboard",
       "title": "Rhoai Metrics Dashboard",
       "description": "RHOAI Metrics Dashboard for Single Serving Models",
@@ -145,85 +224,6 @@
       ],
       "stars": 0,
       "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "llm-cpu-serving",
-      "title": "Llm Cpu Serving",
-      "description": "This kickstart will serve a small language model on CPUs, using vLLM inference runtime",
-      "readmePreview": "# vllm-cpu\n\nWelcome to the vLLM CPU kickstart!\nUse this to quickly get a vLLM up and running in your environment.  \nTo see how it's done, jump straigh...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llm-cpu-serving",
-      "categories": [
-        "Smarty",
-        "rh-ai-bu",
-        "rh-ai-bu-cai"
-      ],
-      "stars": 4,
-      "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "llama-stack-mcp-server",
-      "title": "Llama Stack Mcp Server",
-      "description": "Deploys Llama 3.2-3B on vLLM with Llama Stack and MCP servers in OpenShift AI.",
-      "readmePreview": "# Llama Stack with MCP Server\n\nWelcome to the Llama Stack with MCP Server Kickstart!\n\nUse this to quickly deploy Llama 3.2-3B on vLLM with Llama Stack...",
-      "githubLink": "https://github.com/rh-ai-kickstart/llama-stack-mcp-server",
-      "categories": [
-        "JavaScript",
-        "rh-ai-bu",
-        "rh-ai-bu-cai"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "lls-observability",
-      "title": "Lls Observability",
-      "description": "Llama Stack Observability Kickstart",
-      "readmePreview": "# Llama Stack Telemetry & Observability\n\nObservability & telemetry kickstart for both Llama-Stack and OpenShift AI.\n\nThis repository provides helm cha...",
-      "githubLink": "https://github.com/rh-ai-kickstart/lls-observability",
-      "categories": [
-        "Smarty",
-        "rh-ai-bu",
-        "rh-ai-bu-cai"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "vllm-tool-calling",
-      "title": "Vllm Tool Calling",
-      "description": "AI Kickstart for deploying an LLM with Tool Calling enabled on top of OpenShift AI",
-      "readmePreview": "# vLLM Tool Calling \n\n![Ready for publish](https://img.shields.io/badge/ready_for-publish-red)\n![Ready for publish](https://img.shields.io/badge/Sourc...",
-      "githubLink": "https://github.com/rh-ai-kickstart/vllm-tool-calling",
-      "categories": [
-        "rh-ai-bu",
-        "rh-ai-bu-cai"
-      ],
-      "stars": 1,
-      "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "ai-kickstart-contrib",
-      "title": "Ai Kickstart Contrib",
-      "description": "A repo for AI kickstart documentation, collaboration and support",
-      "readmePreview": "# ai-kickstart-contrib\n\n:loudspeaker: This repository *is not* a kickstart! \n\nThis repository is community oriented. It is used for\ndocumentation, tra...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-contrib",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "8/5/2025"
-    },
-    {
-      "id": "ai-kickstart-template",
-      "title": "Ai Kickstart Template",
-      "description": "Template repository to pre-populate kickstart repos",
-      "readmePreview": "# [INSERT kickstart name here]\n\n*Section is required. NOTE: any italicized or bracketed text should be deleted\nor replaced.*  \n\n*Replace title & this ...",
-      "githubLink": "https://github.com/rh-ai-kickstart/ai-kickstart-template",
-      "categories": [
-        "AI"
-      ],
-      "stars": 0,
-      "lastUpdated": "6/19/2025"
     }
   ]
 }
