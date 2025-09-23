@@ -132,7 +132,7 @@ export async function fetchKickstarts() {
 # .env.example
 REACT_APP_GITHUB_API_URL=https://api.github.com
 REACT_APP_ORG_NAME=rh-ai-kickstart
-REACT_APP_BASE_PATH=/AI-Kickstart-rendering
+REACT_APP_BASE_PATH=/quickstart
 ```
 
 #### Improve Package.json Scripts

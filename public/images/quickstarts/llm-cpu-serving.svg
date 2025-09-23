@@ -1,0 +1,19 @@
+<svg width="400" height="225" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#4169e1;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#grad9)"/>
+  <rect width="380" height="205" x="10" y="10" fill="#ffd700" opacity="0.1" rx="8"/>
+  <circle cx="80" cy="70" r="15" fill="#ffd700" opacity="0.8"/>
+     <circle cx="180" cy="50" r="12" fill="#ffd700" opacity="0.6"/>
+     <circle cx="180" cy="90" r="12" fill="#ffd700" opacity="0.6"/>
+     <circle cx="280" cy="70" r="15" fill="#ffd700" opacity="0.8"/>
+     <line x1="95" y1="70" x2="165" y2="50" stroke="#ffd700" stroke-width="2" opacity="0.4"/>
+     <line x1="95" y1="70" x2="165" y2="90" stroke="#ffd700" stroke-width="2" opacity="0.4"/>
+     <line x1="192" y1="50" x2="265" y2="70" stroke="#ffd700" stroke-width="2" opacity="0.4"/>
+     <line x1="192" y1="90" x2="265" y2="70" stroke="#ffd700" stroke-width="2" opacity="0.4"/>
+  <text x="50" y="190" font-family="Arial, sans-serif" font-size="12" fill="#ffd700" opacity="0.6" font-weight="bold">Smarty</text>
+</svg>

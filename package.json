@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "description": "A showcase of AI kickstart examples for Red Hat OpenShift AI",
-    "homepage": "https://erwangranger.github.io/AI-Kickstart-rendering",
+    "homepage": "https://erwangranger.github.io/quickstart",
     "repository": {
         "type": "git",
         "url": "https://github.com/erwangranger/AI-Kickstart-rendering"
@@ -13,6 +13,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-markdown": "^9.0.1",
+        "react-router-dom": "^7.9.1",
         "react-scripts": "5.0.1",
         "remark-gfm": "^4.0.0",
         "web-vitals": "^2.1.4"

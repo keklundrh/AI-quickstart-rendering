@@ -1,0 +1,16 @@
+<svg width="400" height="225" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f37626;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#4e4e4e;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#grad8)"/>
+  <rect width="380" height="205" x="10" y="10" fill="#f37626" opacity="0.1" rx="8"/>
+  <rect width="60" height="60" x="50" y="50" fill="#f37626" rx="8"/>
+     <rect width="120" height="20" x="130" y="60" fill="#f37626" opacity="0.7" rx="4"/>
+     <rect width="80" height="15" x="130" y="90" fill="#f37626" opacity="0.5" rx="3"/>
+     <circle cx="300" cy="80" r="30" fill="#f37626" opacity="0.4"/>
+     <rect width="40" height="40" x="280" y="130" fill="#f37626" opacity="0.6" rx="6"/>
+  <text x="50" y="190" font-family="Arial, sans-serif" font-size="12" fill="#f37626" opacity="0.6" font-weight="bold">Jupyter Notebook</text>
+</svg>

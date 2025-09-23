@@ -1,0 +1,6 @@
+# This directory contains AI-generated images for quickstart cards
+# Images are generated using the script: scripts/generate-quickstart-images.js
+# 
+# File naming convention: {quickstart-id}.png
+# Recommended size: 1024x576px (16:9 aspect ratio)
+# Display size: 120x68px in cards

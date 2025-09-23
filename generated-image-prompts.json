@@ -1,0 +1,249 @@
+[
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Spending Transaction Monitor\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Focus on AI and technology themes. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Spending Transaction Monitor",
+    "id": "spending-transaction-monitor",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Ai Architecture Charts\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, vector database. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Ai Architecture Charts",
+    "id": "ai-architecture-charts",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "vector database",
+      "embeddings",
+      "system architecture"
+    ],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"RAG\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, document retrieval. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "RAG",
+    "id": "RAG",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "document retrieval",
+      "knowledge base",
+      "vector database"
+    ],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Product Recommender System\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Focus on AI and technology themes. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Product Recommender System",
+    "id": "product-recommender-system",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Basic Speech To Text With Whisper\". Use blue and purple tech gradient with a clean, professional design suitable for a tech card. Include visual elements representing: container orchestration, cloud platform. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Basic Speech To Text With Whisper",
+    "id": "basic-speech-to-text-with-whisper",
+    "categories": [
+      "Jupyter Notebook"
+    ],
+    "keywords": [
+      "container orchestration",
+      "cloud platform"
+    ],
+    "colorScheme": "Jupyter Notebook"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Lls Observability\". Use blue and purple tech gradient with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, data analytics. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Lls Observability",
+    "id": "lls-observability",
+    "categories": [
+      "Jupyter Notebook"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "data analytics",
+      "monitoring dashboard",
+      "system architecture"
+    ],
+    "colorScheme": "Jupyter Notebook"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Ai Virtual Agent\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, AI agent. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Ai Virtual Agent",
+    "id": "ai-virtual-agent",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "AI agent",
+      "automation"
+    ],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Openshift Ai Observability Summarizer\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: data analytics, monitoring dashboard, container orchestration. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Openshift Ai Observability Summarizer",
+    "id": "openshift-ai-observability-summarizer",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [
+      "data analytics",
+      "monitoring dashboard",
+      "container orchestration",
+      "cloud platform"
+    ],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Guardrailing Llms\". Use blue and purple tech gradient with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Guardrailing Llms",
+    "id": "guardrailing-llms",
+    "categories": [
+      "Jupyter Notebook"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network"
+    ],
+    "colorScheme": "Jupyter Notebook"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Llm Cpu Serving\". Use blue and purple tech gradient with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, model serving. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Llm Cpu Serving",
+    "id": "llm-cpu-serving",
+    "categories": [
+      "Smarty"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "model serving",
+      "cloud deployment"
+    ],
+    "colorScheme": "Smarty"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Vllm Tool Calling\". Use purple and cyan futuristic colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, development tools. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Vllm Tool Calling",
+    "id": "vllm-tool-calling",
+    "categories": [
+      "AI"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "development tools",
+      "API integration",
+      "container orchestration"
+    ],
+    "colorScheme": "AI"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Dynamic Model Router\". Use blue and yellow tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, container orchestration. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Dynamic Model Router",
+    "id": "dynamic-model-router",
+    "categories": [
+      "Python"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "container orchestration",
+      "cloud platform"
+    ],
+    "colorScheme": "Python"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Byo Agentic Framework\". Use purple and cyan futuristic colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, AI agent. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Byo Agentic Framework",
+    "id": "byo-agentic-framework",
+    "categories": [
+      "AI"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "AI agent",
+      "automation"
+    ],
+    "colorScheme": "AI"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Llama Stack Mcp Server\". Use yellow and black tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, development tools. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Llama Stack Mcp Server",
+    "id": "llama-stack-mcp-server",
+    "categories": [
+      "JavaScript"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "development tools",
+      "API integration",
+      "container orchestration"
+    ],
+    "colorScheme": "JavaScript"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Custom Workbench Images Examples\". Use purple and cyan futuristic colors with a clean, professional design suitable for a tech card. Include visual elements representing: container orchestration, cloud platform. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Custom Workbench Images Examples",
+    "id": "custom-workbench-images-examples",
+    "categories": [
+      "AI",
+      "OpenShift",
+      "RHOAI",
+      "Workbench Images"
+    ],
+    "keywords": [
+      "container orchestration",
+      "cloud platform"
+    ],
+    "colorScheme": "AI"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Llama Stack ReAct\". Use yellow and black tech colors with a clean, professional design suitable for a tech card. Include visual elements representing: large language model, neural network, AI agent. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Llama Stack ReAct",
+    "id": "llama-stack-ReAct",
+    "categories": [
+      "JavaScript"
+    ],
+    "keywords": [
+      "large language model",
+      "neural network",
+      "AI agent",
+      "automation"
+    ],
+    "colorScheme": "JavaScript"
+  },
+  {
+    "prompt": "Create a modern, minimalist technical illustration for \"Rhoai Metrics Dashboard\". Use purple and cyan futuristic colors with a clean, professional design suitable for a tech card. Include visual elements representing: model serving, cloud deployment, container orchestration. Style: flat design, geometric shapes, subtle gradients, enterprise software aesthetic. Avoid text, people, or complex details. 16:9 aspect ratio, card-friendly composition.",
+    "title": "Rhoai Metrics Dashboard",
+    "id": "rhoai-metrics-dashboard",
+    "categories": [
+      "AI"
+    ],
+    "keywords": [
+      "model serving",
+      "cloud deployment",
+      "container orchestration",
+      "cloud platform"
+    ],
+    "colorScheme": "AI"
+  }
+]

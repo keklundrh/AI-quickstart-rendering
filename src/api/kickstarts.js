@@ -5,7 +5,7 @@ const CACHE_DURATION = 60 * 60 * 1000;
 const CACHE_KEY = 'kickstarts_cache';
 
 // Base path for GitHub Pages
-export const BASE_PATH = '/AI-Kickstart-rendering';
+export const BASE_PATH = '/quickstart';
 
 // GitHub repository information
 export const REPO_OWNER = 'erwangranger';
@@ -133,9 +133,11 @@ export async function fetchRepoTopics(repoUrl) {
 export async function fetchAllTopics(kickstarts) {
   const topicsPromises = kickstarts.map(async (kickstart) => {
     const topics = await fetchRepoTopics(kickstart.githubLink);
+    // Deduplicate topics to ensure no duplicates
+    const uniqueTopics = [...new Set(topics)];
     return {
       ...kickstart,
-      topics
+      topics: uniqueTopics
     };
   });
 

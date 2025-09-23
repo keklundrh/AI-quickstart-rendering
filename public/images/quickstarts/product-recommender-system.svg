@@ -1,0 +1,16 @@
+<svg width="400" height="225" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3776ab;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffd343;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="225" fill="url(#grad3)"/>
+  <rect width="380" height="205" x="10" y="10" fill="#3776ab" opacity="0.1" rx="8"/>
+  <rect width="100" height="30" x="50" y="50" fill="#3776ab" opacity="0.8" rx="4"/>
+     <rect width="100" height="30" x="180" y="50" fill="#3776ab" opacity="0.6" rx="4"/>
+     <rect width="100" height="30" x="50" y="100" fill="#3776ab" opacity="0.6" rx="4"/>
+     <rect width="100" height="30" x="180" y="100" fill="#3776ab" opacity="0.8" rx="4"/>
+     <rect width="120" height="20" x="140" y="150" fill="#3776ab" opacity="0.4" rx="4"/>
+  <text x="50" y="190" font-family="Arial, sans-serif" font-size="12" fill="#3776ab" opacity="0.6" font-weight="bold">Python</text>
+</svg>

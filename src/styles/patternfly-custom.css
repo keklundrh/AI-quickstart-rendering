@@ -19,6 +19,11 @@
   --pf-global--FontWeight--normal: 400;
   --pf-global--FontWeight--bold: 700;
 
+  /* Red Hat Typography */
+  --red-hat-font-family-body: 'Red Hat Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --red-hat-font-family-heading: 'Red Hat Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --red-hat-font-family-mono: 'Source Code Pro', 'SFMono-Regular', Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
   --pf-global--BackgroundColor--100: #f0f0f0; /* Light gray for sections */
   --pf-global--BackgroundColor--200: #fafafa;
   --pf-global--BackgroundColor--300: #e0e0e0; /* Hover state for select items */
@@ -37,6 +42,30 @@
 body {
   margin: 0;
   background-color: #f0f0f0; /* Page background */
+}
+
+/* Apply Red Hat fonts globally */
+body, 
+.pf-v5-c-page,
+.pf-v5-c-card,
+.pf-v5-c-toolbar,
+.pf-v5-c-form-control,
+.pf-v5-c-button,
+.pf-v5-c-label,
+p, span, div, input {
+  font-family: var(--red-hat-font-family-body) !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.pf-v5-c-title,
+.pf-v5-c-masthead,
+.red-hat-top-nav {
+  font-family: var(--red-hat-font-family-heading) !important;
+}
+
+code, pre,
+.pf-v5-c-code-block {
+  font-family: var(--red-hat-font-family-mono) !important;
 }
 
 .pf-v5-c-page {
@@ -196,15 +225,34 @@ body {
   background-color: var(--pf-global--BackgroundColor--300);
 }
 
-/* Gallery/Card Layout */
+/* Gallery/Card Layout - 3 cards per row with responsive design */
 .pf-v5-c-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjusted min-width for better spacing */
-  gap: var(--pf-global--spacer--lg);
-  padding-bottom: var(--pf-global--spacer--xl); /* Ensure space at bottom of page */
+  grid-template-columns: repeat(3, 1fr); /* Exactly 3 cards per row */
+  gap: 1.5rem; /* Reduced from 2rem */
+  padding-bottom: var(--pf-global--spacer--xl);
+  max-width: 1400px; /* Prevent cards from getting too wide */
+  margin: 0 auto; /* Center the gallery */
 }
 
-/* Card Styles */
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .pf-v5-c-gallery {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards on medium screens */
+    gap: 1.25rem; /* Reduced from 1.5rem */
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .pf-v5-c-gallery {
+    grid-template-columns: 1fr; /* 1 card on mobile */
+    gap: 0.75rem; /* Reduced from 1rem */
+    max-width: 500px;
+  }
+}
+
+/* Card Styles with 3:4 aspect ratio */
 .pf-v5-c-card {
   background-color: white;
   border: var(--pf-global--BorderWidth--sm) solid var(--pf-global--BorderColor--100);
@@ -212,7 +260,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06); /* Enhanced shadow effect */
   display: flex;
   flex-direction: column;
-  height: 100%;
+  aspect-ratio: 3 / 4; /* 3:4 aspect ratio - height is 4/3 times the width */
   overflow: hidden;
   transition: box-shadow 0.2s ease-in-out;
 }
@@ -475,4 +523,36 @@ body {
   border: none;
   border-top: 1px solid var(--pf-global--BorderColor--200);
   margin: 1em 0;
+}
+
+/* Red Hat Top Navigation Styles */
+.top-nav-link:hover {
+  color: #73bcf7 !important;
+  text-decoration: underline;
+}
+
+.top-nav-dropdown:hover {
+  color: #73bcf7 !important;
+}
+
+.red-hat-top-nav {
+  z-index: 1000;
+  position: relative;
+}
+
+/* Quickstart Card Improvements */
+.pf-v5-c-card:hover .kickstart-title-link {
+  text-decoration: underline !important;
+}
+
+.pf-v5-c-card {
+  border-radius: 6px !important; /* Reduced from default 8px */
+}
+
+/* GitHub Button Styling */
+.kickstart-github-button:hover {
+  border: 1px solid #cc0000 !important;
+  color: #151515 !important;
+  background-color: transparent !important;
+  text-decoration: none !important;
 }
