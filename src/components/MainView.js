@@ -141,7 +141,7 @@ const MainView = ({
         {/* Hero Section / Introduction */}
         <section className="pf-v5-c-page__main-section pf-m-light pf-v5-u-py-xl">
           <div className="pf-v5-u-text-align-center pf-v5-u-pb-lg">
-            <h1 className="pf-v5-c-title" style={{ fontSize: '2.5rem', fontWeight: '600' }}>Explore Red Hat AI quickstarts - v03</h1>
+            <h1 className="pf-v5-c-title" style={{ fontSize: '2.5rem', fontWeight: '600' }}>Explore Red Hat AI quickstarts</h1>
             <p className="pf-v5-u-mt-md">
               Discover ready-to-run AI examples designed for Red Hat AI.
               {isRefreshing && (

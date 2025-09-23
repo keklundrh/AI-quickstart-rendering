@@ -4,12 +4,12 @@ const CACHE_DURATION = 60 * 60 * 1000;
 // Cache key for localStorage
 const CACHE_KEY = 'kickstarts_cache';
 
-// Base path for GitHub Pages
+// Base path for the application (used in both development and production)
 export const BASE_PATH = '/quickstart';
 
 // GitHub repository information
-export const REPO_OWNER = 'erwangranger';
-export const REPO_NAME = 'AI-Kickstart-rendering';
+export const REPO_OWNER = 'keklundrh';
+export const REPO_NAME = 'AI-quickstart-rendering';
 
 // Function to get cached data
 function getCachedData() {
@@ -65,6 +65,7 @@ export async function fetchKickstarts() {
 // Function to fetch fresh data
 async function refreshKickstartsData() {
   try {
+    // Use BASE_PATH consistently in both development and production
     const response = await fetch(`${BASE_PATH}/data/kickstarts.json`);
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
