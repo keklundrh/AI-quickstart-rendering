@@ -469,49 +469,116 @@ const Details = ({ kickstarts }) => {
           borderBottom: '1px solid var(--pf-global--BorderColor--100)',
           paddingBottom: 'var(--pf-global--spacer--lg)'
         }}>
-          <h1 className="pf-v5-c-title" style={{ 
-            fontSize: '2rem',
-            marginBottom: 'var(--pf-global--spacer--sm)' 
-          }}>
-            {kickstart.title}
-          </h1>
-          <p style={{ 
-            fontSize: 'var(--pf-global--FontSize--lg)',
-            color: 'var(--pf-global--Color--200)',
-            marginBottom: 'var(--pf-global--spacer--md)'
-          }}>
-            {kickstart.description}
-          </p>
+          {/* Content layout: title and content on left, image on right */}
           <div style={{ 
-            display: 'flex', 
-            gap: 'var(--pf-global--spacer--sm)', 
-            alignItems: 'center',
+            display: 'flex',
+            gap: 'var(--pf-global--spacer--xl)',
+            alignItems: 'flex-start',
             flexWrap: 'wrap'
           }}>
-            {kickstart.categories?.map((category, index) => (
-              <span
-                key={index}
-                className="pf-v5-c-label pf-m-outline pf-m-blue"
-              >
-                {category}
-              </span>
-            ))}
-            {kickstart.stars > 0 && (
-              <span style={{ 
-                fontSize: 'var(--pf-global--FontSize--sm)', 
-                color: 'var(--pf-global--Color--200)',
-                marginLeft: 'var(--pf-global--spacer--sm)'
-              }}>
-                ⭐ {kickstart.stars} stars
-              </span>
-            )}
-            <span style={{ 
-              fontSize: 'var(--pf-global--FontSize--sm)', 
-              color: 'var(--pf-global--Color--200)',
-              marginLeft: 'var(--pf-global--spacer--sm)'
+            {/* Left side: Title, description, tags, and metadata */}
+            <div style={{ 
+              flex: '1',
+              minWidth: '300px',
+              display: 'flex',
+              flexDirection: 'column',
+              height: kickstart.generatedImage ? '225px' : 'auto', // Match image height when image exists
+              justifyContent: 'space-between'
             }}>
-              Updated: {kickstart.lastUpdated}
-            </span>
+              {/* Top section: Title, updated date, and description */}
+              <div>
+                <h1 className="pf-v5-c-title" style={{ 
+                  fontSize: '2rem',
+                  marginBottom: 'var(--pf-global--spacer--xs)',
+                  marginTop: 0
+                }}>
+                  {kickstart.title}
+                </h1>
+                
+                <div style={{
+                  fontSize: 'var(--pf-global--FontSize--sm)',
+                  color: 'var(--pf-global--Color--200)',
+                  marginBottom: 'var(--pf-global--spacer--md)'
+                }}>
+                  Updated: {kickstart.lastUpdated}
+                </div>
+                
+                <p style={{ 
+                  fontSize: 'var(--pf-global--FontSize--lg)',
+                  color: 'var(--pf-global--Color--200)',
+                  marginBottom: 'var(--pf-global--spacer--md)',
+                  lineHeight: '1.5'
+                }}>
+                  {kickstart.description}
+                </p>
+              </div>
+              
+              {/* Bottom section: Tags and stars */}
+              <div style={{ 
+                display: 'flex', 
+                gap: 'var(--pf-global--spacer--sm)', 
+                alignItems: 'center',
+                flexWrap: 'wrap'
+              }}>
+                {/* Tags */}
+                {kickstart.categories?.map((category, index) => (
+                  <span
+                    key={index}
+                    className="pf-v5-c-label pf-m-outline pf-m-blue"
+                  >
+                    {category}
+                  </span>
+                ))}
+                {kickstart.topics && kickstart.topics
+                  .filter(topic => topic && topic.trim())
+                  .slice(0, 2) // Limit to first 2 topics to fit on one line
+                  .map((topic, index) => (
+                  <span
+                    key={`topic-${index}`}
+                    className="pf-v5-c-label pf-m-outline pf-m-green"
+                  >
+                    {topic}
+                  </span>
+                ))}
+                
+                {/* Stars */}
+                {kickstart.stars > 0 && (
+                  <span style={{ 
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '4px',
+                    fontSize: 'var(--pf-global--FontSize--sm)',
+                    color: 'var(--pf-global--Color--200)'
+                  }}>
+                    ⭐ {kickstart.stars} stars
+                  </span>
+                )}
+              </div>
+            </div>
+            
+            {/* Right side: Generated Image */}
+            {kickstart.generatedImage && (
+              <div className="kickstart-details-image" style={{ 
+                flexShrink: 0
+              }}>
+                <img 
+                  src={`${process.env.PUBLIC_URL || ''}/${kickstart.generatedImage}`}
+                  alt={`AI generated illustration for ${kickstart.title}`}
+                  style={{
+                    width: '400px',
+                    height: '225px', // 16:9 aspect ratio
+                    objectFit: 'cover',
+                    borderRadius: 'var(--pf-global--BorderRadius--lg)',
+                    boxShadow: 'var(--pf-global--BoxShadow--lg)',
+                    border: '1px solid var(--pf-global--BorderColor--light-200)'
+                  }}
+                  onError={(e) => {
+                    // Hide image if it fails to load
+                    e.target.style.display = 'none';
+                  }}
+                />
+              </div>
+            )}
           </div>
         </div>
 
