@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { BASE_PATH } from '../api/kickstarts';
 
 // Function to get relevant icons/emojis with labels based on kickstart data
 const getKickstartIcons = (kickstart) => {
@@ -118,14 +119,14 @@ const KickstartCard = ({ kickstart }) => {
       </div>
       <div className="pf-v5-c-card__body">
         {/* Generated Image - Below title, aligned left */}
-        {kickstart.generatedImage && (
+        {kickstart.id && (
           <div className="kickstart-generated-image" style={{ 
             marginBottom: 'var(--pf-global--spacer--md)',
             display: 'flex',
             justifyContent: 'flex-start'
           }}>
             <img 
-              src={`${process.env.PUBLIC_URL || ''}/${kickstart.generatedImage}`}
+              src={`${BASE_PATH}/images/quickstarts/${kickstart.id}.svg`}
               alt={`AI generated illustration for ${kickstart.title}`}
               style={{
                 width: '288px',

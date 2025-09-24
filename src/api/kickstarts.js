@@ -4,8 +4,8 @@ const CACHE_DURATION = 60 * 60 * 1000;
 // Cache key for localStorage
 const CACHE_KEY = 'kickstarts_cache';
 
-// Base path for the application (used in both development and production)
-export const BASE_PATH = '/quickstart';
+// Base path for GitHub Pages (repository name)
+export const BASE_PATH = process.env.NODE_ENV === 'production' ? '/AI-quickstart-rendering' : '/quickstart';
 
 // GitHub repository information
 export const REPO_OWNER = 'keklundrh';

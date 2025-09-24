@@ -1,19 +1,18 @@
 {
-  "lastUpdated": "2025-09-23T20:53:39.100Z",
+  "lastUpdated": "2025-09-24T01:44:50.179Z",
   "stats": {
     "totalQuickstarts": 17,
     "totalImages": 49,
     "successfulImageDownloads": 49,
-    "failedImageDownloads": 0,
-    "generatedImages": 17
+    "failedImageDownloads": 0
   },
   "kickstarts": [
     {
       "id": "spending-transaction-monitor",
       "title": "Spending Transaction Monitor",
       "description": "No description available",
-      "readmePreview": "<!-- omit from toc -->\n# Spending Transaction Monitor\n\nAlerting for credit card transactions with rule-based and future natural-language rules.\n\nFor c...",
-      "readmeContent": "<!-- omit from toc -->\n# Spending Transaction Monitor\n\nAlerting for credit card transactions with rule-based and future natural-language rules.\n\nFor contribution guidelines and repo conventions, see [CONTRIBUTING.md](CONTRIBUTING.md).\n<!-- omit from toc -->\n## Table of contents\n\n- [Overview](#overview)\n- [How it works](#how-it-works)\n- [Getting started](#getting-started)\n- [🐳 Container Deployment (Recommended)](#-container-deployment-recommended)\n  - [🚀 Quick Start with Podman Compose](#-quick-start-with-podman-compose)\n- [🧪 Testing Alert Rules](#-testing-alert-rules)\n  - [**Interactive Alert Rule Testing**](#interactive-alert-rule-testing)\n  - [**Example Workflow**](#example-workflow)\n  - [**What the Test Does**](#what-the-test-does)\n  - [☁️ OpenShift Deployment](#️-openshift-deployment)\n- [🔧 Local Development Mode](#-local-development-mode)\n  - [🔧 Development Mode (Authentication Bypass)](#-development-mode-authentication-bypass)\n- [🔧 Environment Variables Configuration](#-environment-variables-configuration)\n  - [Required Environment Variables](#required-environment-variables)\n    - [Database Configuration](#database-configuration)\n    - [SMTP Configuration (for email alerts)](#smtp-configuration-for-email-alerts)\n    - [API Configuration](#api-configuration)\n    - [LLM Configuration](#llm-configuration)\n  - [🐳 Local Container Deployment (podman-compose.yml)](#-local-container-deployment-podman-composeyml)\n  - [☁️ OpenShift Deployment (values.yaml)](#️-openshift-deployment-valuesyaml)\n  - [🔧 Local Development Environment Variables](#-local-development-environment-variables)\n- [Components](#components)\n- [Standards](#standards)\n- [Releases](#releases)\n- [Structure](#structure)\n\n## Overview\n\n- Monorepo managed with Turborepo\n- UI: React + Vite\n- API: FastAPI (async SQLAlchemy)\n- DB: PostgreSQL with SQLAlchemy models and Alembic migrations\n\nPackages\n- `packages/ui`: web app and Storybook\n- `packages/api`: API service and routes\n- `packages/db`: models, engine, Alembic, seed/verify scripts\n- `packages/ingestion-service`: transaction ingestion service with Kafka integration\n- `packages/evaluation`: rule evaluation (scaffold)\n- `packages/alerts`: alert delivery (scaffold)\n- `packages/configs/*`: shared ESLint/Prettier configs\n\n## How it works\n\n- Users create alert rules (amount, merchant, category, timeframe, location; notification methods: email/SMS/push/webhook).\n- Incoming transactions are stored and evaluated against active rules.\n- Triggered rules produce alert notifications which are delivered via configured channels.\n\n```mermaid\ngraph TD\n\n  %% UI\n  subgraph UI[\"UI (packages/ui)\"]\n    U[\"User\"] --> WUI[\"Web UI\"]\n  end\n\n  %% API\n  subgraph API[\"API (packages/api)\"]\n    API_APP[\"FastAPI App\"]\n    IN[\"Transaction API\"]\n  end\n\n  %% Evaluation\n  subgraph EVAL[\"Evaluation (packages/evaluation)\"]\n    EV[\"Rule Evaluation Service\"]\n  end\n\n  %% Alerts\n  subgraph ALERTS[\"Alerts (packages/alerts)\"]\n    AL[\"Alerts Service\"]\n  end\n\n  %% DB\n  subgraph DB[\"DB (packages/db) - PostgreSQL\"]\n    USERS[\"users\"]\n    CARDS[\"credit_cards\"]\n    AR[\"alert_rules\"]\n    TRX[\"transactions\"]\n    AN[\"alert_notifications\"]\n  end\n\n  %% Delivery\n  subgraph DELIV[\"Delivery Channels\"]\n    EM[\"Email\"]\n    SM[\"SMS\"]\n    PS[\"Push\"]\n    WH[\"Webhook\"]\n  end\n\n  %% External Source\n  subgraph EXT[\"External\"]\n    TS[\"Transaction Source\"]\n  end\n\n  %% Rule authoring\n  WUI -->|Create/Update Rule| API_APP\n  API_APP -->|Persist| AR\n\n  %% Transaction ingestion\n  TS --> IN\n  IN --> API_APP\n  API_APP -->|Store| TRX\n\n  %% Evaluation path\n  API_APP -->|Evaluate| EV\n  EV -->|Read| AR\n  EV -->|Read| TRX\n  EV -->|Create| AN\n  EV -->|Dispatch| AL\n\n  %% Alerts delivery\n  AL -->|Update| AN\n  AL --> EM\n  AL --> SM\n  AL --> PS\n  AL --> WH\n```\n\n## Getting started\n\nPrerequisites: Node 18+, pnpm 9+, Python 3.11+, uv, Podman (preferred) or Docker\n\nInstall\n```bash\npnpm setup\n```\n\n## 🐳 Container Deployment (Recommended)\n\n### 🚀 Quick Start with Podman Compose\n\n**Start with pre-built images:**\n```bash\nmake run-local\n```\n\n**Build and run from source:**\n```bash\nmake build-run-local\n```\n\n\n**Container URLs:**\n- Frontend: http://localhost:3000\n- API: http://localhost:3000/api/* (proxied)\n- API Docs: http://localhost:8000/docs\n- SMTP Web UI: http://localhost:3002\n- Database: localhost:5432\n\n**Container Management:**\n```bash\nmake run-local      # Start with registry images\nmake build-local    # Build images from source\nmake build-run-local # Build and start\nmake stop-local     # Stop all services\nmake logs-local     # View service logs\nmake reset-local    # Reset with fresh data\n```\n\n## 🧪 Testing Alert Rules\n\nAfter starting the application with `make run-local`, you can test alert rules interactively:\n\n### **Interactive Alert Rule Testing**\n\n**List available sample alert rules:**\n\n```bash\nmake list-alert-samples\n```\n\nShows all available test scenarios with their descriptions, such as:\n\n- \"Alert when spending more than $500 in one transaction\"\n- \"Alert me if my dining expense exceeds the average of the last 30 days by more than 40%\"\n- \"Alert me if a transaction happens outside my home state\"\n\n**Interactive testing menu:**\n\n```bash\nmake test-alert-rules\n```\n\nThis command provides:\n\n- 📋 **Clean menu** showing only alert rule descriptions (no technical filenames)\n- 📊 **Data preview** with realistic transaction data adjusted to current time\n- 🔍 **User context** showing the test user profile and transaction history\n- ✅ **Confirmation prompt** before running the actual test\n\n### **Example Workflow**\n\n1. **Start the application:**\n\n   ```bash\n   make run-local\n   ```\n\n2. **Browse available test scenarios:**\n\n   ```bash\n   make list-alert-samples\n   ```\n\n3. **Run interactive testing:**\n\n   ```bash\n   make test-alert-rules\n   ```\n\n   - Select an alert rule by number (1-16)\n   - Review the data preview showing exactly what will be tested\n   - Confirm to proceed with the test\n   - Watch the complete validation and creation process\n\n### **What the Test Does**\n\nThe test process:\n\n1. **Seeds database** with realistic user and transaction data\n2. **Validates the alert rule** using the NLP validation API\n3. **Creates the alert rule** if validation passes\n4. **Shows step-by-step results** including SQL queries and processing steps\n\n**Note:** Make sure the API server is running (`make run-local`) before testing alert rules.\n\n### ☁️ OpenShift Deployment\n\n**Quick Deploy:**\n```bash\nmake full-deploy\n```\n\n**Step-by-step:**\n```bash\n# Login and setup\nmake login\nmake create-project\n\n# Build and push images\nmake build-all\nmake push-all\n\n# Deploy\nmake deploy\n```\n\n**OpenShift Management:**\n```bash\nmake deploy           # Deploy to OpenShift\nmake deploy-dev       # Deploy in development mode\nmake undeploy         # Remove deployment\nmake status           # Check deployment status\nmake logs-api         # View API logs\nmake logs-ui          # View UI logs\n```\n\n**Port Forwarding (for development):**\n```bash\nmake port-forward-api  # Forward API to localhost:8000\nmake port-forward-ui   # Forward UI to localhost:8080\nmake port-forward-db   # Forward DB to localhost:5432\n```\n\n## 🔧 Local Development Mode\n\n**🚀 Start Development Mode** (starts DB, API, UI with auth bypassed)\n```bash\npnpm dev\n```\n\nThis command:\n- Starts PostgreSQL database\n- Starts FastAPI backend on port 8000\n- Starts React UI on port 5173\n- **Automatically enables development mode auth bypass** 🔓\n\nThe UI will show a yellow banner: \"🔓 Development Mode - Auth Bypassed\" when running.\n\n**Backend-only development** (API + Database with test data)\n```bash\npnpm dev:backend     # Complete backend setup + start\npnpm backend:setup   # Setup only (DB + migrations + seed)\npnpm backend:start   # Start API server only (port 8002)\npnpm backend:stop    # Stop database\n```\n\nCommon tasks\n\n```bash\npnpm build\npnpm test\npnpm lint\npnpm format\npnpm db:revision\npnpm db:verify\nmake test-alert-rules    # Interactive alert rule testing  \nmake list-alert-samples  # List available test scenarios\n```\n\n**Local Dev URLs:**\n- Web UI: http://localhost:5173 (shows dev mode banner)\n- API (full stack): http://localhost:8000 (auth bypass enabled)\n- API (backend-only): http://localhost:8002\n- API Docs: http://localhost:8000/docs\n- Component Storybook: http://localhost:6006\n\n### 🔧 Development Mode (Authentication Bypass)\n\n**Quick Start for New Developers:**\n```bash\ngit clone <repo>\npnpm setup\npnpm dev          # 🔓 Auth automatically bypassed in development\n```\nVisit http://localhost:5173 - you'll see a yellow banner and can use the app immediately as \"John Doe\" without any authentication setup.\n\n**How It Works:**\n- **Purpose**: Skip OAuth2/OIDC setup for faster development\n- **Auto-enabled**: When `VITE_ENVIRONMENT=development` (default)\n- **Visual indicator**: 🔓 Yellow banner: \"Development Mode - Auth Bypassed\"\n- **Mock user**: Automatically signed in as \"John Doe\" with admin roles\n- **Security**: Only works in development builds, never in production\n\n**Environment Controls:**\n```bash\n# Default: Auth bypass enabled (recommended for development)\npnpm dev\n\n# To test real Keycloak authentication in development:\nVITE_BYPASS_AUTH=false pnpm dev\n\n# Production: Auth always required (automatic)\nVITE_ENVIRONMENT=production\n```\n\n**Troubleshooting:**\n- **No dev banner?** Check console for \"Development auth provider initialized\"  \n- **Customize mock user:** Edit `packages/ui/src/constants/auth.ts`\n- **Test real auth:** See [`docs/auth/INTEGRATION.md`](docs/auth/INTEGRATION.md) for Keycloak setup\n\n## 🔧 Environment Variables Configuration\n\n### Required Environment Variables\n\nThe application requires these environment variables for proper operation:\n\n#### Database Configuration\n```bash\nDATABASE_URL=postgresql+asyncpg://user:password@host:port/database\n```\n\n#### SMTP Configuration (for email alerts)\n```bash\nSMTP_HOST=smtp.example.com\nSMTP_PORT=2525\nSMTP_USERNAME=\nSMTP_PASSWORD=\nSMTP_FROM_EMAIL=alerts@spending-monitor.com\nSMTP_USE_TLS=false\nSMTP_USE_SSL=false\n```\n\n#### API Configuration\n```bash\nENVIRONMENT=development|production\nBYPASS_AUTH=true|false\nAPI_PORT=8000\nCORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8080\nALLOWED_ORIGINS=http://localhost:3000,http://localhost:8080\n```\n\n#### LLM Configuration\n```bash\nLLM_PROVIDER=XXXXX\nBASE_URL=XXXXX\nAPI_KEY=sk-your-openai-api-key-here\nMODEL=XXXXX\n```\n\n### 🐳 Local Container Deployment (podman-compose.yml)\n\nEnvironment variables are configured in `podman-compose.yml` under the `api` service:\n\n```yaml\napi:\n  environment:\n    - DATABASE_URL=postgresql+asyncpg://user:password@postgres:5432/spending-monitor\n    - SMTP_HOST=smtp4dev\n    - SMTP_PORT=25\n    - SMTP_USERNAME=\n    - SMTP_PASSWORD=\n    - SMTP_FROM_EMAIL=spending-monitor@localhost\n    - SMTP_USE_TLS=false\n    - SMTP_USE_SSL=false\n    - ENVIRONMENT=development\n    - BYPASS_AUTH=true\n    - API_PORT=8000\n    - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8080\n    - ALLOWED_ORIGINS=http://localhost:3000,http://localhost:8080\n    - LLM_PROVIDER=XXXXX\n    - BASE_URL=XXXXX\n    - API_KEY=add-your-openai-api-key-here\n    - MODEL=XXXXX\n```\n\n**To customize for your environment:**\n1. Edit `podman-compose.yml`\n2. Update the environment variables under the `api` service\n3. Restart: `make stop-local && make run-local`\n\n### ☁️ OpenShift Deployment (values.yaml)\n\nFor OpenShift deployment, configure environment variables in `deploy/helm/spending-monitor/values.yaml`:\n\n```yaml\napi:\n  env:\n    DATABASE_URL: \"postgresql+asyncpg://user:password@spending-monitor-db:5432/spending-monitor\"\n    SMTP_HOST: \"smtp.yourdomain.com\"\n    SMTP_PORT: \"587\"\n    SMTP_USERNAME: \"your-smtp-username\"\n    SMTP_PASSWORD: \"your-smtp-password\"\n    SMTP_FROM_EMAIL: \"alerts@yourdomain.com\"\n    SMTP_USE_TLS: \"true\"\n    SMTP_USE_SSL: \"false\"\n    ENVIRONMENT: \"production\"\n    BYPASS_AUTH: \"false\"\n    API_PORT: \"8000\"\n    CORS_ALLOWED_ORIGINS: \"https://your-ui-route.openshift.com\"\n    ALLOWED_ORIGINS: \"https://your-ui-route.openshift.com\"\n    LLM_PROVIDER: XXXXX\n    BASE_URL: XXXXX\n    API_KEY: \"add-your-openai-api-key-here\"\n    MODEL: XXXXX\n```\n\n**To customize for OpenShift:**\n1. Edit `deploy/helm/spending-monitor/values.yaml`\n2. Update the `api.env` section with your values\n3. Deploy: `make deploy`\n\n**Using OpenShift Secrets (Recommended for production):**\n```yaml\napi:\n  envFrom:\n    - secretRef:\n        name: spending-monitor-secrets\n  env:\n    ENVIRONMENT: \"production\"\n    BYPASS_AUTH: \"false\"\n```\n\n### 🔧 Local Development Environment Variables\n\nFor local development without containers, set these in your shell or `.env` file:\n\n```bash\n# Development settings\nexport ENVIRONMENT=development\nexport BYPASS_AUTH=true\nexport API_PORT=8000\n\n# Database (when using local PostgreSQL)\nexport DATABASE_URL=\"postgresql+asyncpg://user:password@localhost:5432/spending-monitor\"\n\n# SMTP (using local SMTP server or external service)\nexport SMTP_HOST=localhost\nexport SMTP_PORT=1025\nexport SMTP_FROM_EMAIL=dev@localhost\nexport SMTP_USE_TLS=false\nexport SMTP_USE_SSL=false\n\n# LLM Configuration\nexport LLM_PROVIDER=XXXXX\nexport BASE_URL=XXXXX\nexport API_KEY=add-your-openai-api-key-here\nexport MODEL=XXXXX\n```\n\nManual DB control (optional)\n```bash\npnpm db:start    # podman compose (fallback to docker compose)\npnpm db:upgrade\npnpm db:seed\npnpm db:stop\n```\n\nPython virtual environments\n```bash\n# Each Python package uses uv-managed venvs under the package directory\npnpm --filter @spending-monitor/api install:deps\npnpm --filter @spending-monitor/db install:deps\n```\n\n## Components\n\n- API (`packages/api`): health, users, transactions; async DB session; foundation for rule evaluation and NLP integration\n- DB (`packages/db`): SQLAlchemy models, Alembic migrations, seed/verify; local Postgres via Podman/Docker\n- UI (`packages/ui`): React app and components in Storybook\n\n## Standards\n\n- Conventional Commits; commitlint enforces messages\n- Branch names must match: `feat/*`, `fix/*`, `chore/*`, `docs/*`, `refactor/*`, `test/*`, `ci/*`, `build/*`, `perf/*`\n- Hooks\n  - pre-commit: UI Prettier/ESLint; API Ruff format/check on staged files\n  - pre-push: format:check, lint, test; commitlint on commit range; branch name check\n\n## Releases\n\nAutomated with semantic-release on CI, using commit messages to drive versioning and changelogs. Configuration in `.releaserc`.\n\n## Structure\n\n```\nspending-transaction-monitor/\n├── packages/\n│   ├── api/\n│   ├── db/\n│   ├── ui/\n│   ├── ingestion-service/\n│   └── configs/\n├── docs/\n├── turbo.json\n├── pnpm-workspace.yaml\n└── package.json\n```\n",
+      "readmePreview": "# Spending Transaction Monitor\n\nAn **AI-driven application** that enables users to define **natural language alert rules** for their credit card trans...",
+      "readmeContent": "# Spending Transaction Monitor\n\nAn **AI-driven application** that enables users to define **natural language alert rules** for their credit card transactions. The system ingests real-time data, evaluates transactions against user-defined rules, applies AI/ML analysis for anomaly detection, and sends alerts through preferred channels such as email or SMS.\n\n## 🚀 Overview\n\nThe Spending Transaction Monitor acts as an intelligent intermediary between credit card transaction streams and customers.  \n\n- Users define alert rules in **plain natural language** (e.g., *“Alert me if I spend more than $200 at restaurants this month”*).  \n- The system ingests transaction events in real-time.  \n- An **NLP engine** converts rules into structured criteria.  \n- A **rule engine** evaluates each new transaction against rules, user data, and behavioral patterns.  \n- Alerts are triggered and delivered via email, or SMS notification.  \n\nThis project demonstrates how to combine **OpenShift AI, and modern ML frameworks** to deliver real-time, user-centric financial monitoring.\n\n\n## 🏗 Architecture\n\nThe solution is deployed on **OpenShift** and integrates multiple components:\n\n- **Transaction Ingestion Service**: Securely receives credit card transaction data in real-time and stores that in the database.  \n- **Transaction Data Store**: Stores both historical and streaming data (PostgreSQL).  \n- **Customer UI**: React frontend for defining and managing alerts.  \n- **NLP Module (LlamaStack + LangGraph Agent)**: Parses natural language into machine-readable rules.  \n- **Rules Engine / Alerting Service**: Evaluates transactions against user rules and behavioral patterns.  \n- **AI/ML Behavioral Analysis**: Detects anomalies, spending spikes, and recurring patterns.  \n- **Notification Service**: Sends alerts via email, or SMS.  \n\n```mermaid\ngraph TD\n\n  %% UI\n  subgraph UI[\"UI (packages/ui)\"]\n    U[\"User\"] --> WUI[\"Web UI\"]\n  end\n\n  %% API\n  subgraph API[\"API (packages/api)\"]\n    API_APP[\"FastAPI App\"]\n    IN[\"Transaction API\"]\n  end\n\n  %% Evaluation\n  subgraph EVAL[\"Evaluation (packages/evaluation)\"]\n    EV[\"Rule Evaluation Service\"]\n  end\n\n  %% Alerts\n  subgraph ALERTS[\"Alerts (packages/alerts)\"]\n    AL[\"Alerts Service\"]\n  end\n\n  %% DB\n  subgraph DB[\"DB (packages/db) - PostgreSQL\"]\n    USERS[\"users\"]\n    CARDS[\"credit_cards\"]\n    AR[\"alert_rules\"]\n    TRX[\"transactions\"]\n    AN[\"alert_notifications\"]\n  end\n\n  %% Delivery\n  subgraph DELIV[\"Delivery Channels\"]\n    EM[\"Email\"]\n    SM[\"SMS\"]\n    PS[\"Push\"]\n    WH[\"Webhook\"]\n  end\n\n  %% External Source\n  subgraph EXT[\"External\"]\n    TS[\"Transaction Source\"]\n  end\n\n  %% Rule authoring\n  WUI -->|Create/Update Rule| API_APP\n  API_APP -->|Persist| AR\n\n  %% Transaction ingestion\n  TS --> IN\n  IN --> API_APP\n  API_APP -->|Store| TRX\n\n  %% Evaluation path\n  API_APP -->|Evaluate| EV\n  EV -->|Read| AR\n  EV -->|Read| TRX\n  EV -->|Create| AN\n  EV -->|Dispatch| AL\n\n  %% Alerts delivery\n  AL -->|Update| AN\n  AL --> EM\n  AL --> SM\n  AL --> PS\n  AL --> WH\n```\n\n## ✨ Features\n\n- **Natural Language Rule Creation**  \n  Define alerts in everyday language (e.g., *“Notify me if I spend 3x more than usual on dining”*).\n\n- **Flexible Rule Management**  \n  Add, delete, or pause rules at any time through the UI.\n\n- **Behavioral AI Analysis**  \n  Detect anomalies such as unusual merchant categories, high-frequency spending, or out-of-pattern locations.\n\n- **Location-Aware Alerts**  \n  Compare transaction location with user’s home, last transaction, or last mobile location.\n\n- **Historical Spend Analysis**  \n  Evaluate transactions against aggregated historical trends (e.g., *monthly average dining spend*).\n\n- **Multi-Channel Notifications**  \n  Deliver alerts via **Email**, or **SMS**.\n\n## 📦 Technology Stack\n\n- **Frontend**: React  \n- **Backend**: FastAPI, Python\n- **Databases**: PostgreSQL (transactions, rules, users)  \n- **AI/ML**: LlamaStack, LangGraph, TensorFlow/PyTorch, RHOAI  \n- **Deployment**: OpenShift, Kubernetes-native microservices  \n- **Notifications**: Email, SMS\n\n## 📊 Example Alert Rules\n\n| Category              | Example Trigger                                                                 |\n|-----------------------|---------------------------------------------------------------------------------|\n| **Spending Pattern**  | “Your dining expense of $98 is 45% higher than your average of $67 over 30 days.”|\n| **Recurring Payment** | “Netflix charged $18.99 this month vs. your usual $15.49 — a 22% increase.”      |\n| **Location-Based**    | “Transaction in Boston detected. Your last known location was Los Angeles.”      |\n| **Merchant-Based**    | “Uber ride was $47.89, up from your last 5 ride average of $28.40.”              |\n\n## 📂 Repository Structure\n\n```\nspending-transaction-monitor/\n├── packages/\n│   ├── api/\n│   ├── db/\n│   ├── ui/\n│   ├── ingestion-service/\n│   └── configs/\n├── docs/\n├── deploy/\n├── .env.example\n├── turbo.json\n├── Makefile\n├── pnpm-workspace.yaml\n├── package.json\n└── README.md\n```\n\n## ⚙️ Getting Started\n\n### Prerequisites\n\n- OpenShift cluster with **RHOAI**\n- PostgreSQL instance  \n- Python 3.11+  \n- Node.js 18+  \n\n### Setup\n\n```bash\n# Clone the repo\ngit clone https://github.com/rh-ai-quickstart/spending-transaction-monitor.git\ncd spending-transaction-monitor\n```\n\n## 🐳 Container Deployment (Recommended)\n\n### 🚀 Quick Start with Podman Compose\n\n**Start with pre-built images:**\n\n```bash\nmake run-local\n```\n\n**Build and run from source:**\n\n```bash\nmake build-run-local\n```\n\n**Container URLs:**\n\n- Frontend: http://localhost:3000\n- API: http://localhost:3000/api/* (proxied)\n- API Docs: http://localhost:8000/docs\n- SMTP Web UI: http://localhost:3002\n- Database: localhost:5432\n\n**Container Management:**\n\n```bash\nmake run-local      # Start with registry images\nmake build-local    # Build images from source\nmake build-run-local # Build and start\nmake stop-local     # Stop all services\nmake logs-local     # View service logs\nmake reset-local    # Reset with fresh data\n```\n\n## 🧪 Testing Alert Rules\n\nAfter starting the application with `make run-local`, you can test alert rules interactively:\n\n### **Interactive Alert Rule Testing**\n\n**List available sample alert rules:**\n\n```bash\nmake list-alert-samples\n```\n\nShows all available test scenarios with their descriptions, such as:\n\n- \"Alert when spending more than $500 in one transaction\"\n- \"Alert me if my dining expense exceeds the average of the last 30 days by more than 40%\"\n- \"Alert me if a transaction happens outside my home state\"\n\n**Interactive testing menu:**\n\n```bash\nmake test-alert-rules\n```\n\nThis command provides:\n\n- 📋 **Alert Rule Menu** showing alert rule descriptions\n- 📊 **Data preview** with realistic transaction data adjusted to current time\n- 🔍 **User context** showing the test user profile and transaction history\n- ✅ **Confirmation prompt** before running the actual test\n\n## 📧 Validating the Alert Notification\n\nAfter confirming a rule test:\n\n1. The system sends a test notification via the configured **test SMTP server**.\n2. To verify:\n   - Open the SMTP server Web UI:  \n     👉 [http://localhost:3002](http://localhost:3002)\n   - Check the inbox for the test email.\n   - Open the email to confirm:\n     - The **rule name/description** is included.\n     - The **transaction details** that triggered the rule are shown.\n\n### **Example Workflow**\n\n1. **Start the application:**\n\n   ```bash\n   make run-local\n   ```\n\n2. **Browse available test scenarios:**\n\n   ```bash\n   make list-alert-samples\n   ```\n\n3. **Run interactive testing:**\n\n   ```bash\n   make test-alert-rules\n   ```\n\n   - Select an alert rule by number (1-16)\n   - Review the data preview showing exactly what will be tested\n   - Confirm to proceed with the test\n   - Watch the complete validation and creation process\n\n### **What the Test Does**\n\nThe test process:\n\n1. **Seeds database** with realistic user and transaction data\n2. **Validates the alert rule** using the NLP validation API\n3. **Creates the alert rule** if validation passes\n4. **Shows step-by-step results** including SQL queries and processing steps\n\n**Note:** Make sure the API server is running (`make run-local`) before testing alert rules.\n\n### ☁️ OpenShift Deployment\n\n**Quick Deploy:**\n\n```bash\nmake full-deploy\n```\n\n**Step-by-step:**\n\n```bash\n# Login and setup\nmake login\nmake create-project\n\n# Build and push images\nmake build-all\nmake push-all\n\n# Deploy\nmake deploy\n```\n\n**OpenShift Management:**\n\n```bash\nmake deploy           # Deploy to OpenShift\nmake undeploy         # Remove deployment\nmake status           # Check deployment status\nmake logs-api         # View API logs\nmake logs-ui          # View UI logs\n```\n\n## 🙌 Contributing\n\nContributions are welcome! Please fork the repo and submit a PR.  \nSee our [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.\n\n## 📜 License\n\nThis project is licensed under the **Apache License 2.0**. See [LICENSE](LICENSE) for details.\n",
       "readmeFilename": "README.md",
       "images": [],
       "githubLink": "https://github.com/rh-ai-quickstart/spending-transaction-monitor",
@@ -21,10 +20,7 @@
         "Python"
       ],
       "stars": 0,
-      "lastUpdated": "9/23/2025",
-      "generatedImage": "images/quickstarts/spending-transaction-monitor.svg",
-      "imageGenerated": true,
-      "imageType": "png"
+      "lastUpdated": "9/23/2025"
     },
     {
       "id": "ai-architecture-charts",
@@ -39,10 +35,7 @@
         "Python"
       ],
       "stars": 7,
-      "lastUpdated": "9/22/2025",
-      "generatedImage": "images/quickstarts/ai-architecture-charts.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/22/2025"
     },
     {
       "id": "RAG",
@@ -100,10 +93,7 @@
         "Python"
       ],
       "stars": 7,
-      "lastUpdated": "9/22/2025",
-      "generatedImage": "images/quickstarts/RAG.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/22/2025"
     },
     {
       "id": "product-recommender-system",
@@ -118,10 +108,7 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "9/22/2025",
-      "generatedImage": "images/quickstarts/product-recommender-system.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/22/2025"
     },
     {
       "id": "basic-speech-to-text-with-whisper",
@@ -173,10 +160,7 @@
         "Jupyter Notebook"
       ],
       "stars": 0,
-      "lastUpdated": "9/18/2025",
-      "generatedImage": "images/quickstarts/basic-speech-to-text-with-whisper.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/18/2025"
     },
     {
       "id": "lls-observability",
@@ -216,10 +200,7 @@
         "Jupyter Notebook"
       ],
       "stars": 2,
-      "lastUpdated": "9/17/2025",
-      "generatedImage": "images/quickstarts/lls-observability.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/17/2025"
     },
     {
       "id": "ai-virtual-agent",
@@ -241,10 +222,7 @@
         "Python"
       ],
       "stars": 5,
-      "lastUpdated": "9/17/2025",
-      "generatedImage": "images/quickstarts/ai-virtual-agent.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/17/2025"
     },
     {
       "id": "openshift-ai-observability-summarizer",
@@ -314,10 +292,7 @@
         "Python"
       ],
       "stars": 15,
-      "lastUpdated": "9/12/2025",
-      "generatedImage": "images/quickstarts/openshift-ai-observability-summarizer.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/12/2025"
     },
     {
       "id": "guardrailing-llms",
@@ -363,10 +338,7 @@
         "Jupyter Notebook"
       ],
       "stars": 0,
-      "lastUpdated": "9/10/2025",
-      "generatedImage": "images/quickstarts/guardrailing-llms.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/10/2025"
     },
     {
       "id": "llm-cpu-serving",
@@ -406,10 +378,7 @@
         "Smarty"
       ],
       "stars": 4,
-      "lastUpdated": "9/2/2025",
-      "generatedImage": "images/quickstarts/llm-cpu-serving.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/2/2025"
     },
     {
       "id": "vllm-tool-calling",
@@ -455,10 +424,7 @@
         "AI"
       ],
       "stars": 1,
-      "lastUpdated": "9/1/2025",
-      "generatedImage": "images/quickstarts/vllm-tool-calling.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "9/1/2025"
     },
     {
       "id": "dynamic-model-router",
@@ -480,10 +446,7 @@
         "Python"
       ],
       "stars": 1,
-      "lastUpdated": "8/29/2025",
-      "generatedImage": "images/quickstarts/dynamic-model-router.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "8/29/2025"
     },
     {
       "id": "byo-agentic-framework",
@@ -498,10 +461,7 @@
         "AI"
       ],
       "stars": 0,
-      "lastUpdated": "8/27/2025",
-      "generatedImage": "images/quickstarts/byo-agentic-framework.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "8/27/2025"
     },
     {
       "id": "llama-stack-mcp-server",
@@ -535,10 +495,7 @@
         "JavaScript"
       ],
       "stars": 0,
-      "lastUpdated": "8/25/2025",
-      "generatedImage": "images/quickstarts/llama-stack-mcp-server.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "8/25/2025"
     },
     {
       "id": "custom-workbench-images-examples",
@@ -563,10 +520,7 @@
         "Workbench Images"
       ],
       "stars": 0,
-      "lastUpdated": "8/13/2025",
-      "generatedImage": "images/quickstarts/custom-workbench-images-examples.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "8/13/2025"
     },
     {
       "id": "llama-stack-ReAct",
@@ -600,10 +554,7 @@
         "JavaScript"
       ],
       "stars": 0,
-      "lastUpdated": "8/8/2025",
-      "generatedImage": "images/quickstarts/llama-stack-ReAct.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "8/8/2025"
     },
     {
       "id": "rhoai-metrics-dashboard",
@@ -618,10 +569,7 @@
         "AI"
       ],
       "stars": 0,
-      "lastUpdated": "8/5/2025",
-      "generatedImage": "images/quickstarts/rhoai-metrics-dashboard.svg",
-      "imageGenerated": true,
-      "imageType": "svg"
+      "lastUpdated": "8/5/2025"
     }
   ]
 }

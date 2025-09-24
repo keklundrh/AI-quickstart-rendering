@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { BASE_PATH } from '../api/kickstarts';
 
 const Details = ({ kickstarts }) => {
   const { name } = useParams();
@@ -524,7 +525,13 @@ const Details = ({ kickstarts }) => {
                 {kickstart.categories?.map((category, index) => (
                   <span
                     key={index}
-                    className="pf-v5-c-label pf-m-outline pf-m-blue"
+                    className="pf-v5-c-label pf-m-outline"
+                    style={{
+                      color: '#EE0000 !important',
+                      borderColor: '#EE0000 !important',
+                      border: '1px solid #EE0000',
+                      backgroundColor: 'transparent !important'
+                    }}
                   >
                     {category}
                   </span>
@@ -535,7 +542,13 @@ const Details = ({ kickstarts }) => {
                   .map((topic, index) => (
                   <span
                     key={`topic-${index}`}
-                    className="pf-v5-c-label pf-m-outline pf-m-green"
+                    className="pf-v5-c-label pf-m-outline"
+                    style={{
+                      color: '#EE0000 !important',
+                      borderColor: '#EE0000 !important',
+                      border: '1px solid #EE0000',
+                      backgroundColor: 'transparent !important'
+                    }}
                   >
                     {topic}
                   </span>
@@ -557,12 +570,12 @@ const Details = ({ kickstarts }) => {
             </div>
             
             {/* Right side: Generated Image */}
-            {kickstart.generatedImage && (
+            {kickstart.id && (
               <div className="kickstart-details-image" style={{ 
                 flexShrink: 0
               }}>
                 <img 
-                  src={`${process.env.PUBLIC_URL || ''}/${kickstart.generatedImage}`}
+                  src={`${BASE_PATH}/images/quickstarts/${kickstart.id}.svg`}
                   alt={`AI generated illustration for ${kickstart.title}`}
                   style={{
                     width: '400px',
