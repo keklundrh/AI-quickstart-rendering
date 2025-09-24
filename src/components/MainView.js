@@ -1,7 +1,6 @@
 import React from 'react';
 import KickstartCard from './KickstartCard';
 import SearchToolbar from './SearchToolbar';
-import { BASE_PATH } from '../api/kickstarts';
 
 const MainView = ({ 
   kickstarts,

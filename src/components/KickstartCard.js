@@ -239,14 +239,14 @@ const KickstartCard = ({ kickstart }) => {
           flex: '1',
           minWidth: '0'
         }}>
-          {kickstart.categories.map((category, index) => (
+          {kickstart.categories && kickstart.categories.map((category, index) => (
             <span
               key={`cat-${index}`}
               className="pf-v5-c-label pf-m-outline"
               style={{
-                color: '#c9190b !important',
-                borderColor: '#c9190b !important',
-                border: '1px solid #c9190b',
+                color: '#EE0000 !important',
+                borderColor: '#EE0000 !important',
+                border: '1px solid #EE0000',
                 backgroundColor: 'transparent !important'
               }}
             >
@@ -260,9 +260,9 @@ const KickstartCard = ({ kickstart }) => {
               key={`${kickstart.title}-topic-${topic}-${index}`}
               className="pf-v5-c-label pf-m-outline"
               style={{
-                color: '#c9190b !important',
-                borderColor: '#c9190b !important',
-                border: '1px solid #c9190b',
+                color: '#EE0000 !important',
+                borderColor: '#EE0000 !important',
+                border: '1px solid #EE0000',
                 backgroundColor: 'transparent !important'
               }}
             >
